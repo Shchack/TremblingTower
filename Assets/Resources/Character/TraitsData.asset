@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92907c28200908243b4c84205f094dee, type: 3}
+  m_Name: TraitsData
+  m_EditorClassIdentifier: 
+  _traits:
+  - Virtue: Honesty
+    Vice: Falsehood
+    DefaultValue: 50
+    MaxValue: 100
+  - Virtue: Courage
+    Vice: Cowardice
+    DefaultValue: 50
+    MaxValue: 100
+  - Virtue: Generosity
+    Vice: Greed
+    DefaultValue: 50
+    MaxValue: 100
+  - Virtue: Kindness
+    Vice: Hatred
+    DefaultValue: 50
+    MaxValue: 100
+  - Virtue: Diligence
+    Vice: Laziness
+    DefaultValue: 50
+    MaxValue: 100
+  _mainVirtueBoost: 10
+  _mainViceBoost: 10
