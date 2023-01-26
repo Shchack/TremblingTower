@@ -62,5 +62,10 @@ namespace EG.Tower.Game
         {
             return Vice.Equals(vice, StringComparison.CurrentCultureIgnoreCase);
         }
+
+        public string AsText()
+        {
+            return $"{Vice} - {Value} - {Virtue}";
+        }
     }
 }

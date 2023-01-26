@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EG.Tower.Game
 {
@@ -10,14 +9,14 @@ namespace EG.Tower.Game
 
         public TraitsData TraitsData => _traitsData;
 
-        public Trait[] HeroTraits => _heroModel.Traits;
+        public Trait[] HeroTraits => _heroCreateModel.Traits;
 
-        private HeroCreateModel _heroModel;
+        private HeroCreateModel _heroCreateModel;
 
         private void Awake()
         {
             Validate();
-            _heroModel = new HeroCreateModel(_defaultName, _traitsData.Traits);
+            _heroCreateModel = new HeroCreateModel(_defaultName, _traitsData.Traits);
         }
 
         private void Validate()
@@ -30,32 +29,34 @@ namespace EG.Tower.Game
 
         public void SetHeroName(string newName)
         {
-            _heroModel.SetName(newName);
+            _heroCreateModel.SetName(newName);
         }
 
         public void SetMainVirtue(string virtue)
         {
-            _heroModel.BoostVirtue(virtue, _traitsData.MainVirtueBoost);
+            _heroCreateModel.BoostVirtue(virtue, _traitsData.MainVirtueBoost);
         }
 
         public void SetMainVice(string vice)
         {
-            _heroModel.BoostVice(vice, _traitsData.MainViceBoost);
+            _heroCreateModel.BoostVice(vice, _traitsData.MainViceBoost);
         }
 
         public void ResetMainVirtue()
         {
-            _heroModel.ResetMainVirtue();
+            _heroCreateModel.ResetMainVirtue();
         }
 
-        internal void ResetMainVice()
+        public void ResetMainVice()
         {
-            _heroModel.ResetMainVice();
+            _heroCreateModel.ResetMainVice();
         }
 
-        internal void CreateHero()
+        public void CreateHero()
         {
             Debug.Log("Hero created!");
+            GameHub.One.Session.HeroModel = new HeroModel(_heroCreateModel);
+            SceneHelper.LoadGameplayScene();
         }
     }
 }
