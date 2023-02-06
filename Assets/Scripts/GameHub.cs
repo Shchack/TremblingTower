@@ -1,4 +1,4 @@
-﻿using KG.Common.Utils;
+﻿using EG.Tower.Common;
 
 namespace EG.Tower.Game
 {

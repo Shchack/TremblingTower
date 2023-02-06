@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace KG.Common.Utils
+namespace EG.Tower.Common
 {
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
