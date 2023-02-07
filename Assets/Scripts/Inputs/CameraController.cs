@@ -1,12 +1,12 @@
 using Cinemachine;
-using EG.Tower.Common;
+using EG.Tower.Utils;
 using UnityEngine;
 
 namespace EG.Tower.Inputs
 {
     public class CameraController : MonoBehaviour
     {
-        [SerializeField] private DefaultInputControls _input;
+        [SerializeField] private GameInputControls _input;
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
         [SerializeField] private BoxCollider _boundaries;
 
@@ -18,7 +18,7 @@ namespace EG.Tower.Inputs
 
         private void Awake()
         {
-            _input = new DefaultInputControls();
+            _input = new GameInputControls();
             _cameraTransform = _virtualCamera.VirtualCameraGameObject.transform;
         }
 
