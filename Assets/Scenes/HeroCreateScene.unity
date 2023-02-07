@@ -1320,7 +1320,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 572732599}
   m_Template: {fileID: 1100202001}
   m_CaptionText: {fileID: 308407915}
   m_CaptionImage: {fileID: 0}
@@ -2456,7 +2456,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1021669665}
   m_Template: {fileID: 1550454104}
   m_CaptionText: {fileID: 1473207976}
   m_CaptionImage: {fileID: 0}
