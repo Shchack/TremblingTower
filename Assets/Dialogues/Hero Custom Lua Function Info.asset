@@ -20,3 +20,6 @@ MonoBehaviour:
   - functionName: GiveTraitReward
     parameters: 0600000001000000
     returnValue: 0
+  - functionName: GetRollChance
+    parameters: 0600000006000000
+    returnValue: 3

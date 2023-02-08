@@ -26,11 +26,15 @@ MonoBehaviour:
     italic: 0
     underline: 0
   - color: {r: 0, g: 1, b: 0, a: 1}
-    bold: 0
+    bold: 1
     italic: 0
     underline: 0
   - color: {r: 0, g: 0, b: 1, a: 1}
-    bold: 0
+    bold: 1
+    italic: 0
+    underline: 0
+  - color: {r: 1, g: 0.84019786, b: 0, a: 1}
+    bold: 1
     italic: 0
     underline: 0
   baseID: 1
@@ -433,8 +437,9 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: '[[var=Trait_Kindness], Chance: Possible] Save the dog from being
-          beaten by the Pioneeren teens.'
+        value: '[em5][[var=Trait_Kindness], Chance: [lua(GetRollChance(Variable["Trait_Kindness"],
+          Variable["Roll_StandardRoll"]))]][/em5] Save the dog from being beaten
+          by the Pioneeren teens.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -1059,8 +1064,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.7900002
+    canvasScrollPosition: {x: 102.14567, y: 0}
+    canvasZoom: 0.8200002
   syncInfo:
     syncActors: 0
     syncItems: 0
