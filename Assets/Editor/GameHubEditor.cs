@@ -1,6 +1,5 @@
 using EG.Tower.Game;
 using UnityEditor;
-using UnityEngine;
 
 [CustomEditor(typeof(GameHub), true)]
 public class GameHubEditor : Editor

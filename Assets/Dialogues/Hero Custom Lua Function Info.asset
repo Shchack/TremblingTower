@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditionFunctions: []
   scriptFunctions:
-  - functionName: CheckVirtueTrait
-    parameters: 0200000001000000
+  - functionName: CheckVirtue
+    parameters: 0600000006000000
     returnValue: 0
   - functionName: GiveTraitReward
-    parameters: 0200000001000000
+    parameters: 0600000001000000
     returnValue: 0

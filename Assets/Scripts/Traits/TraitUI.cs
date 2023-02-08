@@ -27,5 +27,13 @@ namespace EG.Tower.Game
         {
             _progressBar.SetCurrent(value);
         }
+
+        private void OnDestroy()
+        {
+            if (_trait != null)
+            {
+                _trait.OnValueChangedEvent -= HandleValueChangedEvent;
+            }
+        }
     }
 }

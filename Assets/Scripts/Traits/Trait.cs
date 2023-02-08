@@ -1,19 +1,32 @@
-﻿using System;
+﻿using EG.Tower.Game.Utils;
+using System;
+using UnityEngine;
 
 namespace EG.Tower.Game
 {
+    [Serializable]
     public class Trait
     {
         private const int TRAIT_MIN_VALUE = 0;
 
         public event Action<int> OnValueChangedEvent;
 
+        [field: SerializeField, ReadOnlyField]
+        public VirtueType VirtueType { get; private set; }
+
+        [field: SerializeField, ReadOnlyField]
         public string Virtue { get; private set; }
+
+        [field: SerializeField, ReadOnlyField]
         public string Vice { get; private set; }
+
+        [field: SerializeField, ReadOnlyField]
         public int DefaultValue { get; private set; }
+
+        [field: SerializeField, ReadOnlyField]
         public int MaxValue { get; private set; }
 
-        private int _value;
+        [SerializeField] private int _value;
         public int Value
         {
             get
@@ -27,13 +40,14 @@ namespace EG.Tower.Game
             }
         }
 
-        public Trait(string virtue, string vice, int value, int defaultValue, int maxValue)
+        public Trait(TraitData data)
         {
-            Virtue = virtue;
-            Vice = vice;
-            Value = value;
-            DefaultValue = defaultValue;
-            MaxValue = maxValue;
+            VirtueType = data.VirtueType;
+            Virtue = data.Virtue;
+            Vice = data.Vice;
+            Value = data.DefaultValue;
+            DefaultValue = data.DefaultValue;
+            MaxValue = data.MaxValue;
         }
 
         public void AddValue(double value)

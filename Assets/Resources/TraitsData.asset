@@ -13,23 +13,28 @@ MonoBehaviour:
   m_Name: TraitsData
   m_EditorClassIdentifier: 
   _traits:
-  - Virtue: Honesty
+  - VirtueType: 1
+    Virtue: Honesty
     Vice: Falsehood
     DefaultValue: 50
     MaxValue: 100
-  - Virtue: Courage
+  - VirtueType: 2
+    Virtue: Courage
     Vice: Cowardice
     DefaultValue: 50
     MaxValue: 100
-  - Virtue: Generosity
+  - VirtueType: 3
+    Virtue: Generosity
     Vice: Greed
     DefaultValue: 50
     MaxValue: 100
-  - Virtue: Kindness
+  - VirtueType: 4
+    Virtue: Kindness
     Vice: Hatred
     DefaultValue: 50
     MaxValue: 100
-  - Virtue: Diligence
+  - VirtueType: 5
+    Virtue: Diligence
     Vice: Laziness
     DefaultValue: 50
     MaxValue: 100

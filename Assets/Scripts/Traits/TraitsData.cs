@@ -44,11 +44,19 @@ namespace EG.Tower.Game
                 return _vices;
             }
         }
+
+        public Trait[] GetTraits()
+        {
+            return Traits
+                .Select(t => new Trait(t))
+                .ToArray();
+        }
     }
 
     [Serializable]
     public class TraitData
     {
+        public VirtueType VirtueType;
         public string Virtue;
         public string Vice;
         public int DefaultValue = 50;

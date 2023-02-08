@@ -17,7 +17,7 @@ namespace EG.Tower.Game
         private void Awake()
         {
             Validate();
-            _heroCreateModel = new HeroCreateModel(_defaultName, _traitsData.Traits);
+            _heroCreateModel = new HeroCreateModel(_defaultName, _traitsData);
         }
 
         private void Validate()
@@ -56,7 +56,8 @@ namespace EG.Tower.Game
         public void CreateHero()
         {
             Debug.Log("Hero created!");
-            GameHub.One.Session.SetHeroModel(_heroCreateModel);
+            var heroModel = new HeroModel(_heroCreateModel);
+            GameHub.One.Session.SetHeroModel(heroModel);
             SceneHelper.LoadGameplayScene();
         }
     }

@@ -4,14 +4,9 @@
     {
         public HeroModel HeroModel { get; private set; }
 
-        public PlayerSession()
+        public void SetHeroModel(HeroModel heroModel)
         {
-            HeroModel = new HeroModel();
-        }
-
-        public void SetHeroModel(HeroCreateModel heroCreateModel)
-        {
-            HeroModel = new HeroModel(heroCreateModel);
+            HeroModel = heroModel;
         }
     }
 }
