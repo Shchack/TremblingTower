@@ -21,19 +21,23 @@ MonoBehaviour:
     bold: 0
     italic: 0
     underline: 0
-  - color: {r: 1, g: 0, b: 0, a: 1}
+  - color: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
     bold: 0
-    italic: 0
+    italic: 1
     underline: 0
-  - color: {r: 0, g: 1, b: 0, a: 1}
+  - color: {r: 0.4009434, g: 1, b: 0.46202374, a: 1}
     bold: 1
     italic: 0
     underline: 0
-  - color: {r: 0, g: 0, b: 1, a: 1}
+  - color: {r: 1, g: 0.32635185, b: 0.042452812, a: 1}
     bold: 1
     italic: 0
     underline: 0
   - color: {r: 1, g: 0.84019786, b: 0, a: 1}
+    bold: 1
+    italic: 0
+    underline: 0
+  - color: {r: 0.3820755, g: 0.57493633, b: 1, a: 1}
     bold: 1
     italic: 0
     underline: 0
@@ -268,7 +272,7 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     overrideSettings:
-      useOverrides: 0
+      useOverrides: 1
       overrideSubtitleSettings: 0
       showNPCSubtitlesDuringLine: 1
       showNPCSubtitlesWithResponses: 1
@@ -276,17 +280,17 @@ MonoBehaviour:
       skipPCSubtitleAfterResponseMenu: 0
       subtitleCharsPerSecond: 30
       minSubtitleSeconds: 2
-      continueButton: 0
+      continueButton: 1
       overrideSequenceSettings: 0
       defaultSequence: 
       defaultPlayerSequence: 
       defaultResponseMenuSequence: 
-      overrideInputSettings: 0
+      overrideInputSettings: 1
       alwaysForceResponseMenu: 1
-      includeInvalidEntries: 0
+      includeInvalidEntries: 1
       responseTimeout: 0
       emTagForOldResponses: 0
-      emTagForInvalidResponses: 0
+      emTagForInvalidResponses: 2
       cancelSubtitle:
         key: 27
         buttonName: 
@@ -555,12 +559,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'The scene scratches an itch in your heart, but you can''t afford
-          to meddle in every wrongdoing you see along the way. The are things far
-          worse than a couple of spoilt Black Empire kids kicking a dog around.
-
-
-          [Leave.]'
+        value: The scene scratches an itch in your heart, but you can't afford to
+          meddle in every wrongdoing you see along the way. The are things far worse
+          than a couple of spoilt Black Empire kids kicking a dog around.
         type: 0
         typeString: 
       - title: Sequence
@@ -574,7 +575,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 4
+        destinationConversationID: 1
+        destinationDialogueID: 17
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -675,16 +682,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: '[em2][Fail][/em2] You try to stop them, but they are younger and
+        value: '[em4][Fail][/em4] You try to stop them, but they are younger and
           faster. You run out of breath, and lose a wounded dog and the teens chasing
-          it in the hustle of the village''s main square.
-
-
-          [em4][[var=Trait_Courage]
-          +1][/em4]
-
-
-          [Leave.]'
+          it in the hustle of the village''s main square.'
         type: 0
         typeString: 
       - title: Sequence
@@ -698,9 +698,18 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 6
+        destinationConversationID: 1
+        destinationDialogueID: 19
+        isConnector: 0
+        priority: 2
       conditionsString: Variable["CheckResult"] == false
-      userScript: GiveTraitReward(Variable["Trait_Courage"], 1)
+      userScript: 'GiveTraitReward(Variable["Trait_Courage"], 1);
+
+        ShowAlert("[em3][var=Trait_Courage]
+        +1[/em3]")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -733,14 +742,14 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'Treate her and give some food.
+        value: 'Treat her and give some food.
 
           [em4][Supplies -2][/em4]
 
-          [em4][[var=Trait_Courage]
-          +2][/em4]
+          [em3][[var=Trait_Courage]
+          +2][/em3]
 
-          [em4][[var=Trait_Kindness] +2][/em4]'
+          [em3][[var=Trait_Kindness] +2][/em3]'
         type: 0
         typeString: 
       - title: Sequence
@@ -767,7 +776,10 @@ MonoBehaviour:
         GiveTraitReward(Variable["Trait_Courage"],
         2);
 
-        GiveTraitReward(Variable["Trait_Kindness"], 2)'
+        GiveTraitReward(Variable["Trait_Kindness"], 2);
+
+        ShowAlert("[em4]Supplies
+        -2[/em4]\n[em3][var=Trait_Courage] +2[/em3]\n[em3][var=Trait_Kindness] +2[/em3]")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -802,7 +814,7 @@ MonoBehaviour:
       - title: Dialogue Text
         value: 'Pet the dog and walk away.
 
-          [em4][Courage +2][/em4]'
+          [em3][Courage +2][/em3]'
         type: 0
         typeString: 
       - title: Sequence
@@ -824,7 +836,10 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: GiveTraitReward("Courage", 2)
+      userScript: 'GiveTraitReward("Courage", 2);
+
+        ShowAlert("[em3]Courage
+        +2[/em3]")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -868,10 +883,7 @@ MonoBehaviour:
           You play
           with the dog for a bit. As she lies on its back, you can see the ribs through
           her skin. She''s been starving for a while. You wonder if she''d make it
-          without the food.
-
-
-          [Leave.]'
+          without the food.'
         type: 0
         typeString: 
       - title: Sequence
@@ -885,7 +897,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 11
+        destinationConversationID: 1
+        destinationDialogueID: 20
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -920,8 +938,18 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: You pet the dog, and when she gets used to you, you clean her wound
+        value: 'You pet the dog, and when she gets used to you, you clean her wound
           and apply a bandage. This should do the trick.
+
+
+          You throw some
+          food, and the dog easily catches it mid-air. Judging from her reflexes,
+          she''s well trained.
+
+
+          As you walk away, you realize you have
+          done everything you could. She would make it through the next couple days,
+          which, for such a tumultuous time, feels like an eternity.'
         type: 0
         typeString: 
       - title: Sequence
@@ -939,7 +967,7 @@ MonoBehaviour:
       - originConversationID: 1
         originDialogueID: 12
         destinationConversationID: 1
-        destinationDialogueID: 13
+        destinationDialogueID: 18
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -953,97 +981,36 @@ MonoBehaviour:
         y: 139.22916
         width: 160
         height: 30
-    - id: 13
+    - id: 17
       fields:
       - title: Title
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
-        value: 2
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
+        value: 2
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: You throw some food, and the dog easily catches it mid-air. Judging
-          from her reflexes, she's well trained.
+        value: '[Leave.]'
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
-        typeString: 
-      conversationID: 1
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 1
-        originDialogueID: 13
-        destinationConversationID: 1
-        destinationDialogueID: 14
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 1114.7131
-        y: 195.65117
-        width: 160
-        height: 30
-    - id: 14
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: 
-      - title: Description
-        value: 
-        type: 0
-        typeString: 
-      - title: Actor
-        value: 2
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Dialogue Text
-        value: 'As you walk away, you realize you have done everything you could.
-          She would make it through the next couple days, which, for such a tumultuous
-          time, feels like an eternity.
-
-
-          [Leave.]'
-        type: 0
-        typeString: 
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -1059,13 +1026,160 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1117.4655
-        y: 246.5686
+        x: 380.8274
+        y: 471.57056
+        width: 160
+        height: 30
+    - id: 18
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '[Leave.]'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1112.8783
+        y: 189.22916
+        width: 160
+        height: 30
+    - id: 19
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '[Leave.]'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 641.9766
+        y: 315.57648
+        width: 160
+        height: 30
+    - id: 20
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '[Leave.]'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 892.6947
+        y: 321.33926
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 102.14567, y: 0}
-    canvasZoom: 0.8200002
+    canvasScrollPosition: {x: 288.12338, y: 0}
+    canvasZoom: 0.97
   syncInfo:
     syncActors: 0
     syncItems: 0

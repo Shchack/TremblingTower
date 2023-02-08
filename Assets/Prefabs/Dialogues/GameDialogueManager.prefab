@@ -75,7 +75,7 @@ MonoBehaviour:
       cancelConversation:
         key: 27
         buttonName: 
-    dialogueUI: {fileID: 101180, guid: 5ba51781a19f8a843abeb2d304d0d26e, type: 3}
+    dialogueUI: {fileID: 101180, guid: 2ba89a1046e5b0445a49890868d075de, type: 3}
     defaultCanvas: {fileID: 2623373192521171499}
     localizationSettings:
       language: 
@@ -88,8 +88,8 @@ MonoBehaviour:
       allowPCSubtitleReminders: 0
       skipPCSubtitleAfterResponseMenu: 1
       subtitleCharsPerSecond: 30
-      minSubtitleSeconds: 1
-      continueButton: 2
+      minSubtitleSeconds: 2
+      continueButton: 3
       requireContinueOnLastLine: 0
       richTextEmphases: 1
       informSequenceStartAndEnd: 0
@@ -126,10 +126,10 @@ MonoBehaviour:
       minBarkSeconds: 0
       defaultBarkSequence: 
     alertSettings:
-      allowAlertsDuringConversations: 0
-      alertCheckFrequency: 0
-      alertCharsPerSecond: 0
-      minAlertSeconds: 0
+      allowAlertsDuringConversations: 1
+      alertCheckFrequency: 0.2
+      alertCharsPerSecond: 30
+      minAlertSeconds: 4
   persistentDataSettings:
     recordPersistentDataOn: 0
     includeActorData: 1
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 960, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
