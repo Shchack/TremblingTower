@@ -26,7 +26,7 @@ namespace EG.Tower.Game.Rolls
             {
                 while (!found && index < Probabilities.Length)
                 {
-                    if (checkValue >= Probabilities[index].ChanceRange.Min && checkValue <= Probabilities[index].ChanceRange.Max)
+                    if (checkValue > Probabilities[index].ChanceRange.Min && checkValue <= Probabilities[index].ChanceRange.Max)
                     {
                         found = true;
                         result = Probabilities[index].Text;
