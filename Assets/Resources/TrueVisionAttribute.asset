@@ -15,3 +15,4 @@ MonoBehaviour:
   Name: TrueVision
   ConvertType: 0
   Divisor: 10
+  Icon: {fileID: 21300000, guid: 7ae9d2c635ae1274091b08b9b24d09cb, type: 3}

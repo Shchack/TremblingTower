@@ -15,3 +15,4 @@ MonoBehaviour:
   Name: Attack
   ConvertType: 1
   Divisor: 10
+  Icon: {fileID: 21300000, guid: b5e90ba889b3dab47ae766bd52114302, type: 3}

@@ -1,11 +1,15 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace EG.Tower.Game.Battle.UI
 {
     public class BattleAttributesScreen : MonoBehaviour
     {
+        [SerializeField] private Canvas _canvas;
         [SerializeField] private TMP_Text _heroNameLabel;
+        [SerializeField] private Button _beginBattleButton;
         [SerializeField] private BattleAttributeUI _attributeUIPrefab;
         [SerializeField] private RectTransform _attributesHolder;
 
@@ -17,7 +21,15 @@ namespace EG.Tower.Game.Battle.UI
         private void Start()
         {
             _battleController = FindObjectOfType<BattleController>();
+            _beginBattleButton.onClick.AddListener(HandleBeginButtonClick);
             GenerateItems();
+            _canvas.enabled = true;
+        }
+
+        private void HandleBeginButtonClick()
+        {
+            _battleController.BeginBattle();
+            _canvas.enabled = false;
         }
 
         private void GenerateItems()

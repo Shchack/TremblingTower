@@ -15,3 +15,4 @@ MonoBehaviour:
   Name: Defend
   ConvertType: 1
   Divisor: 10
+  Icon: {fileID: 21300000, guid: 0e1fe95541c63914180b52cedae59f2b, type: 3}

@@ -10,6 +10,7 @@ namespace EG.Tower.Game
         public string Name;
         public HeroAttributeType ConvertType;
         public float Divisor = 10f;
+        public Sprite Icon;
 
         private Dictionary<HeroAttributeType, Func<int, int>> _convertMethods;
 
@@ -31,7 +32,7 @@ namespace EG.Tower.Game
                 value = method.Invoke(traitValue);
             }
 
-            return new HeroAttributeModel(Name, ConvertType, value);
+            return new HeroAttributeModel(Name, ConvertType, value, Icon);
         }
 
         private int ConvertDivision(int traitValue)

@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da08f3728e9aa744885a7d027c07c395, type: 3}
-  m_Name: CritChanceAttribute
+  m_Name: CritAttribute
   m_EditorClassIdentifier: 
   Name: Crit
   ConvertType: 1
   Divisor: 10
+  Icon: {fileID: 21300000, guid: 9fdc4127aa448ad4c86d94fc180bc443, type: 3}

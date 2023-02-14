@@ -17,10 +17,15 @@ namespace EG.Tower.Game.Battle
             CombatOrder = combatOrder;
         }
 
+        public BattleAttributeItemModel[] GetActions()
+        {
+            return Items.Where(i => i.AttributeType == HeroAttributeType.Points).ToArray();
+        }
+
         private BattleAttributeItemModel GetModel(Trait trait)
         {
             var attribute = trait.GetAttribute();
-            return new BattleAttributeItemModel(trait.Virtue, trait.Value, attribute.AttributeType, attribute.Name, attribute.Value);
+            return new BattleAttributeItemModel(trait.Virtue, trait.Value, attribute);
         }
     }
 }
