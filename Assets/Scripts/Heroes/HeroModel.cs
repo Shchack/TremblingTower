@@ -22,6 +22,9 @@ namespace EG.Tower.Game
         [field: SerializeField]
         public Trait MainViceTrait { get; private set; }
 
+        [field: SerializeField]
+        public int Inspiration { get; private set; }
+
         private Dictionary<VirtueType, Trait> _virtueTraits;
 
         public HeroModel(HeroCreateModel createModel)
@@ -31,6 +34,7 @@ namespace EG.Tower.Game
             MainVirtueTrait = createModel.MainVirtueTrait;
             MainViceTrait = createModel.MainViceTrait;
             _virtueTraits = Traits.ToDictionary(t => t.VirtueType, t => t);
+            Inspiration = 2;
         }
 
         public HeroModel(string name, TraitsData defaultTraits)
@@ -40,6 +44,7 @@ namespace EG.Tower.Game
             MainVirtueTrait = null;
             MainViceTrait = null;
             _virtueTraits = Traits.ToDictionary(t => t.VirtueType, t => t);
+            Inspiration = 2;
         }
 
         public double FindVirtueTraitValue(string name)
@@ -56,10 +61,17 @@ namespace EG.Tower.Game
         public bool TryFindVirtueTrait(string name, out Trait trait)
         {
             trait = null;
-            bool success = Enum.TryParse(name, out VirtueType type) && _virtueTraits.TryGetValue(type, out trait);
+            bool success = Enum.TryParse(name, out VirtueType type) && TryFindVirtueTrait(type, out trait);
+
+            return success;
+        }
+
+        public bool TryFindVirtueTrait(VirtueType type, out Trait trait)
+        {
+            bool success = _virtueTraits.TryGetValue(type, out trait);
             if (!success)
             {
-                Debug.LogWarning($"Trait {name} not found! Default value: [{TRAIT_DEFAULT_VALUE}]");
+                Debug.LogWarning($"Trait {type} not found!");
             }
 
             return success;

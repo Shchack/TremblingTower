@@ -171,11 +171,11 @@ MonoBehaviour:
   - id: 5
     fields:
     - title: Name
-      value: Trait/Generosity
+      value: Trait/Justice
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
-      value: Generosity
+      value: Justice
       type: 0
       typeString: VirtueCustomFieldType
     - title: Description
@@ -478,7 +478,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 385.50464
-        y: 224.49545
+        y: 223.689
         width: 160
         height: 30
     - id: 3
@@ -656,7 +656,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 645.1842
-        y: 188.12914
+        y: 187.32271
         width: 160
         height: 30
     - id: 6
@@ -785,8 +785,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 892.6948
-        y: 139.68787
+        x: 891.0819
+        y: 138.07497
         width: 160
         height: 30
     - id: 10
@@ -1178,8 +1178,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 288.12338, y: 0}
-    canvasZoom: 0.97
+    canvasScrollPosition: {x: 0, y: 50.99982}
+    canvasZoom: 0.94000006
   syncInfo:
     syncActors: 0
     syncItems: 0

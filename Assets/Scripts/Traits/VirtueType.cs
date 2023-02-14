@@ -5,7 +5,7 @@
         None = 0,
         Honesty = 1,
         Courage = 2,
-        Generosity = 3,
+        Justice = 3,
         Kindness = 4,
         Diligence = 5
     }

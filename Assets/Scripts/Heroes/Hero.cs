@@ -1,13 +1,11 @@
 ﻿using EG.Tower.Game.Rolls;
 using PixelCrushers.DialogueSystem;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace EG.Tower.Game
 {
     public class Hero : MonoBehaviour
     {
-        [SerializeField] private TraitsData _defaultTraits;
         [SerializeField] private RollProbabilitiesData _probabilitiesData;
         [SerializeField] private HeroModel _heroModel;
 
@@ -17,11 +15,6 @@ namespace EG.Tower.Game
         private void Start()
         {
             _heroModel = GameHub.One.Session.HeroModel;
-            if (_heroModel == null)
-            {
-                _heroModel = new HeroModel("Hero", _defaultTraits);
-                GameHub.One.Session.SetHeroModel(_heroModel);
-            }
         }
 
         public string GetRollChance(string virtueName, double rollTypeValue)

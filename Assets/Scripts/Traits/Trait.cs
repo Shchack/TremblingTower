@@ -40,6 +40,8 @@ namespace EG.Tower.Game
             }
         }
 
+        private HeroAttributeData _battleAttributeData;
+
         public Trait(TraitData data)
         {
             VirtueType = data.VirtueType;
@@ -48,6 +50,12 @@ namespace EG.Tower.Game
             Value = data.DefaultValue;
             DefaultValue = data.DefaultValue;
             MaxValue = data.MaxValue;
+            _battleAttributeData = data.AttributeData;
+        }
+
+        public HeroAttributeModel GetAttribute()
+        {
+            return _battleAttributeData.GetAttribute(Value);
         }
 
         public void AddValue(double value)

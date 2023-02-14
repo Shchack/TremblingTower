@@ -21,16 +21,24 @@ MonoBehaviour:
     bold: 0
     italic: 0
     underline: 0
-  - color: {r: 1, g: 0, b: 0, a: 1}
+  - color: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
     bold: 0
+    italic: 1
+    underline: 0
+  - color: {r: 0.4009434, g: 1, b: 0.46202374, a: 1}
+    bold: 1
     italic: 0
     underline: 0
-  - color: {r: 0, g: 1, b: 0, a: 1}
-    bold: 0
+  - color: {r: 1, g: 0.32635185, b: 0.042452812, a: 1}
+    bold: 1
     italic: 0
     underline: 0
-  - color: {r: 0, g: 0, b: 1, a: 1}
-    bold: 0
+  - color: {r: 1, g: 0.84019786, b: 0, a: 1}
+    bold: 1
+    italic: 0
+    underline: 0
+  - color: {r: 0.3820755, g: 0.57493633, b: 1, a: 1}
+    bold: 1
     italic: 0
     underline: 0
   baseID: 1
@@ -139,7 +147,7 @@ MonoBehaviour:
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
-      value: Kindness
+      value: Honesty
       type: 0
       typeString: VirtueCustomFieldType
     - title: Description
@@ -155,7 +163,7 @@ MonoBehaviour:
     - title: Initial Value
       value: Courage
       type: 0
-      typeString: CustomFieldType_Text
+      typeString: VirtueCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -169,7 +177,7 @@ MonoBehaviour:
     - title: Initial Value
       value: Generosity
       type: 0
-      typeString: CustomFieldType_Text
+      typeString: VirtueCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -183,7 +191,7 @@ MonoBehaviour:
     - title: Initial Value
       value: Kindness
       type: 0
-      typeString: CustomFieldType_Text
+      typeString: VirtueCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -197,7 +205,7 @@ MonoBehaviour:
     - title: Initial Value
       value: Diligence
       type: 0
-      typeString: CustomFieldType_Text
+      typeString: VirtueCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -244,20 +252,6 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: CustomFieldType_Text
-  - id: 11
-    fields:
-    - title: Name
-      value: TraitType
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Initial Value
-      value: None
-      type: 0
-      typeString: VirtueCustomFieldType
-    - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
   conversations:
   - id: 1
     fields:
@@ -278,7 +272,7 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     overrideSettings:
-      useOverrides: 0
+      useOverrides: 1
       overrideSubtitleSettings: 0
       showNPCSubtitlesDuringLine: 1
       showNPCSubtitlesWithResponses: 1
@@ -286,17 +280,17 @@ MonoBehaviour:
       skipPCSubtitleAfterResponseMenu: 0
       subtitleCharsPerSecond: 30
       minSubtitleSeconds: 2
-      continueButton: 0
+      continueButton: 1
       overrideSequenceSettings: 0
       defaultSequence: 
       defaultPlayerSequence: 
       defaultResponseMenuSequence: 
-      overrideInputSettings: 0
+      overrideInputSettings: 1
       alwaysForceResponseMenu: 1
-      includeInvalidEntries: 0
+      includeInvalidEntries: 1
       responseTimeout: 0
       emTagForOldResponses: 0
-      emTagForInvalidResponses: 0
+      emTagForInvalidResponses: 2
       cancelSubtitle:
         key: 27
         buttonName: 
@@ -310,11 +304,11 @@ MonoBehaviour:
       - title: Title
         value: START
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
         value: 1
         type: 5
@@ -326,19 +320,15 @@ MonoBehaviour:
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
         value: None()
         type: 0
-        typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
+        typeString: CustomFieldType_Text
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -350,7 +340,7 @@ MonoBehaviour:
       - originConversationID: 1
         originDialogueID: 0
         destinationConversationID: 1
-        destinationDialogueID: 18
+        destinationDialogueID: 1
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -397,10 +387,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: CustomFieldType_Text
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -455,18 +441,15 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: '[[var=Trait_Kindness], Chance: Possible] Save the dog from being
-          beaten by the Pioneeren teens.'
+        value: '[em5][[var=Trait_Kindness], Chance: [lua(GetRollChance(Variable["Trait_Kindness"],
+          Variable["Roll_StandardRoll"]))]][/em5] Save the dog from being beaten
+          by the Pioneeren teens.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
         typeString: CustomFieldType_Text
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -478,18 +461,24 @@ MonoBehaviour:
       - originConversationID: 1
         originDialogueID: 2
         destinationConversationID: 1
-        destinationDialogueID: 15
+        destinationDialogueID: 5
+        isConnector: 0
+        priority: 2
+      - originConversationID: 1
+        originDialogueID: 2
+        destinationConversationID: 1
+        destinationDialogueID: 6
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: CheckVirtue(Variable["Trait_Kindness"], Variable["Roll_StandardRoll"]);
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
         x: 385.50464
-        y: 224.49545
+        y: 223.689
         width: 160
         height: 30
     - id: 3
@@ -522,10 +511,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -574,22 +559,15 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'The scene scratches an itch in your heart, but you can''t afford
-          to meddle in every wrongdoing you see along the way. The are things far
-          worse than a couple of spoilt Black Empire kids kicking a dog around.
-
-
-          [Leave.]'
+        value: The scene scratches an itch in your heart, but you can't afford to
+          meddle in every wrongdoing you see along the way. The are things far worse
+          than a couple of spoilt Black Empire kids kicking a dog around.
         type: 0
         typeString: 
       - title: Sequence
         value: 
         type: 0
         typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -597,7 +575,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 4
+        destinationConversationID: 1
+        destinationDialogueID: 17
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -644,10 +628,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -675,8 +655,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 798.34875
-        y: 191.92662
+        x: 645.1842
+        y: 187.32271
         width: 160
         height: 30
     - id: 6
@@ -702,26 +682,15 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: '[em2][Fail][/em2] You try to stop them, but they are younger and
+        value: '[em4][Fail][/em4] You try to stop them, but they are younger and
           faster. You run out of breath, and lose a wounded dog and the teens chasing
-          it in the hustle of the village''s main square.
-
-
-          [em4][Courage
-          +1][/em4]
-
-
-          [Leave.]'
+          it in the hustle of the village''s main square.'
         type: 0
         typeString: 
       - title: Sequence
         value: 
         type: 0
         typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -729,16 +698,25 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 6
+        destinationConversationID: 1
+        destinationDialogueID: 19
+        isConnector: 0
+        priority: 2
       conditionsString: Variable["CheckResult"] == false
-      userScript: 
+      userScript: 'GiveTraitReward(Variable["Trait_Courage"], 1);
+
+        ShowAlert("[em3][var=Trait_Courage]
+        +1[/em3]")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 796.40704
-        y: 269.37396
+        x: 641.9766
+        y: 265.57648
         width: 160
         height: 30
     - id: 9
@@ -764,24 +742,20 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'Treate her and give some food.
+        value: 'Treat her and give some food.
 
           [em4][Supplies -2][/em4]
 
-          [em4][Courage
-          +2][/em4]
+          [em3][[var=Trait_Courage]
+          +2][/em3]
 
-          [em4][Kindness +2][/em4]'
+          [em3][[var=Trait_Kindness] +2][/em3]'
         type: 0
         typeString: 
       - title: Sequence
         value: 
         type: 0
         typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -799,17 +773,20 @@ MonoBehaviour:
       conditionsString: Item["Supplies"].Count >= 2
       userScript: 'Item["Supplies"].Count = Item["Supplies"].Count -2;
 
-        GiveTraitReward("Courage",
+        GiveTraitReward(Variable["Trait_Courage"],
         2);
 
-        GiveTraitReward("Kindness", 2);'
+        GiveTraitReward(Variable["Trait_Kindness"], 2);
+
+        ShowAlert("[em4]Supplies
+        -2[/em4]\n[em3][var=Trait_Courage] +2[/em3]\n[em3][var=Trait_Kindness] +2[/em3]")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1045.8594
-        y: 143.48535
+        x: 891.0819
+        y: 138.07497
         width: 160
         height: 30
     - id: 10
@@ -837,17 +814,13 @@ MonoBehaviour:
       - title: Dialogue Text
         value: 'Pet the dog and walk away.
 
-          [em4][Courage +2][/em4]'
+          [em3][Courage +2][/em3]'
         type: 0
         typeString: 
       - title: Sequence
         value: 
         type: 0
         typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -863,14 +836,17 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: GiveTraitReward("Courage", 2)
+      userScript: 'GiveTraitReward("Courage", 2);
+
+        ShowAlert("[em3]Courage
+        +2[/em3]")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1044.9419
-        y: 230.64133
+        x: 891.77734
+        y: 226.84384
         width: 160
         height: 30
     - id: 11
@@ -907,20 +883,13 @@ MonoBehaviour:
           You play
           with the dog for a bit. As she lies on its back, you can see the ribs through
           her skin. She''s been starving for a while. You wonder if she''d make it
-          without the food.
-
-
-          [Leave.]'
+          without the food.'
         type: 0
         typeString: 
       - title: Sequence
         value: 
         type: 0
         typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -928,7 +897,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 11
+        destinationConversationID: 1
+        destinationDialogueID: 20
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -936,8 +911,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1045.8593
-        y: 275.13675
+        x: 892.6947
+        y: 271.33926
         width: 160
         height: 30
     - id: 12
@@ -963,18 +938,24 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: You pet the dog, and when she gets used to you, you clean her wound
+        value: 'You pet the dog, and when she gets used to you, you clean her wound
           and apply a bandage. This should do the trick.
+
+
+          You throw some
+          food, and the dog easily catches it mid-air. Judging from her reflexes,
+          she''s well trained.
+
+
+          As you walk away, you realize you have
+          done everything you could. She would make it through the next couple days,
+          which, for such a tumultuous time, feels like an eternity.'
         type: 0
         typeString: 
       - title: Sequence
         value: 
         type: 0
         typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -986,7 +967,7 @@ MonoBehaviour:
       - originConversationID: 1
         originDialogueID: 12
         destinationConversationID: 1
-        destinationDialogueID: 13
+        destinationDialogueID: 18
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -996,191 +977,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1266.0428
-        y: 143.02664
-        width: 160
-        height: 30
-    - id: 13
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: 
-      - title: Description
-        value: 
-        type: 0
-        typeString: 
-      - title: Actor
-        value: 2
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Dialogue Text
-        value: You throw some food, and the dog easily catches it mid-air. Judging
-          from her reflexes, she's well trained.
-        type: 0
-        typeString: 
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
-      conversationID: 1
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 1
-        originDialogueID: 13
-        destinationConversationID: 1
-        destinationDialogueID: 14
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 1267.8777
-        y: 199.44865
-        width: 160
-        height: 30
-    - id: 14
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: 
-      - title: Description
-        value: 
-        type: 0
-        typeString: 
-      - title: Actor
-        value: 2
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Dialogue Text
-        value: 'As you walk away, you realize you have done everything you could.
-          She would make it through the next couple days, which, for such a tumultuous
-          time, feels like an eternity.
-
-
-          [Leave.]'
-        type: 0
-        typeString: 
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: 
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
-      conversationID: 1
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks: []
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 1270.63
-        y: 250.36609
-        width: 160
-        height: 30
-    - id: 15
-      fields:
-      - title: Title
-        value: evaluate check
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Actor
-        value: 2
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
-      conversationID: 1
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 1
-        originDialogueID: 15
-        destinationConversationID: 1
-        destinationDialogueID: 5
-        isConnector: 0
-        priority: 2
-      - originConversationID: 1
-        originDialogueID: 15
-        destinationConversationID: 1
-        destinationDialogueID: 6
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: CheckVirtue(Variable["Trait_Kindness"], Variable["Roll_StandardRoll"]);
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 586.4756
-        y: 223.11928
+        x: 1112.8783
+        y: 139.22916
         width: 160
         height: 30
     - id: 17
@@ -1206,17 +1004,13 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Leave
+        value: '[Leave.]'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
         typeString: CustomFieldType_Text
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -1232,8 +1026,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 25.504608
-        y: 406.26038
+        x: 380.8274
+        y: 471.57056
         width: 160
         height: 30
     - id: 18
@@ -1247,11 +1041,11 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Actor
-        value: 2
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
+        value: 2
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -1259,17 +1053,13 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: 
+        value: '[Leave.]'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
         typeString: CustomFieldType_Text
-      - title: VirtueCheck
-        value: None
-        type: 0
-        typeString: VirtueCustomFieldType
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -1277,13 +1067,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 1
-        originDialogueID: 18
-        destinationConversationID: 1
-        destinationDialogueID: 17
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -1291,13 +1075,111 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 25.504608
-        y: 341.69727
+        x: 1112.8783
+        y: 189.22916
+        width: 160
+        height: 30
+    - id: 19
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '[Leave.]'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 641.9766
+        y: 315.57648
+        width: 160
+        height: 30
+    - id: 20
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '[Leave.]'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 892.6947
+        y: 321.33926
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 6.796097, y: 35.922318}
-    canvasZoom: 1.03
+    canvasScrollPosition: {x: 0, y: 50.99982}
+    canvasZoom: 0.94000006
   syncInfo:
     syncActors: 0
     syncItems: 0
@@ -1314,4 +1196,4 @@ MonoBehaviour:
     Item","value":"False","type":2,"typeString":"CustomFieldType_Boolean"}],"locationFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Description","value":"","type":0,"typeString":""}],"variableFields":[{"title":"Name","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Initial
     Value","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"}],"conversationFields":[{"title":"Title","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Actor","value":"0","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"0","type":5,"typeString":"CustomFieldType_Actor"}],"dialogueEntryFields":[{"title":"Title","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Actor","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Menu
     Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Dialogue
-    Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Sequence","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"VirtueCheck","value":"None","type":0,"typeString":"VirtueCustomFieldType"}],"actorPrimaryFieldTitles":[],"itemPrimaryFieldTitles":[],"questPrimaryFieldTitles":[],"locationPrimaryFieldTitles":[],"variablePrimaryFieldTitles":[],"conversationPrimaryFieldTitles":[],"dialogueEntryPrimaryFieldTitles":["VirtueCheck"],"npcLineColor":{"r":1.0,"g":0.0,"b":0.0,"a":1.0},"pcLineColor":{"r":0.0,"g":0.0,"b":1.0,"a":1.0},"repeatLineColor":{"r":0.5,"g":0.5,"b":0.5,"a":1.0}}'
+    Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Sequence","value":"","type":0,"typeString":"CustomFieldType_Text"}],"actorPrimaryFieldTitles":[],"itemPrimaryFieldTitles":[],"questPrimaryFieldTitles":[],"locationPrimaryFieldTitles":[],"variablePrimaryFieldTitles":[],"conversationPrimaryFieldTitles":[],"dialogueEntryPrimaryFieldTitles":["VirtueCheck"],"npcLineColor":{"r":1.0,"g":0.0,"b":0.0,"a":1.0},"pcLineColor":{"r":0.0,"g":0.0,"b":1.0,"a":1.0},"repeatLineColor":{"r":0.5,"g":0.5,"b":0.5,"a":1.0}}'

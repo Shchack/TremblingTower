@@ -18,25 +18,30 @@ MonoBehaviour:
     Vice: Falsehood
     DefaultValue: 50
     MaxValue: 100
+    AttributeData: {fileID: 11400000, guid: 83b5ebf5a57113e409f2f9c3789ea0ba, type: 2}
   - VirtueType: 2
     Virtue: Courage
     Vice: Cowardice
     DefaultValue: 50
     MaxValue: 100
+    AttributeData: {fileID: 11400000, guid: a7fd5ba0db6fc8e4bb7e94d807d903fa, type: 2}
   - VirtueType: 3
-    Virtue: Generosity
-    Vice: Greed
+    Virtue: Justice
+    Vice: Unjustice
     DefaultValue: 50
     MaxValue: 100
+    AttributeData: {fileID: 11400000, guid: 5d664ee812bf6234b85b287105ac6a02, type: 2}
   - VirtueType: 4
     Virtue: Kindness
     Vice: Hatred
     DefaultValue: 50
     MaxValue: 100
+    AttributeData: {fileID: 11400000, guid: 53e7fec2151b25c4dab99e6f8b19cbcc, type: 2}
   - VirtueType: 5
     Virtue: Diligence
     Vice: Laziness
     DefaultValue: 50
     MaxValue: 100
+    AttributeData: {fileID: 11400000, guid: 5276598108becdf4ba8b0275f8890e4b, type: 2}
   _mainVirtueBoost: 10
   _mainViceBoost: 10

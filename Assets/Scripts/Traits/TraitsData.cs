@@ -15,35 +15,9 @@ namespace EG.Tower.Game
         public TraitData[] Traits => _traits;
         public int MainVirtueBoost => _mainVirtueBoost;
         public int MainViceBoost => _mainViceBoost;
+        public List<string> Virtues => _traits.Select(t => t.Virtue).ToList();
+        public List<string> Vices => _traits.Select(t => t.Vice).ToList();
 
-
-        private List<string> _virtues = null;
-        public List<string> Virtues
-        {
-            get
-            {
-                if (_virtues == null || _virtues.Count == 0)
-                {
-                    _virtues = _traits.Select(t => t.Virtue).ToList();
-                }
-
-                return _virtues;
-            }
-        }
-
-        private List<string> _vices = null;
-        public List<string> Vices
-        {
-            get
-            {
-                if (_vices == null || _vices.Count == 0)
-                {
-                    _vices = _traits.Select(t => t.Vice).ToList();
-                }
-
-                return _vices;
-            }
-        }
 
         public Trait[] GetTraits()
         {
@@ -61,5 +35,6 @@ namespace EG.Tower.Game
         public string Vice;
         public int DefaultValue = 50;
         public int MaxValue = 100;
+        public HeroAttributeData AttributeData;
     }
 }
