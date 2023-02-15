@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EG.Tower.Game.Battle.Behaviours;
+using UnityEngine;
 
 namespace EG.Tower.Game.Battle.Data
 {
-    public class BattleActionData
+    public abstract class BattleActionData : ScriptableObject, IBattleAction
     {
+        [SerializeField] protected string _name;
+        [SerializeField] protected bool _isEnemyTarget;
+
+        public string Name => _name;
+        public bool IsEnemyTarget => _isEnemyTarget;
+
+        public abstract void Execute(HeroBattleUnit owner, BattleUnit target, string attributeName);
     }
 }

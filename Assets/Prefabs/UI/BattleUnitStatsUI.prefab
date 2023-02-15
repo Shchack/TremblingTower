@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8584871b58112224682d5de7452b2a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _portrait: {fileID: 5644332494526379583}
   _hpLabel: {fileID: 5635842987509479084}
   _combatOrderLabel: {fileID: 3764907595600798741}
 --- !u!114 &1907157260437850227

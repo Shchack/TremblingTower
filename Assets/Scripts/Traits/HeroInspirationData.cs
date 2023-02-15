@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using EG.Tower.Game.Battle.Data;
+using UnityEngine;
 
 namespace EG.Tower.Game
 {
@@ -9,5 +10,6 @@ namespace EG.Tower.Game
         public string CombatActionName = "Special";
         public int Value = 2;
         public Sprite Icon;
+        public BattleActionData BattleAction;
     }
 }

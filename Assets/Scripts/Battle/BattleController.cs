@@ -1,5 +1,5 @@
 ﻿using EG.Tower.Game.Battle.Behaviours;
-using EG.Tower.Game.Rolls;
+using EG.Tower.Game.Battle.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,33 +7,37 @@ using UnityEngine;
 
 namespace EG.Tower.Game.Battle
 {
-    public class BattleController : MonoBehaviour
+    public class BattleController : MonoBehaviour, IDependencyInjectable
     {
         public event Action<BattleUnit> OnBattleBeginEvent;
 
-        [SerializeField] private DiceType _combatOrderDice = DiceType.D10;
+        [SerializeField] private HeroBattleUnit _hero;
+        [SerializeField] private EnemyBattleUnit[] _enemies;
 
-        [SerializeField] private BattleUnit _hero;
-        [SerializeField] private BattleUnit[] _enemies;
-
-        public BattleUnit Hero => _hero;
+        public HeroBattleUnit Hero => _hero;
+        public EnemyBattleUnit[] Enemies => _enemies;
 
         private BattleUnit[] _unitsOrder;
         private int _turnUnitIndex;
 
         private void Awake()
         {
-            HeroModel heroModel = GameHub.One.Session.HeroModel;
-            _hero.Init(heroModel, _combatOrderDice);
-            InitEnemies();
+            GameHub.One.Register(this);
+        }
+
+        private void Start()
+        {
+            InitUnitEvents();
             CreateUnitsOrder();
         }
 
-        private void InitEnemies()
+        private void InitUnitEvents()
         {
+            _hero.OnUnitSelectedEvent += HandleUnitSelectedEvent;
+
             foreach (var enemy in _enemies)
             {
-                enemy.Init(_combatOrderDice);
+                enemy.OnUnitSelectedEvent += HandleUnitSelectedEvent;
             }
         }
 
@@ -63,6 +67,38 @@ namespace EG.Tower.Game.Battle
             }
 
             return _unitsOrder[_turnUnitIndex];
+        }
+
+        private void OnDestroy()
+        {
+            GameHub.One.Unregister(this);
+        }
+
+        private BattleAction _currentAction;
+
+        public void TrackAction(BattleActionModel actionModel)
+        {
+            _currentAction = new BattleAction(actionModel);
+        }
+
+        public void UntrackAction(BattleActionModel actionModel)
+        {
+            _currentAction = null;
+        }
+
+        private void HandleUnitSelectedEvent(BattleUnit target)
+        {
+            ExecuteAction(target);
+        }
+
+        public void ExecuteAction(BattleUnit target)
+        {
+            if (_currentAction != null)
+            {
+                _currentAction.Execute(target);
+            }
+
+            _currentAction = null;
         }
     }
 }

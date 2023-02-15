@@ -20,7 +20,7 @@ namespace EG.Tower.Game.Battle.UI
 
         private void Start()
         {
-            _battleController = FindObjectOfType<BattleController>();
+            _battleController = GameHub.One.BattleController;
             _beginBattleButton.onClick.AddListener(HandleBeginButtonClick);
             GenerateItems();
             _canvas.enabled = true;
@@ -36,7 +36,7 @@ namespace EG.Tower.Game.Battle.UI
         {
             Cleanup();
             var hero = _battleController.Hero;
-            _heroNameLabel.text = hero.HeroName;
+            _heroNameLabel.text = hero.Name;
 
             GenerateAdditionalItem(_hpAttributeName, hero.HP);
             GenerateAdditionalItem(_combatOrderAttributeName, hero.CombatOrder);

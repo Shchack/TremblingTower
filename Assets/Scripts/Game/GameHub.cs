@@ -1,4 +1,5 @@
-﻿using EG.Tower.Utils;
+﻿using EG.Tower.Game.Battle;
+using EG.Tower.Utils;
 using UnityEngine;
 
 namespace EG.Tower.Game
@@ -19,6 +20,18 @@ namespace EG.Tower.Game
 
                 return _session;
             }
+        }
+
+        public BattleController BattleController { get; private set; }
+
+        public void Register(BattleController battleController)
+        {
+            BattleController = battleController;
+        }
+
+        public void Unregister(BattleController battleController)
+        {
+            BattleController = null;
         }
     }
 }

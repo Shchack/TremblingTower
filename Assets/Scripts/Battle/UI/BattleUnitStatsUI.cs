@@ -1,11 +1,13 @@
 ﻿using EG.Tower.Game.Battle.Behaviours;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace EG.Tower.Game.Battle.UI
 {
     public class BattleUnitStatsUI : MonoBehaviour
     {
+        [SerializeField] private Image _portrait;
         [SerializeField] private TMP_Text _hpLabel;
         [SerializeField] private TMP_Text _combatOrderLabel;
 
@@ -14,6 +16,16 @@ namespace EG.Tower.Game.Battle.UI
 
         public void Init(BattleUnit battleUnit)
         {
+            _battleUnit = battleUnit;
+            _maxHp = battleUnit.MaxHP;
+            SetHpLabel(battleUnit.HP, battleUnit.MaxHP);
+            SetCombatOrderLabel(battleUnit.CombatOrder);
+            battleUnit.OnHPChangedEvent += HandleHPChangedEvent;
+        }
+
+        public void Init(EnemyBattleUnit battleUnit)
+        {
+            _portrait.sprite = battleUnit.Icon;
             _battleUnit = battleUnit;
             _maxHp = battleUnit.MaxHP;
             SetHpLabel(battleUnit.HP, battleUnit.MaxHP);

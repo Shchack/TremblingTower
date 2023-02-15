@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EG.Tower.Game.Battle.Data;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace EG.Tower.Game
         public HeroAttributeType ConvertType;
         public float Divisor = 10f;
         public Sprite Icon;
+        public BattleActionData BattleActionData;
 
         private Dictionary<HeroAttributeType, Func<int, int>> _convertMethods;
 
@@ -33,7 +35,7 @@ namespace EG.Tower.Game
                 value = method.Invoke(traitValue);
             }
 
-            return new HeroAttributeModel(Name, ConvertType, value, Icon);
+            return new HeroAttributeModel(Name, ConvertType, value, Icon, BattleActionData);
         }
 
         private int ConvertAsIs(int traitValue)

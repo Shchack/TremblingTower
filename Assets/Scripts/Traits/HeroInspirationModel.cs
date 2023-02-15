@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EG.Tower.Game.Battle.Data;
+using System;
 using UnityEngine;
 
 namespace EG.Tower.Game
@@ -10,6 +11,7 @@ namespace EG.Tower.Game
         public string CombatActionName { get; private set; }
         public int Value { get; private set; }
         public Sprite Icon { get; private set; }
+        public IBattleAction BattleAction { get; private set; }
 
         public HeroInspirationModel(HeroInspirationData data)
         {
@@ -17,6 +19,7 @@ namespace EG.Tower.Game
             CombatActionName = data.CombatActionName;
             Value = data.Value;
             Icon = data.Icon;
+            BattleAction = data.BattleAction;
         }
     }
 }
