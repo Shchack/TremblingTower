@@ -1,9 +1,8 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace EG.Tower.Game.Battle
+namespace EG.Tower.Game.Battle.UI
 {
     public class BattleActionItemUI : MonoBehaviour
     {
@@ -11,6 +10,8 @@ namespace EG.Tower.Game.Battle
         [SerializeField] private Image _iconImage;
         [SerializeField] private TMP_Text _valueLabel;
         [SerializeField] private Image _highligher;
+
+        private string _actionName;
 
         private void Start()
         {
@@ -29,8 +30,9 @@ namespace EG.Tower.Game.Battle
             _highligher.enabled = !_highligher.enabled;
         }
 
-        public void Init(Sprite icon, int value)
+        public void Init(string actionName, Sprite icon, int value)
         {
+            _actionName = actionName;
             _iconImage.sprite = icon;
             _valueLabel.text = value.ToString();
         }

@@ -1,19 +1,24 @@
 ﻿using System.Linq;
 
-namespace EG.Tower.Game.Battle
+namespace EG.Tower.Game.Battle.Models
 {
     public class BattleAttributesModel
     {
+
         public string HeroName { get; internal set; }
         public BattleAttributeItemModel[] Items { get; private set; }
-        public int UltUseTimes { get; private set; }
+        public int HP { get; private set; }
+        public int MaxHP { get; private set; }
+        public HeroInspirationModel Inspiration { get; private set; }
         public int CombatOrder { get; private set; }
 
         public BattleAttributesModel(HeroModel heroModel, int combatOrder)
         {
             HeroName = heroModel.Name;
             Items = heroModel.Traits.Select(GetModel).ToArray();
-            UltUseTimes = heroModel.Inspiration;
+            HP = heroModel.HP;
+            MaxHP = heroModel.MaxHP;
+            Inspiration = heroModel.Inspiration;
             CombatOrder = combatOrder;
         }
 

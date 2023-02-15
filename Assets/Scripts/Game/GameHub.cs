@@ -5,7 +5,7 @@ namespace EG.Tower.Game
 {
     public class GameHub : Singleton<GameHub>
     {
-        [SerializeField] private TraitsData _defaultTraits;
+        [SerializeField] private HeroSetupData _defaultTraits;
 
         private PlayerSession _session;
         public PlayerSession Session

@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using EG.Tower.Game.Battle.Models;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace EG.Tower.Game.Battle
+namespace EG.Tower.Game.Battle.UI
 {
     public class BattleScreen : MonoBehaviour
     {
         [SerializeField] private Canvas _canvas;
+        [SerializeField] private BattleUnitStatsUI _heroStatsUI;
         [SerializeField] private RectTransform _abilitiesHolder;
         [SerializeField] private BattleActionItemUI _battleActionUiPrefab;
-        [SerializeField] private UltButtonUI _ultButton;
         [SerializeField] private Button _executeButton;
 
         private BattleController _battleController;
@@ -17,9 +18,8 @@ namespace EG.Tower.Game.Battle
         {
             _canvas.enabled = false;
             _battleController = FindObjectOfType<BattleController>();
-            InitActions(_battleController.GetAttributesModel());
+            Init(_battleController.Attributes);
             _executeButton.onClick.AddListener(HandleExecuteButtonClick);
-            _ultButton.OnUltButtonClick += HandleUltButtonClick;
             _battleController.OnBattleBeginEvent += HandleBattleBeginEvent;
         }
 
@@ -30,25 +30,28 @@ namespace EG.Tower.Game.Battle
 
         private void HandleExecuteButtonClick()
         {
-            Debug.LogError($"{_executeButton.name} clicked!");
+            _battleController.ExecuteActions();
         }
 
-        private void HandleUltButtonClick()
+        private void Init(BattleAttributesModel attributes)
         {
-            Debug.LogError($"{_ultButton.name} clicked!");
+            _heroStatsUI.Init(attributes.HP, attributes.MaxHP);
+            InitActions(attributes);
         }
+
         private void InitActions(BattleAttributesModel attributes)
         {
             Cleanup();
 
-            _ultButton.SetUseTimes(attributes.UltUseTimes);
             var actions = attributes.GetActions();
-
             foreach (var item in actions)
             {
                 var itemUI = Instantiate(_battleActionUiPrefab, _abilitiesHolder);
-                itemUI.Init(item.AttributeIcon, item.AttributeValue);
+                itemUI.Init(item.AttributeName, item.AttributeIcon, item.AttributeValue);
             }
+
+            var ultItemUI = Instantiate(_battleActionUiPrefab, _abilitiesHolder);
+            ultItemUI.Init(attributes.Inspiration.CombatActionName, attributes.Inspiration.Icon, attributes.Inspiration.Value);
         }
 
         private void Cleanup()
@@ -63,7 +66,6 @@ namespace EG.Tower.Game.Battle
 
         private void OnDestroy()
         {
-            _ultButton.OnUltButtonClick -= HandleUltButtonClick;
             _battleController.OnBattleBeginEvent -= HandleBattleBeginEvent;
         }
     }

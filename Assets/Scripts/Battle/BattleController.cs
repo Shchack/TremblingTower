@@ -1,4 +1,5 @@
-﻿using EG.Tower.Game.Rolls;
+﻿using EG.Tower.Game.Battle.Models;
+using EG.Tower.Game.Rolls;
 using System;
 using UnityEngine;
 
@@ -10,18 +11,22 @@ namespace EG.Tower.Game.Battle
 
         [SerializeField] private DiceType _combatOrderDice = DiceType.D10;
 
-        private BattleAttributesModel _attributes;
+        public BattleAttributesModel Attributes { get; private set; }
 
         private void Awake()
         {
             var heroModel = GameHub.One.Session.HeroModel;
             var heroCombatOrder = GetCombatOrder(heroModel);
-            _attributes = new BattleAttributesModel(heroModel, heroCombatOrder);
+            Attributes = new BattleAttributesModel(heroModel, heroCombatOrder);
+        }
+        public void BeginBattle()
+        {
+            OnBattleBeginEvent?.Invoke();
         }
 
-        public BattleAttributesModel GetAttributesModel()
+        public void ExecuteActions()
         {
-            return _attributes;
+            Debug.LogError($"Execution!");
         }
 
         private int GetCombatOrder(HeroModel heroModel)
@@ -35,11 +40,6 @@ namespace EG.Tower.Game.Battle
             var rollResult = RollHelper.Roll(_combatOrderDice);
 
             return rollResult + attackValue;
-        }
-
-        public void BeginBattle()
-        {
-            OnBattleBeginEvent?.Invoke();
         }
     }
 }

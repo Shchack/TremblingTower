@@ -39,7 +39,7 @@ namespace EG.Tower.Game
             _controller.SetHeroName(newName);
         }
 
-        private void InitDropdowns(TraitsData traitsData)
+        private void InitDropdowns(HeroSetupData traitsData)
         {
             _mainVirtueDropdown.onValueChanged.AddListener(HandleMainVirtueChanged);
             _mainViceDropdown.onValueChanged.AddListener(HandleMainViceChanged);

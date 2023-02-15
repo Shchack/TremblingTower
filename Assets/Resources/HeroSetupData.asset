@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92907c28200908243b4c84205f094dee, type: 3}
-  m_Name: TraitsData
+  m_Script: {fileID: 11500000, guid: f28a860ecf319424d9f241144c949195, type: 3}
+  m_Name: HeroSetupData
   m_EditorClassIdentifier: 
   _traits:
   - VirtueType: 1
@@ -45,3 +45,7 @@ MonoBehaviour:
     AttributeData: {fileID: 11400000, guid: 5276598108becdf4ba8b0275f8890e4b, type: 2}
   _mainVirtueBoost: 10
   _mainViceBoost: 10
+  _health: 20
+  _supplies: 5
+  _money: 5
+  _inspirationData: {fileID: 11400000, guid: 6b0890949e610c24fa1e7646e9546546, type: 2}

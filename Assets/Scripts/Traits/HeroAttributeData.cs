@@ -19,7 +19,8 @@ namespace EG.Tower.Game
             _convertMethods = new Dictionary<HeroAttributeType, Func<int, int>>
             {
                 { HeroAttributeType.PercentAsIs, ConvertAsIs },
-                { HeroAttributeType.Points, ConvertDivision }
+                { HeroAttributeType.Points, ConvertPoints },
+                { HeroAttributeType.PercentDivision, ConvertPercentDivision }
             };
         }
 
@@ -35,14 +36,19 @@ namespace EG.Tower.Game
             return new HeroAttributeModel(Name, ConvertType, value, Icon);
         }
 
-        private int ConvertDivision(int traitValue)
+        private int ConvertAsIs(int traitValue)
+        {
+            return traitValue;
+        }
+
+        private int ConvertPoints(int traitValue)
         {
             return Divisor > 0f ? Mathf.RoundToInt(traitValue / Divisor) : 0;
         }
 
-        private int ConvertAsIs(int traitValue)
+        private int ConvertPercentDivision(int traitValue)
         {
-            return traitValue;
+            return Divisor > 0f ? Mathf.RoundToInt(traitValue / Divisor) : 0;
         }
     }
 }

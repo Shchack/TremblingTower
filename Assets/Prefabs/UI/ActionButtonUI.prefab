@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 872154177517337316}
   - component: {fileID: 872154177517337315}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 872154177821470551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175dac8b2ba964243bf4ae979b6809dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 9568f4d4362385d428e9a79e9eb5fbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _actionButton: {fileID: 872154177821470537}

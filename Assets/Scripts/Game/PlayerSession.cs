@@ -17,9 +17,9 @@
             }
         }
 
-        private TraitsData _defaultTraits;
+        private HeroSetupData _defaultTraits;
 
-        public PlayerSession(TraitsData defaultTraits)
+        public PlayerSession(HeroSetupData defaultTraits)
         {
             _defaultTraits = defaultTraits;
         }

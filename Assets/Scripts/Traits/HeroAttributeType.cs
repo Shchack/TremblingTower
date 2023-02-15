@@ -6,6 +6,7 @@ namespace EG.Tower.Game
     public enum HeroAttributeType
     {
         PercentAsIs = 0,
-        Points = 1
+        Points = 1,
+        PercentDivision = 2,
     }
 }

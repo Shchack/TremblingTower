@@ -11,12 +11,22 @@ namespace EG.Tower.Game
         public Trait MainVirtueTrait { get; private set; }
         public Trait MainViceTrait { get; private set; }
 
-        public HeroCreateModel(string defaultName, TraitsData traitsData)
+        public int MaxHP { get; private set; }
+        public int Supplies { get; private set; }
+        public int Money { get; private set; }
+        public HeroInspirationModel Inspiration { get; private set; }
+
+        public HeroCreateModel(string defaultName, HeroSetupData setupData)
         {
             Name = defaultName;
             MainVirtueTrait = null;
             MainViceTrait = null;
-            Traits = traitsData.GetTraits();
+            Traits = setupData.GetTraits();
+
+            MaxHP = setupData.MaxHP;
+            Supplies = setupData.Supplies;
+            Money = setupData.Money;
+            Inspiration = setupData.Inspiration;
         }
 
         public void SetName(string newName)

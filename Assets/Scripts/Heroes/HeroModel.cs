@@ -23,7 +23,19 @@ namespace EG.Tower.Game
         public Trait MainViceTrait { get; private set; }
 
         [field: SerializeField]
-        public int Inspiration { get; private set; }
+        public int HP { get; private set; }
+
+        [field: SerializeField]
+        public int MaxHP { get; internal set; }
+
+        [field: SerializeField]
+        public int Supplies { get; private set; }
+
+        [field: SerializeField]
+        public int Money { get; private set; }
+
+        [field: SerializeField]
+        public HeroInspirationModel Inspiration { get; private set; }
 
         private Dictionary<VirtueType, Trait> _virtueTraits;
 
@@ -34,17 +46,25 @@ namespace EG.Tower.Game
             MainVirtueTrait = createModel.MainVirtueTrait;
             MainViceTrait = createModel.MainViceTrait;
             _virtueTraits = Traits.ToDictionary(t => t.VirtueType, t => t);
-            Inspiration = 2;
+            HP = createModel.MaxHP;
+            MaxHP = createModel.MaxHP;
+            Supplies = createModel.Supplies;
+            Money = createModel.Money;
+            Inspiration = createModel.Inspiration;
         }
 
-        public HeroModel(string name, TraitsData defaultTraits)
+        public HeroModel(string name, HeroSetupData setupData)
         {
             Name = name;
-            Traits = defaultTraits.GetTraits();
+            Traits = setupData.GetTraits();
             MainVirtueTrait = null;
             MainViceTrait = null;
             _virtueTraits = Traits.ToDictionary(t => t.VirtueType, t => t);
-            Inspiration = 2;
+            HP = setupData.MaxHP;
+            MaxHP = setupData.MaxHP;
+            Inspiration = setupData.Inspiration;
+            Supplies = setupData.Supplies;
+            Money = setupData.Money;
         }
 
         public double FindVirtueTraitValue(string name)

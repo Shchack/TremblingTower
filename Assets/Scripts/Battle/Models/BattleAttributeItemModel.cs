@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EG.Tower.Game.Battle
+namespace EG.Tower.Game.Battle.Models
 {
     public class BattleAttributeItemModel
     {

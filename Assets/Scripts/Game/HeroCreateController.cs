@@ -5,10 +5,10 @@ namespace EG.Tower.Game
 {
     public class HeroCreateController : MonoBehaviour
     {
-        [SerializeField] private TraitsData _traitsData;
+        [SerializeField] private HeroSetupData _traitsData;
         [SerializeField] private string _defaultName = "Hero";
 
-        public TraitsData TraitsData => _traitsData;
+        public HeroSetupData TraitsData => _traitsData;
 
         public Trait[] HeroTraits => _heroCreateModel.Traits;
 
