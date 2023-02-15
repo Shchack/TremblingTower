@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using EG.Tower.Game.Battle.Models;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ namespace EG.Tower.Game.Battle.UI
         [SerializeField] private TMP_Text _valueLabel;
         [SerializeField] private Image _highligher;
 
-        private string _actionName;
+        private BattleActionModel _action;
 
         private void Start()
         {
@@ -19,22 +20,21 @@ namespace EG.Tower.Game.Battle.UI
             _highligher.enabled = false;
         }
 
+        public void Init(BattleActionModel action)
+        {
+            _action = action;
+            _iconImage.sprite = action.Icon;
+            _valueLabel.text = action.Value.ToString();
+        }
+
         private void HandleActionSelectButtonClick()
         {
-            Debug.LogError($"{name} action button clicked!");
-            ToggleHighlight();
+            _action.TryExecute();
         }
 
         private void ToggleHighlight()
         {
             _highligher.enabled = !_highligher.enabled;
-        }
-
-        public void Init(string actionName, Sprite icon, int value)
-        {
-            _actionName = actionName;
-            _iconImage.sprite = icon;
-            _valueLabel.text = value.ToString();
         }
     }
 }

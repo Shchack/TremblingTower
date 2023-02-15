@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EG.Tower.Game.Battle.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -67,6 +68,11 @@ namespace EG.Tower.Game
             Money = setupData.Money;
         }
 
+        public BattleAttributeItemModel[] GetBattleAttributes()
+        {
+            return Traits.Select(CreateBattleAttribute).ToArray();
+        }
+
         public double FindVirtueTraitValue(string name)
         {
             double traitValue = TRAIT_DEFAULT_VALUE;
@@ -95,6 +101,12 @@ namespace EG.Tower.Game
             }
 
             return success;
+        }
+
+        private BattleAttributeItemModel CreateBattleAttribute(Trait trait)
+        {
+            var attribute = trait.GetAttribute();
+            return new BattleAttributeItemModel(trait.Virtue, trait.Value, attribute);
         }
     }
 }

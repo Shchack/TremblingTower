@@ -1,4 +1,6 @@
-﻿using EG.Tower.Game.Battle.Models;
+﻿using EG.Tower.Game.Battle.Behaviours;
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +10,9 @@ namespace EG.Tower.Game.Battle.UI
     {
         [SerializeField] private Canvas _canvas;
         [SerializeField] private BattleUnitStatsUI _heroStatsUI;
-        [SerializeField] private RectTransform _abilitiesHolder;
+        [SerializeField] private RectTransform _actionsHolder;
         [SerializeField] private BattleActionItemUI _battleActionUiPrefab;
-        [SerializeField] private Button _executeButton;
+        [SerializeField] private Button _endTurnButton;
 
         private BattleController _battleController;
 
@@ -18,45 +20,59 @@ namespace EG.Tower.Game.Battle.UI
         {
             _canvas.enabled = false;
             _battleController = FindObjectOfType<BattleController>();
-            Init(_battleController.Attributes);
-            _executeButton.onClick.AddListener(HandleExecuteButtonClick);
+            Init(_battleController.Hero);
+            _endTurnButton.onClick.AddListener(HandleEndTurnButtonClick);
             _battleController.OnBattleBeginEvent += HandleBattleBeginEvent;
         }
 
-        private void HandleBattleBeginEvent()
+        private void HandleBattleBeginEvent(BattleUnit turnUnit)
         {
+            SetTurnUI(turnUnit);
             _canvas.enabled = true;
         }
 
-        private void HandleExecuteButtonClick()
+        private void HandleEndTurnButtonClick()
         {
-            _battleController.ExecuteActions();
+            var turnUnit = _battleController.EndTurn();
+            SetTurnUI(turnUnit);
         }
 
-        private void Init(BattleAttributesModel attributes)
+        private void Init(BattleUnit heroUnit)
         {
-            _heroStatsUI.Init(attributes.HP, attributes.MaxHP);
-            InitActions(attributes);
+            _heroStatsUI.Init(heroUnit);
+            InitActions(heroUnit);
         }
 
-        private void InitActions(BattleAttributesModel attributes)
+        private void InitActions(BattleUnit battleUnit)
         {
             Cleanup();
 
-            var actions = attributes.GetActions();
-            foreach (var item in actions)
+            var actions = battleUnit.Actions;
+            foreach (var action in actions)
             {
-                var itemUI = Instantiate(_battleActionUiPrefab, _abilitiesHolder);
-                itemUI.Init(item.AttributeName, item.AttributeIcon, item.AttributeValue);
+                var itemUI = Instantiate(_battleActionUiPrefab, _actionsHolder);
+                itemUI.Init(action);
             }
+        }
 
-            var ultItemUI = Instantiate(_battleActionUiPrefab, _abilitiesHolder);
-            ultItemUI.Init(attributes.Inspiration.CombatActionName, attributes.Inspiration.Icon, attributes.Inspiration.Value);
+        private void SetTurnUI(BattleUnit turnUnit)
+        {
+            var label = _endTurnButton.GetComponentInChildren<TMP_Text>();
+            if (turnUnit.IsPlayer)
+            {
+                _actionsHolder.gameObject.SetActive(true);
+                label.text = "End Turn";
+            }
+            else
+            {
+                _actionsHolder.gameObject.SetActive(false);
+                label.text = "Enemy Turn";
+            }
         }
 
         private void Cleanup()
         {
-            var items = _abilitiesHolder.GetComponentsInChildren<BattleActionItemUI>();
+            var items = _actionsHolder.GetComponentsInChildren<BattleActionItemUI>();
 
             for (int i = 0; i < items.Length; i++)
             {

@@ -4,7 +4,6 @@ namespace EG.Tower.Game.Battle.Models
 {
     public class BattleAttributesModel
     {
-
         public string HeroName { get; internal set; }
         public BattleAttributeItemModel[] Items { get; private set; }
         public int HP { get; private set; }

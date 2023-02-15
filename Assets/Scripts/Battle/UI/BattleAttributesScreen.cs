@@ -35,14 +35,15 @@ namespace EG.Tower.Game.Battle.UI
         private void GenerateItems()
         {
             Cleanup();
-            BattleAttributesModel attributes = _battleController.Attributes;
-            _heroNameLabel.text = attributes.HeroName;
+            var hero = _battleController.Hero;
+            _heroNameLabel.text = hero.HeroName;
 
-            GenerateAdditionalItem(_hpAttributeName, attributes.HP);
-            GenerateAdditionalItem(_combatOrderAttributeName, attributes.CombatOrder);
-            GenerateAdditionalItem(attributes.Inspiration.CombatActionName, attributes.Inspiration.Value);
+            GenerateAdditionalItem(_hpAttributeName, hero.HP);
+            GenerateAdditionalItem(_combatOrderAttributeName, hero.CombatOrder);
+            GenerateAdditionalItem(hero.Inspiration.CombatActionName, hero.Inspiration.Value);
 
-            foreach (var item in attributes.Items)
+            BattleAttributeItemModel[] attributes = _battleController.Hero.Attributes;
+            foreach (var item in attributes)
             {
                 var uiItem = Instantiate(_attributeUIPrefab, _attributesHolder);
                 uiItem.InitMainAttribute(item);
