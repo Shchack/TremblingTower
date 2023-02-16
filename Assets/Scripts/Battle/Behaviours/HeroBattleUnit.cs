@@ -41,7 +41,7 @@ namespace EG.Tower.Game.Battle.Behaviours
                 actions.Add(action.Name, action);
             }
 
-            var inspirationAction = new BattleActionModel(Inspiration);
+            var inspirationAction = new BattleActionModel(Inspiration, this);
             actions.Add(inspirationAction.Name, inspirationAction);
 
             return actions;

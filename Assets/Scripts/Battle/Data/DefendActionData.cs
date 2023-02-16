@@ -8,7 +8,7 @@ namespace EG.Tower.Game.Battle.Data
     {
         public override void Execute(HeroBattleUnit owner, BattleUnit target, string attributeName)
         {
-            Debug.Log("Executing Defend action!");
+            Debug.Log($"Executing {Name}!");
 
             if (owner.TryFindAttribute(attributeName, out var attribute))
             {
@@ -16,7 +16,7 @@ namespace EG.Tower.Game.Battle.Data
             }
             else
             {
-                Debug.LogError($"Action {_name} failed! {attributeName} not found!");
+                Debug.LogError($"Action {Name} failed! {attributeName} not found!");
             }
         }
     }

@@ -27,11 +27,11 @@ namespace EG.Tower.Game.Battle.UI
         public void Init(BattleActionModel action)
         {
             _action = action;
-            action.OnActionExecuteEvent += Deselect;
+            action.OnActionExecuteEvent += HandleActionExecuteEvent;
             _iconImage.sprite = action.Icon;
             _valueLabel.text = action.Value.ToString();
+            _actionButton.interactable = _action.Value > 0;
         }
-
         private void HandleActionSelectButtonClick()
         {
             _isSelectingTarget = !_isSelectingTarget;
@@ -45,6 +45,17 @@ namespace EG.Tower.Game.Battle.UI
                 Deselect();
                 GameHub.One.BattleController.UntrackAction(_action);
             }
+        }
+
+        private void HandleActionExecuteEvent()
+        {
+            if (_action.Value <= 0)
+            {
+                _actionButton.interactable = false;
+            }
+
+            _valueLabel.text = _action.Value.ToString();
+            Deselect();
         }
 
         public void Select()

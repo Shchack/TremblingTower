@@ -85,17 +85,17 @@ namespace EG.Tower.Game.Battle.Behaviours
                 Defence -= defencePoints;
             }
 
-            var hpPoint = HP - currentHitValue;
-            HP = hpPoint >= 0 ? hpPoint : 0;
+            HP -= currentHitValue;
 
             if (HP <= 0)
             {
-                Die();
+                Kill();
             }
         }
 
-        private void Die()
+        public void Kill()
         {
+            HP = 0;
             gameObject.SetActive(false);
         }
 

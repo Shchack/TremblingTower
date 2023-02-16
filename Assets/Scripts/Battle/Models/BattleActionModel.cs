@@ -15,27 +15,34 @@ namespace EG.Tower.Game.Battle.Models
         public IBattleAction Action { get; private set; }
         public HeroBattleUnit Owner { get; private set; }
 
-        public BattleActionModel(BattleAttributeItemModel item, HeroBattleUnit owner)
+        public BattleActionModel(BattleAttributeItemModel model, HeroBattleUnit owner)
+            : this(model.AttributeName, model.AttributeValue, model.AttributeIcon, model.BattleAction, owner)
         {
-            Name = item.AttributeName;
-            Value = item.AttributeValue;
-            Icon = item.AttributeIcon;
-            Action = item.BattleAction;
+        }
+
+        public BattleActionModel(HeroInspirationModel model, HeroBattleUnit owner)
+            : this(model.CombatActionName, model.Value, model.Icon, model.BattleAction, owner)
+        {
+        }
+
+        public BattleActionModel(string name, int value, Sprite icon, IBattleAction action, HeroBattleUnit owner)
+        {
+            Name = name;
+            Value = value;
+            Icon = icon;
+            Action = action;
             Owner = owner;
         }
 
-        public BattleActionModel(HeroInspirationModel inspiration)
+        public void Spend(int decrease)
         {
-            Name = inspiration.CombatActionName;
-            Value = inspiration.Value;
-            Icon = inspiration.Icon;
-            Action = inspiration.BattleAction;
+            Value -= decrease;
         }
 
         public void Execute(BattleUnit target)
         {
-            OnActionExecuteEvent?.Invoke();
             Owner.Perform(Action, target, Name);
+            OnActionExecuteEvent?.Invoke();
         }
 
         public bool CanExecute(BattleUnit target)

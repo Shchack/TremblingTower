@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace EG.Tower.Game.Battle.Data
 {
-    [CreateAssetMenu(fileName = "HealActionData", menuName = "Data/Battle/HealAction", order = 3)]
-    public class HealActionData : BattleActionData
+    [CreateAssetMenu(fileName = "InstantKillActionData", menuName = "Data/Battle/InstantKillAction", order = 4)]
+    public class InstantKillActionData : BattleActionData
     {
         public override void Execute(HeroBattleUnit owner, BattleUnit target, string attributeName)
         {
@@ -12,7 +12,8 @@ namespace EG.Tower.Game.Battle.Data
 
             if (owner.TryFindAttribute(attributeName, out var attribute))
             {
-                target.Heal(attribute.Value);
+                target.Kill();
+                attribute.Spend(1);
             }
             else
             {
