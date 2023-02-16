@@ -16,3 +16,4 @@ MonoBehaviour:
   ConvertType: 1
   Divisor: 10
   Icon: {fileID: 21300000, guid: 325c0b9005399884283af5549bef2c4e, type: 3}
+  BattleActionData: {fileID: 11400000, guid: d7ce1a3032ba2a14a84dd3fd3372f57d, type: 2}

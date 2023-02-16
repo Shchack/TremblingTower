@@ -94,14 +94,20 @@ namespace EG.Tower.Game.Battle.Behaviours
             }
         }
 
+        private void Die()
+        {
+            gameObject.SetActive(false);
+        }
+
         public virtual void AddDefence(int value)
         {
             Defence += value;
         }
 
-        private void Die()
+        public void Heal(int value)
         {
-            gameObject.SetActive(false);
+            var newValue = HP + value;
+            HP = Mathf.Clamp(newValue, 0, MaxHP);
         }
 
         protected virtual int GetCombatOrder(int orderBonus)
