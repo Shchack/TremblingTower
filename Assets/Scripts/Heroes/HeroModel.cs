@@ -43,6 +43,10 @@ namespace EG.Tower.Game
 
         private Dictionary<VirtueType, Trait> _virtueTraits;
 
+        private Dictionary<HeroAttributeType, Func<Trait, int>> _convertMethods;
+
+        public BattleAttributeItemModel[] BattleAttributes { get; private set; }
+
         public HeroModel(HeroCreateModel createModel)
         {
             Name = createModel.Name;
@@ -56,6 +60,7 @@ namespace EG.Tower.Game
             Money = createModel.Money;
             TurnEnergy = createModel.TurnEnergy;
             Inspiration = createModel.Inspiration;
+            InitBattleAtributes();
         }
 
         public HeroModel(string name, HeroSetupData setupData)
@@ -71,11 +76,19 @@ namespace EG.Tower.Game
             Supplies = setupData.Supplies;
             Money = setupData.Money;
             TurnEnergy = setupData.TurnEnergy;
+            InitBattleAtributes();
         }
 
-        public BattleAttributeItemModel[] GetBattleAttributes()
+        private void InitBattleAtributes()
         {
-            return Traits.Select(CreateBattleAttribute).ToArray();
+            _convertMethods = new()
+            {
+                { HeroAttributeType.PercentAsIs, ConvertAsIs },
+                { HeroAttributeType.Points, ConvertPoints },
+                { HeroAttributeType.PercentDivision, ConvertPercentDivision }
+            };
+
+            BattleAttributes = Traits.Select(CreateBattleAttribute).ToArray();
         }
 
         public double FindVirtueTraitValue(string name)
@@ -108,10 +121,37 @@ namespace EG.Tower.Game
             return success;
         }
 
-        private BattleAttributeItemModel CreateBattleAttribute(Trait trait)
+        public BattleAttributeItemModel CreateBattleAttribute(Trait trait)
         {
-            var attribute = trait.GetAttribute();
-            return new BattleAttributeItemModel(trait.Virtue, trait.Value, attribute);
+            int value = 0;
+
+            if (_convertMethods.TryGetValue(trait.AttributeType, out var method))
+            {
+                value = method.Invoke(trait);
+            }
+
+            return new BattleAttributeItemModel(
+                trait.VirtueType,
+                trait.Virtue,
+                trait.Value,
+                value,
+                trait.AttributeType,
+                trait.BattleAttribute);
+        }
+
+        private int ConvertAsIs(Trait trait)
+        {
+            return trait.Value;
+        }
+
+        private int ConvertPoints(Trait trait)
+        {
+            return trait.Divisor > 0f ? Mathf.RoundToInt(trait.Value / trait.Divisor) : 0;
+        }
+
+        private int ConvertPercentDivision(Trait trait)
+        {
+            return trait.Divisor > 0f ? Mathf.RoundToInt(trait.Value / trait.Divisor) : 0;
         }
     }
 }

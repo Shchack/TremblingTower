@@ -1,4 +1,5 @@
-﻿using EG.Tower.Game.Utils;
+﻿using EG.Tower.Game.Battle.Data;
+using EG.Tower.Game.Utils;
 using System;
 using UnityEngine;
 
@@ -26,6 +27,15 @@ namespace EG.Tower.Game
         [field: SerializeField, ReadOnlyField]
         public int MaxValue { get; private set; }
 
+        [field: SerializeField, ReadOnlyField]
+        public HeroAttributeType AttributeType { get; private set; }
+
+        [field: SerializeField, ReadOnlyField]
+        public float Divisor { get; private set; } = 10f;
+
+        [field: SerializeField, ReadOnlyField]
+        public BattleAttributeData BattleAttribute { get; private set; }
+
         [SerializeField] private int _value;
         public int Value
         {
@@ -40,8 +50,6 @@ namespace EG.Tower.Game
             }
         }
 
-        private HeroAttributeData _battleAttributeData;
-
         public Trait(TraitData data)
         {
             VirtueType = data.VirtueType;
@@ -50,12 +58,9 @@ namespace EG.Tower.Game
             Value = data.DefaultValue;
             DefaultValue = data.DefaultValue;
             MaxValue = data.MaxValue;
-            _battleAttributeData = data.AttributeData;
-        }
-
-        public HeroAttributeModel GetAttribute()
-        {
-            return _battleAttributeData.GetAttribute(Value);
+            AttributeType = data.AttributeType;
+            Divisor = data.Divisor;
+            BattleAttribute = data.BattleAttribute;
         }
 
         public void AddValue(double value)

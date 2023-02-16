@@ -33,18 +33,22 @@ namespace EG.Tower.Game.Battle.UI
             InitEnemies(_battleController.Enemies);
             _endTurnButton.onClick.AddListener(HandleEndTurnButtonClick);
             _battleController.OnBattleBeginEvent += HandleBattleBeginEvent;
+            _battleController.OnTurnBeginEvent += HandleTurnBeginEvent;
         }
 
-        private void HandleBattleBeginEvent(BattleUnit turnUnit)
+        private void HandleBattleBeginEvent()
         {
-            SetTurnUI(turnUnit);
             _canvas.enabled = true;
+        }
+
+        private void HandleTurnBeginEvent(BattleUnit unit)
+        {
+            SetTurnUI(unit);
         }
 
         private void HandleEndTurnButtonClick()
         {
-            var turnUnit = _battleController.EndTurn();
-            SetTurnUI(turnUnit);
+            _battleController.EndTurn();
         }
 
         private void InitHero(HeroBattleUnit heroUnit)
@@ -66,7 +70,7 @@ namespace EG.Tower.Game.Battle.UI
             foreach (var enemy in enemies)
             {
                 var itemUI = Instantiate(_statsUIPrefab, _enemiesStatsHolder);
-                itemUI.Init(enemy);
+                itemUI.Init(enemy, enemy.Icon);
             }
         }
 
@@ -102,11 +106,13 @@ namespace EG.Tower.Game.Battle.UI
             {
                 _actionsHolder.gameObject.SetActive(true);
                 label.text = "End Turn";
+                _endTurnButton.interactable = true;
             }
             else
             {
                 _actionsHolder.gameObject.SetActive(false);
                 label.text = "Enemy Turn";
+                _endTurnButton.interactable = false;
             }
         }
 
@@ -122,7 +128,11 @@ namespace EG.Tower.Game.Battle.UI
 
         private void OnDestroy()
         {
-            _battleController.OnBattleBeginEvent -= HandleBattleBeginEvent;
+            if (_battleController != null)
+            {
+                _battleController.OnBattleBeginEvent -= HandleBattleBeginEvent;
+                _battleController.OnTurnBeginEvent -= HandleTurnBeginEvent;
+            }
         }
     }
 }

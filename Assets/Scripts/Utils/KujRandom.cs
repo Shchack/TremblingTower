@@ -39,7 +39,7 @@ namespace EG.Tower.Utils
             return result;
         }
 
-        public static int Index(int length) => Random.Range(0, length - 1);
+        public static int Index(int length) => Random.Range(0, length);
 
         public static float Chance() => Random.Range(0f, 1f);
 

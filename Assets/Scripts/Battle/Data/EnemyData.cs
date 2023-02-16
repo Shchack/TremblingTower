@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using EG.Tower.Game.Battle.Models;
+using UnityEngine;
 
 namespace EG.Tower.Battle.Data
 {
@@ -11,5 +12,6 @@ namespace EG.Tower.Battle.Data
         public int Defence;
         public int TurnEnergy = 1;
         public Sprite Icon;
+        public EnemyActionModel[] Actions;
     }
 }

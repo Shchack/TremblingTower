@@ -11,6 +11,7 @@ namespace EG.Tower.Game.Battle.Behaviours
         public event Action<int> OnHPChangedEvent;
         public event Action<int> OnDefenceChangedEvent; 
         public event Action<int> OnTurnEnergyChangedEvent;
+        public event Action<string> OnDeathEvent;
 
         [SerializeField] protected DiceType _combatOrderDice = DiceType.D10;
         [SerializeField] protected ObjectHighlighter _highlighter;
@@ -67,10 +68,10 @@ namespace EG.Tower.Game.Battle.Behaviours
         protected virtual void Awake()
         {
             _highlighter.OnObjectClickEvent += HandleObjectClickEvent;
-            Defence = 0;
+            Name = name;
         }
 
-        public void ResetTurn()
+        public virtual void BeginTurn()
         {
             TurnEnergy = MaxTurnEnergy;
         }
@@ -96,6 +97,7 @@ namespace EG.Tower.Game.Battle.Behaviours
         public void Kill()
         {
             HP = 0;
+            OnDeathEvent?.Invoke(Name);
             gameObject.SetActive(false);
         }
 

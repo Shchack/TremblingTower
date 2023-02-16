@@ -15,7 +15,7 @@ namespace EG.Tower.Game.Battle.UI
         private BattleUnit _battleUnit;
         private int _maxHp;
 
-        public void Init(BattleUnit battleUnit)
+        public void Init(BattleUnit battleUnit, Sprite icon = null)
         {
             _battleUnit = battleUnit;
             _maxHp = battleUnit.MaxHP;
@@ -23,16 +23,11 @@ namespace EG.Tower.Game.Battle.UI
             SetCombatOrderLabel(battleUnit.CombatOrder);
             battleUnit.OnHPChangedEvent += HandleHPChangedEvent;
             battleUnit.OnDefenceChangedEvent += SetDefenceLabel;
-        }
 
-        public void Init(EnemyBattleUnit battleUnit)
-        {
-            _portrait.sprite = battleUnit.Icon;
-            _battleUnit = battleUnit;
-            _maxHp = battleUnit.MaxHP;
-            SetHpLabel(battleUnit.HP, battleUnit.MaxHP);
-            SetCombatOrderLabel(battleUnit.CombatOrder);
-            battleUnit.OnHPChangedEvent += HandleHPChangedEvent;
+            if (icon != null)
+            {
+                _portrait.sprite = icon;
+            }
         }
 
         private void HandleHPChangedEvent(int currentHp)

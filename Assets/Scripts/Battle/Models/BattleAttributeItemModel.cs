@@ -1,27 +1,30 @@
-﻿using EG.Tower.Game.Battle.Data;
-using UnityEngine;
-
-namespace EG.Tower.Game.Battle.Models
+﻿namespace EG.Tower.Game.Battle.Models
 {
     public class BattleAttributeItemModel
     {
+        public VirtueType VirtueType { get; private set; }
         public string VirtueName { get; private set; }
         public int VirtueValue { get; private set; }
-        public string AttributeName { get; private set; }
         public int AttributeValue { get; private set; }
         public HeroAttributeType AttributeType { get; private set; }
-        public Sprite AttributeIcon { get; private set; }
-        public IBattleAction BattleAction { get; private set; }
+        public BattleAttributeData AttributeData { get; private set; }
 
-        public BattleAttributeItemModel(string virtueName, int virtueValue, HeroAttributeModel attribute)
+        public bool HasAction => AttributeData.BattleAction != null;
+
+        public BattleAttributeItemModel(
+            VirtueType virtueType,
+            string virtueName,
+            int virtueValue,
+            int attributeValue,
+            HeroAttributeType attributeType,
+            BattleAttributeData attribute)
         {
+            VirtueType = virtueType;
             VirtueName = virtueName;
             VirtueValue = virtueValue;
-            AttributeName = attribute.Name;
-            AttributeValue = attribute.Value;
-            AttributeType = attribute.AttributeType;
-            AttributeIcon = attribute.Icon;
-            BattleAction = attribute.BattleAction;
+            AttributeValue = attributeValue;
+            AttributeType = attributeType;
+            AttributeData = attribute;
         }
     }
 }

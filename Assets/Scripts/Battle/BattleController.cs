@@ -9,15 +9,14 @@ namespace EG.Tower.Game.Battle
 {
     public class BattleController : MonoBehaviour, IDependencyInjectable
     {
-        public event Action<BattleUnit> OnBattleBeginEvent;
+        public event Action OnBattleBeginEvent;
+        public event Action<BattleUnit> OnTurnBeginEvent;
 
         [SerializeField] private HeroBattleUnit _hero;
-        [SerializeField] private EnemyBattleUnit[] _enemies;
+        [field: SerializeField] public EnemyBattleUnit[] Enemies { get; private set; }
 
         public HeroBattleUnit Hero => _hero;
-        public EnemyBattleUnit[] Enemies => _enemies;
-
-        private BattleUnit[] _unitsOrder;
+        private Dictionary<string, BattleUnit> _unitsOrder;
         private int _turnUnitIndex;
 
         private void Awake()
@@ -32,37 +31,50 @@ namespace EG.Tower.Game.Battle
 
         private void Start()
         {
-            InitUnitEvents();
-            CreateUnitsOrder();
+            InitUnits();
         }
 
-        private void InitUnitEvents()
+        private void InitUnits()
         {
             _hero.OnUnitSelectedEvent += HandleUnitSelectedEvent;
+            _hero.OnDeathEvent += HandleHeroDeathEvent;
 
-            foreach (var enemy in _enemies)
+            foreach (var enemy in Enemies)
             {
+                enemy.SetTarget(_hero);
                 enemy.OnUnitSelectedEvent += HandleUnitSelectedEvent;
+                enemy.OnTurnEndEvent += EndTurn;
+                enemy.OnDeathEvent += HandleEnemyDeathEvent;
             }
+
+            CreateUnitsOrder();
         }
 
         private void CreateUnitsOrder()
         {
-            var units = new List<BattleUnit>(_enemies);
+            var units = new List<BattleUnit>(Enemies);
             units.Add(_hero);
-            _unitsOrder = units.OrderByDescending(u => u.CombatOrder).ToArray();
+            _unitsOrder = units.OrderByDescending(u => u.CombatOrder).ToDictionary(u => u.Name, u => u);
             _turnUnitIndex = 0;
         }
 
         public void BeginBattle()
         {
-            OnBattleBeginEvent?.Invoke(_unitsOrder[_turnUnitIndex]);
+            OnBattleBeginEvent?.Invoke();
+            BeginNextTurn();
         }
 
-        public BattleUnit EndTurn()
+        private void BeginNextTurn()
+        {
+            var unit = _unitsOrder.ElementAt(_turnUnitIndex).Value;
+            unit.BeginTurn();
+            OnTurnBeginEvent?.Invoke(unit);
+        }
+
+        public void EndTurn()
         {
             Debug.Log($"End Turn!");
-            if (_turnUnitIndex + 1 < _unitsOrder.Length)
+            if (_turnUnitIndex + 1 < _unitsOrder.Count)
             {
                 _turnUnitIndex++;
             }
@@ -71,10 +83,25 @@ namespace EG.Tower.Game.Battle
                 _turnUnitIndex = 0;
             }
 
-            var unit = _unitsOrder[_turnUnitIndex];
-            unit.ResetTurn();
+            BeginNextTurn();
+        }
 
-            return unit;
+        private void HandleEnemyDeathEvent(string name)
+        {
+            if (!_unitsOrder.Remove(name))
+            {
+                Debug.LogError("Failed to remove enemy", this);
+            }
+
+            if (_unitsOrder.Count <= 1)
+            {
+                Debug.LogWarning("Win", this);
+            }
+        }
+
+        private void HandleHeroDeathEvent(string name)
+        {
+            Debug.LogWarning("Game Over!", this);
         }
 
         private BattleActionModel _currentAction;

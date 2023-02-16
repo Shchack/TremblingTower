@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EG.Tower.Game.Battle.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -46,6 +47,8 @@ namespace EG.Tower.Game
         public string Vice;
         public int DefaultValue = 50;
         public int MaxValue = 100;
-        public HeroAttributeData AttributeData;
+        public HeroAttributeType AttributeType;
+        public float Divisor;
+        public BattleAttributeData BattleAttribute;
     }
 }

@@ -5441,7 +5441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hero: {fileID: 3217760927047866480}
-  _enemies:
+  <Enemies>k__BackingField:
   - {fileID: 1710422116407461967}
   - {fileID: 1437614742390052195}
 --- !u!1 &1804140190
