@@ -22,6 +22,8 @@ namespace EG.Tower.Game.Battle.Behaviours
             Attack = _data.Attack;
             Defence = _data.Defence;
             Icon = _data.Icon;
+            MaxTurnEnergy = _data.TurnEnergy;
+            TurnEnergy = _data.TurnEnergy;
             CombatOrder = GetCombatOrder(Attack);
         }
     }

@@ -36,6 +36,9 @@ namespace EG.Tower.Game
         public int Money { get; private set; }
 
         [field: SerializeField]
+        public int TurnEnergy { get; private set; }
+
+        [field: SerializeField]
         public HeroInspirationModel Inspiration { get; private set; }
 
         private Dictionary<VirtueType, Trait> _virtueTraits;
@@ -51,6 +54,7 @@ namespace EG.Tower.Game
             MaxHP = createModel.MaxHP;
             Supplies = createModel.Supplies;
             Money = createModel.Money;
+            TurnEnergy = createModel.TurnEnergy;
             Inspiration = createModel.Inspiration;
         }
 
@@ -66,6 +70,7 @@ namespace EG.Tower.Game
             Inspiration = setupData.Inspiration;
             Supplies = setupData.Supplies;
             Money = setupData.Money;
+            TurnEnergy = setupData.TurnEnergy;
         }
 
         public BattleAttributeItemModel[] GetBattleAttributes()

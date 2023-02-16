@@ -1,5 +1,4 @@
 ﻿using EG.Tower.Game.Battle.Behaviours;
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,6 +14,7 @@ namespace EG.Tower.Game.Battle.UI
 
         [Header("Hero")]
         [SerializeField] private BattleUnitStatsUI _heroStatsUI;
+        [SerializeField] private TurnEnergyUI _turnEnergyUI;
         [SerializeField] private RectTransform _actionsHolder;
         [SerializeField] private BattleActionItemUI _battleActionUiPrefab;
 
@@ -29,8 +29,8 @@ namespace EG.Tower.Game.Battle.UI
         {
             _canvas.enabled = false;
             _battleController = GameHub.One.BattleController;
-            InitHeroStats(_battleController.Hero);
-            InitEnemiesStats(_battleController.Enemies);
+            InitHero(_battleController.Hero);
+            InitEnemies(_battleController.Enemies);
             _endTurnButton.onClick.AddListener(HandleEndTurnButtonClick);
             _battleController.OnBattleBeginEvent += HandleBattleBeginEvent;
         }
@@ -47,13 +47,14 @@ namespace EG.Tower.Game.Battle.UI
             SetTurnUI(turnUnit);
         }
 
-        private void InitHeroStats(HeroBattleUnit heroUnit)
+        private void InitHero(HeroBattleUnit heroUnit)
         {
             _heroStatsUI.Init(heroUnit);
+            _turnEnergyUI.Init(heroUnit, _actionsHolder);
             InitActions(heroUnit);
         }
 
-        private void InitEnemiesStats(EnemyBattleUnit[] enemies)
+        private void InitEnemies(EnemyBattleUnit[] enemies)
         {
             var items = _enemiesStatsHolder.GetComponentsInChildren<BattleUnitStatsUI>();
 

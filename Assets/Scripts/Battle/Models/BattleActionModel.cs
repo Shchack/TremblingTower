@@ -35,7 +35,12 @@ namespace EG.Tower.Game.Battle.Models
         public void Execute(BattleUnit target)
         {
             OnActionExecuteEvent?.Invoke();
-            Action.Execute(Owner, target, Name);
+            Owner.Perform(Action, target, Name);
+        }
+
+        public bool CanExecute()
+        {
+            return Owner.TurnEnergy > 0;
         }
     }
 }

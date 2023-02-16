@@ -7,20 +7,20 @@ namespace EG.Tower.Game.Battle.Behaviours
 {
     public abstract class BattleUnit : MonoBehaviour
     {
-        [SerializeField] protected DiceType _combatOrderDice = DiceType.D10;
-
         public event Action<BattleUnit> OnUnitSelectedEvent;
         public event Action<int> OnHPChangedEvent;
+        public event Action<int> OnTurnEnergyChangedEvent;
 
+        [SerializeField] protected DiceType _combatOrderDice = DiceType.D10;
         [SerializeField] protected ObjectHighlighter _highlighter;
 
         public abstract bool IsPlayer { get; }
         public string Name { get; protected set; }
         public int MaxHP { get; protected set; }
         public int CombatOrder { get; protected set; }
+        public int MaxTurnEnergy { get; protected set; }
 
         private int _hp;
-
         public int HP
         {
             get
@@ -34,9 +34,28 @@ namespace EG.Tower.Game.Battle.Behaviours
             }
         }
 
+        private int _turnEnergy;
+        public int TurnEnergy
+        {
+            get
+            {
+                return _turnEnergy;
+            }
+            protected set
+            {
+                _turnEnergy = value;
+                OnTurnEnergyChangedEvent?.Invoke(_turnEnergy);
+            }
+        }
+
         protected virtual void Awake()
         {
             _highlighter.OnObjectClickEvent += HandleObjectClickEvent;
+        }
+
+        public void ResetTurn()
+        {
+            TurnEnergy = MaxTurnEnergy;
         }
 
         public virtual void Hit(int value)

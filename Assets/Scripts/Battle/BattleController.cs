@@ -25,6 +25,11 @@ namespace EG.Tower.Game.Battle
             GameHub.One.Register(this);
         }
 
+        private void OnDestroy()
+        {
+            GameHub.One.Unregister(this);
+        }
+
         private void Start()
         {
             InitUnitEvents();
@@ -66,19 +71,17 @@ namespace EG.Tower.Game.Battle
                 _turnUnitIndex = 0;
             }
 
-            return _unitsOrder[_turnUnitIndex];
+            var unit = _unitsOrder[_turnUnitIndex];
+            unit.ResetTurn();
+
+            return unit;
         }
 
-        private void OnDestroy()
-        {
-            GameHub.One.Unregister(this);
-        }
-
-        private BattleAction _currentAction;
+        private BattleActionModel _currentAction;
 
         public void TrackAction(BattleActionModel actionModel)
         {
-            _currentAction = new BattleAction(actionModel);
+            _currentAction = actionModel;
         }
 
         public void UntrackAction(BattleActionModel actionModel)
@@ -93,9 +96,13 @@ namespace EG.Tower.Game.Battle
 
         public void ExecuteAction(BattleUnit target)
         {
-            if (_currentAction != null)
+            if (_currentAction != null && _currentAction.CanExecute())
             {
                 _currentAction.Execute(target);
+            }
+            else
+            {
+                Debug.LogError("Failed to execture battle action", this);
             }
 
             _currentAction = null;

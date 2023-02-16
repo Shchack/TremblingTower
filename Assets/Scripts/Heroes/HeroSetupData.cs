@@ -15,6 +15,7 @@ namespace EG.Tower.Game
         [SerializeField] private int _maxHP = 20;
         [SerializeField] private int _supplies = 5;
         [SerializeField] private int _money = 5;
+        [SerializeField] private int _turnEnergy;
         [SerializeField] private HeroInspirationData _inspirationData;
 
         public TraitData[] Traits => _traits;
@@ -26,6 +27,7 @@ namespace EG.Tower.Game
         public int MaxHP => _maxHP;
         public int Supplies => _supplies;
         public int Money => _money;
+        public int TurnEnergy => _turnEnergy;
         public HeroInspirationModel Inspiration => new HeroInspirationModel(_inspirationData);
 
         public Trait[] GetTraits()

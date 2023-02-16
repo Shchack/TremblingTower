@@ -1,4 +1,5 @@
-﻿using EG.Tower.Game.Battle.Models;
+﻿using EG.Tower.Game.Battle.Data;
+using EG.Tower.Game.Battle.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,8 @@ namespace EG.Tower.Game.Battle.Behaviours
             HP = heroModel.HP;
             MaxHP = heroModel.MaxHP;
             Inspiration = heroModel.Inspiration;
+            MaxTurnEnergy = heroModel.TurnEnergy;
+            TurnEnergy = heroModel.TurnEnergy;
             Actions = CreateActions();
 
             var orderBonus = GetCombatOrderBonus(heroModel);
@@ -42,6 +45,12 @@ namespace EG.Tower.Game.Battle.Behaviours
             actions.Add(inspirationAction.Name, inspirationAction);
 
             return actions;
+        }
+
+        public void Perform(IBattleAction action, BattleUnit target, string name)
+        {
+            TurnEnergy--;
+            action.Execute(this, target, name);
         }
 
         public bool TryFindAttribute(string name, out BattleActionModel action)

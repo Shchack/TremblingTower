@@ -9,6 +9,7 @@ namespace EG.Tower.Battle.Data
         public int MaxHP;
         public int Attack;
         public int Defence;
+        public int TurnEnergy = 1;
         public Sprite Icon;
     }
 }
