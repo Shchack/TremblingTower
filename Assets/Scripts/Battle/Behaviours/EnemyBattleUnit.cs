@@ -7,8 +7,8 @@ namespace EG.Tower.Game.Battle.Behaviours
     {
         [SerializeField] private EnemyData _data;
 
-        public int Attack { get; private set; }
-        public int Defence { get; private set; }
+        public int AttackPoints { get; private set; }
+        public int DefendPoints { get; private set; }
         public Sprite Icon { get; private set; }
 
         public override bool IsPlayer => false;
@@ -19,12 +19,12 @@ namespace EG.Tower.Game.Battle.Behaviours
             Name = _data.Name;
             HP = _data.MaxHP;
             MaxHP = _data.MaxHP;
-            Attack = _data.Attack;
-            Defence = _data.Defence;
+            AttackPoints = _data.Attack;
+            DefendPoints = _data.Defence;
             Icon = _data.Icon;
             MaxTurnEnergy = _data.TurnEnergy;
             TurnEnergy = _data.TurnEnergy;
-            CombatOrder = GetCombatOrder(Attack);
+            CombatOrder = GetCombatOrder(AttackPoints);
         }
     }
 }

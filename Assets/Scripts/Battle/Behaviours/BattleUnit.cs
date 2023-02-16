@@ -9,12 +9,14 @@ namespace EG.Tower.Game.Battle.Behaviours
     {
         public event Action<BattleUnit> OnUnitSelectedEvent;
         public event Action<int> OnHPChangedEvent;
+        public event Action<int> OnDefenceChangedEvent; 
         public event Action<int> OnTurnEnergyChangedEvent;
 
         [SerializeField] protected DiceType _combatOrderDice = DiceType.D10;
         [SerializeField] protected ObjectHighlighter _highlighter;
 
         public abstract bool IsPlayer { get; }
+
         public string Name { get; protected set; }
         public int MaxHP { get; protected set; }
         public int CombatOrder { get; protected set; }
@@ -31,6 +33,20 @@ namespace EG.Tower.Game.Battle.Behaviours
             {
                 _hp = value;
                 OnHPChangedEvent?.Invoke(_hp);
+            }
+        }
+
+        private int _defence;
+        public int Defence
+        {
+            get
+            {
+                return _defence;
+            }
+            protected set
+            {
+                _defence = value;
+                OnDefenceChangedEvent?.Invoke(_defence);
             }
         }
 
@@ -51,6 +67,7 @@ namespace EG.Tower.Game.Battle.Behaviours
         protected virtual void Awake()
         {
             _highlighter.OnObjectClickEvent += HandleObjectClickEvent;
+            Defence = 0;
         }
 
         public void ResetTurn()
@@ -60,12 +77,26 @@ namespace EG.Tower.Game.Battle.Behaviours
 
         public virtual void Hit(int value)
         {
-            HP -= value;
+            int currentHitValue = value;
+            if (Defence > 0)
+            {
+                var defencePoints = Mathf.Clamp(currentHitValue, 0, Defence);
+                currentHitValue -= defencePoints;
+                Defence -= defencePoints;
+            }
+
+            var hpPoint = HP - currentHitValue;
+            HP = hpPoint >= 0 ? hpPoint : 0;
 
             if (HP <= 0)
             {
                 Die();
             }
+        }
+
+        public virtual void AddDefence(int value)
+        {
+            Defence += value;
         }
 
         private void Die()

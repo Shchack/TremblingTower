@@ -38,9 +38,11 @@ namespace EG.Tower.Game.Battle.Models
             Owner.Perform(Action, target, Name);
         }
 
-        public bool CanExecute()
+        public bool CanExecute(BattleUnit target)
         {
-            return Owner.TurnEnergy > 0;
+            bool isSuitableTarget = Action.IsPlayerTarget == target.IsPlayer;
+
+            return Owner.TurnEnergy > 0 && isSuitableTarget;
         }
     }
 }

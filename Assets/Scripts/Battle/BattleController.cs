@@ -96,16 +96,21 @@ namespace EG.Tower.Game.Battle
 
         public void ExecuteAction(BattleUnit target)
         {
-            if (_currentAction != null && _currentAction.CanExecute())
+            if (_currentAction == null)
+            {
+                Debug.LogError("No selected action to execute", this);
+                return;
+            }
+
+            if (_currentAction.CanExecute(target))
             {
                 _currentAction.Execute(target);
+                _currentAction = null;
             }
             else
             {
-                Debug.LogError("Failed to execture battle action", this);
+                Debug.LogError("Failed to execute battle action", this);
             }
-
-            _currentAction = null;
         }
     }
 }
