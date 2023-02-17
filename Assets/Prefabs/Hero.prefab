@@ -487,6 +487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 689143013464280015}
   - component: {fileID: 3622691913591597301}
+  - component: {fileID: 4507388889653260790}
   - component: {fileID: 2450653150849960495}
   - component: {fileID: 689143013464280001}
   - component: {fileID: 689143013464280004}
@@ -525,7 +526,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab9a6f96f8f31b4c9200d39afe309a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 4507388889653260790}
   _highlighter: {fileID: 2450653150849960495}
+  _combatOrderDice: 10
+--- !u!114 &4507388889653260790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689143013464280005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871a328a9150f0f4fa7f44ae1b9c8094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1435850354006722275}
 --- !u!114 &2450653150849960495
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,8 +13,9 @@ namespace EG.Tower.Game.Battle.Behaviours
         public event Action<int> OnTurnEnergyChangedEvent;
         public event Action<string> OnDeathEvent;
 
-        [SerializeField] protected DiceType _combatOrderDice = DiceType.D10;
+        [SerializeField] protected BattleUnitAnimator _animator;
         [SerializeField] protected ObjectHighlighter _highlighter;
+        [SerializeField] protected DiceType _combatOrderDice = DiceType.D10;
 
         public abstract bool IsPlayer { get; }
 
@@ -76,6 +77,16 @@ namespace EG.Tower.Game.Battle.Behaviours
             TurnEnergy = MaxTurnEnergy;
         }
 
+        public virtual void Attack()
+        {
+            _animator.Play(BattleUnitAnimType.Attack);
+        }
+
+        public virtual void Ult()
+        {
+            _animator.Play(BattleUnitAnimType.Ult);
+        }
+
         public virtual void Hit(int value)
         {
             int currentHitValue = value;
@@ -97,19 +108,28 @@ namespace EG.Tower.Game.Battle.Behaviours
         public void Kill()
         {
             HP = 0;
+
+            if (_highlighter != null)
+            {
+                _highlighter.Disable();
+                _highlighter.OnObjectClickEvent -= HandleObjectClickEvent;
+            }
+
             OnDeathEvent?.Invoke(Name);
-            gameObject.SetActive(false);
+            _animator.Play(BattleUnitAnimType.Death);
         }
 
         public virtual void AddDefence(int value)
         {
             Defence += value;
+            _animator.Play(BattleUnitAnimType.Defend);
         }
 
         public void Heal(int value)
         {
             var newValue = HP + value;
             HP = Mathf.Clamp(newValue, 0, MaxHP);
+            _animator.Play(BattleUnitAnimType.Heal);
         }
 
         protected virtual int GetCombatOrder(int orderBonus)

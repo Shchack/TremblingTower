@@ -10,6 +10,7 @@ namespace EG.Tower.Game.Battle.Data
         public override void Execute(BattleUnit owner, BattleUnit target, BattleActionModel model)
         {
             Debug.Log($"Executing {Name}!");
+            owner.Ult();
             target.Kill();
             model.Spend(1);
         }

@@ -70,7 +70,7 @@ namespace EG.Tower.Game.Battle.Behaviours
 
         private IEnumerator ExecuteRandomAction()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
 
             var randomIndex = KujRandom.Index(_actions.Length);
 
@@ -78,6 +78,8 @@ namespace EG.Tower.Game.Battle.Behaviours
 
             var target = model.Action.IsPlayerTarget ? this : _targetHero;
             model.Action.Execute(this, target, model);
+
+            yield return new WaitForSeconds(1.5f);
         }
 
         private BattleActionModel CreateActionModel(EnemyActionModel actionModel)

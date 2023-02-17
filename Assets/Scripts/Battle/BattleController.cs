@@ -122,7 +122,10 @@ namespace EG.Tower.Game.Battle
 
         private void HandleUnitSelectedEvent(BattleUnit target)
         {
-            ExecuteAction(target);
+            if (_unitsOrder.ContainsKey(target.Name))
+            {
+                ExecuteAction(target);
+            }
         }
 
         public void ExecuteAction(BattleUnit target)
