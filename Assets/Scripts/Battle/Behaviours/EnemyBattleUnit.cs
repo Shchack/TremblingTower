@@ -3,6 +3,7 @@ using EG.Tower.Game.Battle.Models;
 using EG.Tower.Utils;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,14 +15,14 @@ namespace EG.Tower.Game.Battle.Behaviours
 
         [SerializeField] private EnemyData _data;
 
-        public int AttackPoints { get; private set; }
         public int DefendPoints { get; private set; }
         public Sprite Icon { get; private set; }
 
         public override bool IsPlayer => false;
 
         private BattleUnit _targetHero;
-        private BattleActionModel[] _actions;
+        private Dictionary<int, BattleActionModel> _actionPriority;
+        private int _totalActionPoints;
 
         protected override void Awake()
         {
@@ -36,14 +37,16 @@ namespace EG.Tower.Game.Battle.Behaviours
             TurnEnergy = _data.TurnEnergy;
             Defence = 0;
             CombatOrder = GetCombatOrder(AttackPoints);
-            _actions = _data.Actions.Select(CreateActionModel).ToArray();
+            Actions = _data.Actions.Select(CreateActionModel).ToArray();
+
+            _totalActionPoints = Actions.Sum(a => a.Value);
         }
 
         public override void BeginTurn()
         {
             base.BeginTurn();
 
-            if (_actions.Length <= 0)
+            if (Actions.Length <= 0)
             {
                 Debug.LogError($"Enemy {name} has no available battle actions!");
                 return;
@@ -61,7 +64,7 @@ namespace EG.Tower.Game.Battle.Behaviours
         {
             while (TurnEnergy > 0)
             {
-                yield return ExecuteRandomAction();
+                yield return ExecuteActionByPriority();
                 TurnEnergy--;
             }
 
@@ -72,9 +75,36 @@ namespace EG.Tower.Game.Battle.Behaviours
         {
             yield return new WaitForSeconds(1.5f);
 
-            var randomIndex = KujRandom.Index(_actions.Length);
+            var randomIndex = KujRandom.Index(Actions.Length);
 
-            BattleActionModel model = _actions[randomIndex];
+            BattleActionModel model = Actions[randomIndex];
+
+            var target = model.Action.IsPlayerTarget ? this : _targetHero;
+            model.Action.Execute(this, target, model);
+
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        private IEnumerator ExecuteActionByPriority()
+        {
+            yield return new WaitForSeconds(1.5f);
+
+            BattleActionModel model = null;
+            while (model == null)
+            {
+                var randomChance = KujRandom.Chance();
+
+                for (int i = 0; i < Actions.Length; i++)
+                {
+                    float actionPercent = (float)Actions[i].Value / (float)_totalActionPoints;
+
+                    if (randomChance <= actionPercent)
+                    {
+                        model = Actions[i];
+                        break;
+                    }
+                }
+            }
 
             var target = model.Action.IsPlayerTarget ? this : _targetHero;
             model.Action.Execute(this, target, model);

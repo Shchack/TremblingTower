@@ -1,4 +1,5 @@
-﻿using EG.Tower.Game.Common;
+﻿using EG.Tower.Game.Battle.Models;
+using EG.Tower.Game.Common;
 using EG.Tower.Game.Rolls;
 using System;
 using UnityEngine;
@@ -9,7 +10,8 @@ namespace EG.Tower.Game.Battle.Behaviours
     {
         public event Action<BattleUnit> OnUnitSelectedEvent;
         public event Action<int> OnHPChangedEvent;
-        public event Action<int> OnDefenceChangedEvent; 
+        public event Action<int> OnDefenceChangedEvent;
+        public event Action<int> OnAttackChangedEvent;
         public event Action<int> OnTurnEnergyChangedEvent;
         public event Action<string> OnDeathEvent;
 
@@ -35,6 +37,20 @@ namespace EG.Tower.Game.Battle.Behaviours
             {
                 _hp = value;
                 OnHPChangedEvent?.Invoke(_hp);
+            }
+        }
+
+        private int _attackPoints;
+        public int AttackPoints
+        {
+            get
+            {
+                return _attackPoints;
+            }
+            protected set
+            {
+                _attackPoints = value;
+                OnAttackChangedEvent?.Invoke(_attackPoints);
             }
         }
 
@@ -65,6 +81,8 @@ namespace EG.Tower.Game.Battle.Behaviours
                 OnTurnEnergyChangedEvent?.Invoke(_turnEnergy);
             }
         }
+
+        public BattleActionModel[] Actions { get; protected set; }
 
         protected virtual void Awake()
         {

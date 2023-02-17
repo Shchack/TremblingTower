@@ -10,7 +10,6 @@ namespace EG.Tower.Game.Battle.Behaviours
 
         public BattleAttributeItemModel[] Attributes { get; private set; }
         public HeroInspirationModel Inspiration { get; private set; }
-        public Dictionary<string, BattleActionModel> Actions { get; private set; }
 
         private Dictionary<VirtueType, BattleAttributeItemModel> _attributes;
 
@@ -29,27 +28,28 @@ namespace EG.Tower.Game.Battle.Behaviours
             Defence = 0;
             Actions = CreateActions();
 
-            var orderBonus = GetCombatOrderBonus();
-            CombatOrder = GetCombatOrder(orderBonus);
+            var attackPoints = GetAttackPoints();
+            AttackPoints = attackPoints;
+            CombatOrder = GetCombatOrder(attackPoints);
         }
 
-        public Dictionary<string, BattleActionModel> CreateActions()
+        public BattleActionModel[] CreateActions()
         {
-            Dictionary<string, BattleActionModel> actions = new Dictionary<string, BattleActionModel>();
+            var actions = new List<BattleActionModel>();
             var actionAttributes = Attributes.Where(i => i.HasAction);
 
             foreach (var attribute in actionAttributes)
             {
                 var action = new BattleActionModel(attribute.AttributeData, attribute.AttributeValue, this);
                 action.OnActionExecuteEvent += HandleActionExecuteEvent;
-                actions.Add(action.Name, action);
+                actions.Add(action);
             }
 
             var inspirationAction = new BattleActionModel(Inspiration, this);
             inspirationAction.OnActionExecuteEvent += HandleActionExecuteEvent;
-            actions.Add(inspirationAction.Name, inspirationAction);
+            actions.Add(inspirationAction);
 
-            return actions;
+            return actions.ToArray();
         }
 
         private void HandleActionExecuteEvent()
@@ -57,7 +57,7 @@ namespace EG.Tower.Game.Battle.Behaviours
             TurnEnergy--;
         }
 
-        private int GetCombatOrderBonus()
+        private int GetAttackPoints()
         {
             int attackValue = 0;
             if (_attributes.TryGetValue(VirtueType.Courage, out var attribute))

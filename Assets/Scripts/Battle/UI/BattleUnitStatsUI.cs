@@ -10,6 +10,7 @@ namespace EG.Tower.Game.Battle.UI
         [SerializeField] private Image _portrait;
         [SerializeField] private TMP_Text _hpLabel;
         [SerializeField] private TMP_Text _combatOrderLabel;
+        [SerializeField] private TMP_Text _attackLabel;
         [SerializeField] private TMP_Text _defenceLabel;
 
         private BattleUnit _battleUnit;
@@ -22,7 +23,11 @@ namespace EG.Tower.Game.Battle.UI
             SetHpLabel(battleUnit.HP, battleUnit.MaxHP);
             SetCombatOrderLabel(battleUnit.CombatOrder);
             battleUnit.OnHPChangedEvent += HandleHPChangedEvent;
+
+            SetDefenceLabel(battleUnit.Defence);
+            SetAttackLabel(battleUnit.AttackPoints);
             battleUnit.OnDefenceChangedEvent += SetDefenceLabel;
+            battleUnit.OnAttackChangedEvent += SetAttackLabel;
 
             if (icon != null)
             {
@@ -38,6 +43,11 @@ namespace EG.Tower.Game.Battle.UI
         private void SetHpLabel(int currentHp, int maxHp)
         {
             _hpLabel.text = $"{currentHp}/{maxHp}";
+        }
+
+        private void SetAttackLabel(int value)
+        {
+            _attackLabel.text = value.ToString();
         }
 
         private void SetDefenceLabel(int value)

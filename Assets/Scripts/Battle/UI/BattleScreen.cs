@@ -91,7 +91,7 @@ namespace EG.Tower.Game.Battle.UI
             foreach (var action in actions)
             {
                 var itemUI = Instantiate(_battleActionUiPrefab, _actionsHolder);
-                itemUI.Init(action.Value);
+                itemUI.Init(action);
                 itemUI.OnSelectedEvent += HandleItemSelectedEvent;
                 _items.Add(itemUI);
             }
