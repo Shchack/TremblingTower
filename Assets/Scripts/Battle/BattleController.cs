@@ -10,6 +10,8 @@ namespace EG.Tower.Game.Battle
     public class BattleController : MonoBehaviour, IDependencyInjectable
     {
         public event Action OnBattleBeginEvent;
+        public event Action OnBattleWinEvent;
+        public event Action OnBattleLostEvent;
         public event Action<BattleUnit> OnTurnBeginEvent;
 
         [SerializeField] private HeroBattleUnit _hero;
@@ -93,15 +95,17 @@ namespace EG.Tower.Game.Battle
                 Debug.LogError("Failed to remove enemy", this);
             }
 
-            if (_unitsOrder.Count <= 1)
+            if (_unitsOrder.Count <= 1 && _unitsOrder.All(u => u.Value.IsPlayer))
             {
                 Debug.LogWarning("Win", this);
+                OnBattleWinEvent?.Invoke();
             }
         }
 
         private void HandleHeroDeathEvent(string name)
         {
             Debug.LogWarning("Game Over!", this);
+            OnBattleLostEvent?.Invoke();
         }
 
         private BattleActionModel _currentAction;

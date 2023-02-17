@@ -1,4 +1,5 @@
 ﻿using EG.Tower.Game.Battle.Behaviours;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -34,11 +35,18 @@ namespace EG.Tower.Game.Battle.UI
             _endTurnButton.onClick.AddListener(HandleEndTurnButtonClick);
             _battleController.OnBattleBeginEvent += HandleBattleBeginEvent;
             _battleController.OnTurnBeginEvent += HandleTurnBeginEvent;
+            _battleController.OnBattleWinEvent += HideScreen;
+            _battleController.OnBattleLostEvent += HideScreen;
         }
 
         private void HandleBattleBeginEvent()
         {
             _canvas.enabled = true;
+        }
+
+        private void HideScreen()
+        {
+            _canvas.enabled = false;
         }
 
         private void HandleTurnBeginEvent(BattleUnit unit)
