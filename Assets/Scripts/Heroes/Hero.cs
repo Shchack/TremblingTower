@@ -7,15 +7,11 @@ namespace EG.Tower.Game
     public class Hero : MonoBehaviour
     {
         [SerializeField] private RollProbabilitiesData _probabilitiesData;
-        [SerializeField] private HeroModel _heroModel;
 
         private const float TRAIT_MAX_VALUE = 100f;
         private const float TRAIT_DEFAULT_VALUE = 50f;
 
-        private void Start()
-        {
-            _heroModel = GameHub.One.Session.HeroModel;
-        }
+        private HeroModel _heroModel => GameHub.One.Session.HeroModel;
 
         public string GetRollChance(string virtueName, double rollTypeValue)
         {

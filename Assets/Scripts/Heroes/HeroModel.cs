@@ -45,8 +45,6 @@ namespace EG.Tower.Game
 
         private Dictionary<HeroAttributeType, Func<Trait, int>> _convertMethods;
 
-        public BattleAttributeItemModel[] BattleAttributes { get; private set; }
-
         public HeroModel(HeroCreateModel createModel)
         {
             Name = createModel.Name;
@@ -60,7 +58,7 @@ namespace EG.Tower.Game
             Money = createModel.Money;
             TurnEnergy = createModel.TurnEnergy;
             Inspiration = createModel.Inspiration;
-            InitBattleAtributes();
+            InitBattleAttributeConvert();
         }
 
         public HeroModel(string name, HeroSetupData setupData)
@@ -76,10 +74,10 @@ namespace EG.Tower.Game
             Supplies = setupData.Supplies;
             Money = setupData.Money;
             TurnEnergy = setupData.TurnEnergy;
-            InitBattleAtributes();
+            InitBattleAttributeConvert();
         }
 
-        private void InitBattleAtributes()
+        private void InitBattleAttributeConvert()
         {
             _convertMethods = new()
             {
@@ -87,8 +85,11 @@ namespace EG.Tower.Game
                 { HeroAttributeType.Points, ConvertPoints },
                 { HeroAttributeType.PercentDivision, ConvertPercentDivision }
             };
+        }
 
-            BattleAttributes = Traits.Select(CreateBattleAttribute).ToArray();
+        public BattleAttributeItemModel[] GetBattleAttributes()
+        {
+            return Traits.Select(CreateBattleAttribute).ToArray();
         }
 
         public double FindVirtueTraitValue(string name)

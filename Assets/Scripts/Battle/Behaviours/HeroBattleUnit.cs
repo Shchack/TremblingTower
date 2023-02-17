@@ -23,7 +23,7 @@ namespace EG.Tower.Game.Battle.Behaviours
             Inspiration = heroModel.Inspiration;
             MaxTurnEnergy = heroModel.TurnEnergy;
             TurnEnergy = heroModel.TurnEnergy;
-            Attributes = heroModel.BattleAttributes;
+            Attributes = heroModel.GetBattleAttributes();
             _attributes = Attributes.ToDictionary(a => a.VirtueType, a => a);
             Defence = 0;
             Actions = CreateActions();
