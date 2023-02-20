@@ -21,8 +21,8 @@ namespace EG.Tower.Game.Battle.Behaviours
         public override bool IsPlayer => false;
 
         private BattleUnit _targetHero;
-        private Dictionary<int, BattleActionModel> _actionPriority;
         private int _totalActionPoints;
+        private Queue<BattleActionModel> _actionsQueue;
 
         protected override void Awake()
         {
@@ -41,6 +41,46 @@ namespace EG.Tower.Game.Battle.Behaviours
             Actions = _data.Actions.Select(CreateActionModel).ToArray();
 
             _totalActionPoints = Actions.Sum(a => a.Value);
+
+            _actionsQueue = new Queue<BattleActionModel>();
+            QueueNextActions(_actionsQueue, MaxTurnEnergy);
+        }
+
+        private void QueueNextActions(Queue<BattleActionModel> queue, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                var action = ChooseAction();
+                queue.Enqueue(action);
+            }
+        }
+
+        public override BattleActionModel[] GetNextActions()
+        {
+            return _actionsQueue.ToArray();
+        }
+
+        private BattleActionModel ChooseAction()
+        {
+            BattleActionModel model = null;
+
+            while (model == null)
+            {
+                var randomChance = KujRandom.Chance();
+
+                for (int i = 0; i < Actions.Length; i++)
+                {
+                    float actionPercent = (float)Actions[i].Value / (float)_totalActionPoints;
+
+                    if (randomChance <= actionPercent)
+                    {
+                        model = Actions[i];
+                        break;
+                    }
+                }
+            }
+
+            return model;
         }
 
         public override void BeginTurn()
@@ -66,15 +106,15 @@ namespace EG.Tower.Game.Battle.Behaviours
             while (TurnEnergy > 0)
             {
                 yield return ExecuteActionByPriority();
-                TurnEnergy--;
             }
 
+            QueueNextActions(_actionsQueue, MaxTurnEnergy);
             OnTurnEndEvent?.Invoke();
         }
 
         private IEnumerator ExecuteRandomAction()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
 
             var randomIndex = KujRandom.Index(Actions.Length);
 
@@ -83,34 +123,23 @@ namespace EG.Tower.Game.Battle.Behaviours
             var target = model.Action.IsPlayerTarget ? this : _targetHero;
             model.Action.Execute(this, target, model);
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
         }
 
         private IEnumerator ExecuteActionByPriority()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
 
-            BattleActionModel model = null;
-            while (model == null)
+            while (_actionsQueue.Count > 0)
             {
-                var randomChance = KujRandom.Chance();
-
-                for (int i = 0; i < Actions.Length; i++)
-                {
-                    float actionPercent = (float)Actions[i].Value / (float)_totalActionPoints;
-
-                    if (randomChance <= actionPercent)
-                    {
-                        model = Actions[i];
-                        break;
-                    }
-                }
+                var actionModel = _actionsQueue.Dequeue();
+                var target = actionModel.Action.IsPlayerTarget ? this : _targetHero;
+                actionModel.Action.Execute(this, target, actionModel);
             }
 
-            var target = model.Action.IsPlayerTarget ? this : _targetHero;
-            model.Action.Execute(this, target, model);
+            TurnEnergy--;
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
         }
 
         private BattleActionModel CreateActionModel(EnemyActionModel actionModel)

@@ -25,6 +25,7 @@ namespace EG.Tower.Game.Battle.UI
 
         private BattleController _battleController;
         private List<BattleActionItemUI> _items;
+        private List<BattleUnitStatsUI> _enemiesStats;
 
         private void Start()
         {
@@ -63,11 +64,21 @@ namespace EG.Tower.Game.Battle.UI
         {
             _heroStatsUI.Init(heroUnit);
             _turnEnergyUI.Init(heroUnit, _actionsHolder);
+            heroUnit.OnTrueVisionEvent += HandleTrueVisionEvent;
             InitActions(heroUnit);
+        }
+
+        private void HandleTrueVisionEvent(int trueVisionValue)
+        {
+            foreach (var item in _enemiesStats)
+            {
+                item.ShowTrueVisionAction(trueVisionValue);
+            }
         }
 
         private void InitEnemies(EnemyBattleUnit[] enemies)
         {
+            _enemiesStats = new List<BattleUnitStatsUI>();
             var items = _enemiesStatsHolder.GetComponentsInChildren<BattleUnitStatsUI>();
 
             for (int i = 0; i < items.Length; i++)
@@ -79,6 +90,7 @@ namespace EG.Tower.Game.Battle.UI
             {
                 var itemUI = Instantiate(_statsUIPrefab, _enemiesStatsHolder);
                 itemUI.Init(enemy, enemy.Icon);
+                _enemiesStats.Add(itemUI);
             }
         }
 

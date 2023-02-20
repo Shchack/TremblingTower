@@ -1,4 +1,5 @@
 ﻿using EG.Tower.Game.Battle.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,8 @@ namespace EG.Tower.Game.Battle.Behaviours
 {
     public class HeroBattleUnit : BattleUnit
     {
+        public event Action<int> OnTrueVisionEvent;
+
         public override bool IsPlayer => true;
 
         public BattleAttributeItemModel[] Attributes { get; private set; }
@@ -30,6 +33,13 @@ namespace EG.Tower.Game.Battle.Behaviours
             AttackPoints = GetBattleAttributeValue(VirtueType.Courage);
             CombatOrder = GetCombatOrder(AttackPoints);
             Actions = CreateActions();
+        }
+
+        public override void BeginTurn()
+        {
+            base.BeginTurn();
+            var trueVisionValue = GetBattleAttributeValue(VirtueType.Honesty);
+            OnTrueVisionEvent?.Invoke(trueVisionValue);
         }
 
         public BattleActionModel[] CreateActions()

@@ -165,9 +165,11 @@ namespace EG.Tower.Game.Battle.Behaviours
             _animator.Play(BattleUnitAnimType.Heal);
         }
 
-        public virtual void Ult()
+        public virtual void Ult(BattleUnit target, BattleActionModel actionModel)
         {
             _animator.Play(BattleUnitAnimType.Ult);
+            target.Kill();
+            actionModel.Spend(1);
         }
 
         protected bool TryToCrit(int value, out int critValue)
@@ -187,6 +189,11 @@ namespace EG.Tower.Game.Battle.Behaviours
             }
 
             return result;
+        }
+
+        public virtual BattleActionModel[] GetNextActions()
+        {
+            return null;
         }
 
         protected virtual int GetCombatOrder(int orderBonus)
