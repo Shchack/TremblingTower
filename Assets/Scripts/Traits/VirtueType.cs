@@ -7,6 +7,7 @@
         Courage = 2,
         Justice = 3,
         Kindness = 4,
-        Diligence = 5
+        Diligence = 5,
+        Knowledge = 6
     }
 }

@@ -50,6 +50,14 @@ MonoBehaviour:
     Vice: Laziness
     DefaultValue: 50
     MaxValue: 100
+    AttributeType: 1
+    Divisor: 20
+    BattleAttribute: {fileID: 11400000, guid: 9b78fd69d2268934985b8b284bcab927, type: 2}
+  - VirtueType: 6
+    Virtue: Knowledge
+    Vice: Illiteracy
+    DefaultValue: 50
+    MaxValue: 100
     AttributeType: 2
     Divisor: 5
     BattleAttribute: {fileID: 11400000, guid: 5276598108becdf4ba8b0275f8890e4b, type: 2}
@@ -58,5 +66,4 @@ MonoBehaviour:
   _maxHP: 20
   _supplies: 5
   _money: 5
-  _turnEnergy: 2
   _inspirationData: {fileID: 11400000, guid: 6b0890949e610c24fa1e7646e9546546, type: 2}

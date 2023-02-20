@@ -21,16 +21,14 @@ namespace EG.Tower.Game.Battle.Behaviours
             HP = heroModel.HP;
             MaxHP = heroModel.MaxHP;
             Inspiration = heroModel.Inspiration;
-            MaxTurnEnergy = heroModel.TurnEnergy;
-            TurnEnergy = heroModel.TurnEnergy;
+            Defence = 0;
             Attributes = heroModel.GetBattleAttributes();
             _attributes = Attributes.ToDictionary(a => a.VirtueType, a => a);
-            Defence = 0;
+            MaxTurnEnergy = GetBattleAttributeValue(VirtueType.Diligence);
+            TurnEnergy = MaxTurnEnergy;
+            AttackPoints = GetBattleAttributeValue(VirtueType.Courage);
+            CombatOrder = GetCombatOrder(AttackPoints);
             Actions = CreateActions();
-
-            var attackPoints = GetAttackPoints();
-            AttackPoints = attackPoints;
-            CombatOrder = GetCombatOrder(attackPoints);
         }
 
         public BattleActionModel[] CreateActions()
@@ -57,10 +55,10 @@ namespace EG.Tower.Game.Battle.Behaviours
             TurnEnergy--;
         }
 
-        private int GetAttackPoints()
+        private int GetBattleAttributeValue(VirtueType type)
         {
             int attackValue = 0;
-            if (_attributes.TryGetValue(VirtueType.Courage, out var attribute))
+            if (_attributes.TryGetValue(type, out var attribute))
             {
                 attackValue = attribute.AttributeValue;
             }

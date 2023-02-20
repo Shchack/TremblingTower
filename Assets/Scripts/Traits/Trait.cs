@@ -1,4 +1,5 @@
 ﻿using EG.Tower.Game.Battle.Data;
+using EG.Tower.Game.Heroes;
 using EG.Tower.Game.Utils;
 using System;
 using UnityEngine;
@@ -62,6 +63,8 @@ namespace EG.Tower.Game
             Divisor = data.Divisor;
             BattleAttribute = data.BattleAttribute;
         }
+
+        public int GetBattleValue() => AttributeHelper.Convert(AttributeType, Divisor, Value);
 
         public void AddValue(double value)
         {

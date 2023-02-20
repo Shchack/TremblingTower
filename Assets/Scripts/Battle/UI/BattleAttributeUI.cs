@@ -15,7 +15,7 @@ namespace EG.Tower.Game.Battle.UI
 
             if (item.AttributeType == HeroAttributeType.Points)
             {
-                _attributeValueLabel.text = $"+{item.AttributeValue} {item.AttributeData.Name}";
+                _attributeValueLabel.text = $"{item.AttributeValue} {item.AttributeData.Name}";
             }
             else
             {

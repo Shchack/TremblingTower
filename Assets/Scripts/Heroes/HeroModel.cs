@@ -1,4 +1,5 @@
 ﻿using EG.Tower.Game.Battle.Models;
+using EG.Tower.Game.Heroes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,14 +37,9 @@ namespace EG.Tower.Game
         public int Money { get; private set; }
 
         [field: SerializeField]
-        public int TurnEnergy { get; private set; }
-
-        [field: SerializeField]
         public HeroInspirationModel Inspiration { get; private set; }
 
         private Dictionary<VirtueType, Trait> _virtueTraits;
-
-        private Dictionary<HeroAttributeType, Func<Trait, int>> _convertMethods;
 
         public HeroModel(HeroCreateModel createModel)
         {
@@ -56,9 +52,7 @@ namespace EG.Tower.Game
             MaxHP = createModel.MaxHP;
             Supplies = createModel.Supplies;
             Money = createModel.Money;
-            TurnEnergy = createModel.TurnEnergy;
             Inspiration = createModel.Inspiration;
-            InitBattleAttributeConvert();
         }
 
         public HeroModel(string name, HeroSetupData setupData)
@@ -73,18 +67,6 @@ namespace EG.Tower.Game
             Inspiration = setupData.Inspiration;
             Supplies = setupData.Supplies;
             Money = setupData.Money;
-            TurnEnergy = setupData.TurnEnergy;
-            InitBattleAttributeConvert();
-        }
-
-        private void InitBattleAttributeConvert()
-        {
-            _convertMethods = new()
-            {
-                { HeroAttributeType.PercentAsIs, ConvertAsIs },
-                { HeroAttributeType.Points, ConvertPoints },
-                { HeroAttributeType.PercentDivision, ConvertPercentDivision }
-            };
         }
 
         public BattleAttributeItemModel[] GetBattleAttributes()
@@ -122,14 +104,9 @@ namespace EG.Tower.Game
             return success;
         }
 
-        public BattleAttributeItemModel CreateBattleAttribute(Trait trait)
+        private BattleAttributeItemModel CreateBattleAttribute(Trait trait)
         {
-            int value = 0;
-
-            if (_convertMethods.TryGetValue(trait.AttributeType, out var method))
-            {
-                value = method.Invoke(trait);
-            }
+            int value = trait.GetBattleValue();
 
             return new BattleAttributeItemModel(
                 trait.VirtueType,
@@ -138,21 +115,6 @@ namespace EG.Tower.Game
                 value,
                 trait.AttributeType,
                 trait.BattleAttribute);
-        }
-
-        private int ConvertAsIs(Trait trait)
-        {
-            return trait.Value;
-        }
-
-        private int ConvertPoints(Trait trait)
-        {
-            return trait.Divisor > 0f ? Mathf.RoundToInt(trait.Value / trait.Divisor) : 0;
-        }
-
-        private int ConvertPercentDivision(Trait trait)
-        {
-            return trait.Divisor > 0f ? Mathf.RoundToInt(trait.Value / trait.Divisor) : 0;
         }
     }
 }

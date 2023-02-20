@@ -210,6 +210,20 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: CustomFieldType_Text
+  - id: 11
+    fields:
+    - title: Name
+      value: Trait/Knowledge
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: Knowledge
+      type: 0
+      typeString: VirtueCustomFieldType
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
   - id: 8
     fields:
     - title: Name

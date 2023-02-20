@@ -14,7 +14,6 @@ namespace EG.Tower.Game
         public int MaxHP { get; private set; }
         public int Supplies { get; private set; }
         public int Money { get; private set; }
-        public int TurnEnergy { get; private set; }
         public HeroInspirationModel Inspiration { get; private set; }
 
         public HeroCreateModel(string defaultName, HeroSetupData setupData)
@@ -27,7 +26,6 @@ namespace EG.Tower.Game
             MaxHP = setupData.MaxHP;
             Supplies = setupData.Supplies;
             Money = setupData.Money;
-            TurnEnergy = setupData.TurnEnergy;
             Inspiration = setupData.Inspiration;
         }
 
