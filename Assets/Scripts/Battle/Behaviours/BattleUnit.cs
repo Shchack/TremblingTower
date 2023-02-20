@@ -1,6 +1,7 @@
 ﻿using EG.Tower.Game.Battle.Models;
 using EG.Tower.Game.Common;
 using EG.Tower.Game.Rolls;
+using EG.Tower.Utils;
 using System;
 using UnityEngine;
 
@@ -82,6 +83,8 @@ namespace EG.Tower.Game.Battle.Behaviours
             }
         }
 
+        public int CritChancePercent { get; protected set; }
+
         public BattleActionModel[] Actions { get; protected set; }
 
         protected virtual void Awake()
@@ -93,16 +96,6 @@ namespace EG.Tower.Game.Battle.Behaviours
         public virtual void BeginTurn()
         {
             TurnEnergy = MaxTurnEnergy;
-        }
-
-        public virtual void Attack()
-        {
-            _animator.Play(BattleUnitAnimType.Attack);
-        }
-
-        public virtual void Ult()
-        {
-            _animator.Play(BattleUnitAnimType.Ult);
         }
 
         public virtual void Hit(int value)
@@ -137,17 +130,63 @@ namespace EG.Tower.Game.Battle.Behaviours
             _animator.Play(BattleUnitAnimType.Death);
         }
 
+        public virtual void Attack(BattleUnit target, int value)
+        {
+            _animator.Play(BattleUnitAnimType.Attack);
+
+            if (TryToCrit(value, out int critValue))
+            {
+                value = critValue;
+            }
+
+            target.Hit(value);
+        }
+
         public virtual void AddDefence(int value)
         {
+            if (TryToCrit(value, out int critValue))
+            {
+                value = critValue;
+            }
+
             Defence += value;
             _animator.Play(BattleUnitAnimType.Defend);
         }
 
         public void Heal(int value)
         {
+            if (TryToCrit(value, out int critValue))
+            {
+                value = critValue;
+            }
+
             var newValue = HP + value;
             HP = Mathf.Clamp(newValue, 0, MaxHP);
             _animator.Play(BattleUnitAnimType.Heal);
+        }
+
+        public virtual void Ult()
+        {
+            _animator.Play(BattleUnitAnimType.Ult);
+        }
+
+        protected bool TryToCrit(int value, out int critValue)
+        {
+            bool result = false;
+            critValue = value;
+            if (CritChancePercent <= 0)
+            {
+                return result;
+            }
+
+            var randomChance = KujRandom.Chance();
+            if (randomChance <= (CritChancePercent / 100f))
+            {
+                critValue = value + value;
+                result = true;
+            }
+
+            return result;
         }
 
         protected virtual int GetCombatOrder(int orderBonus)

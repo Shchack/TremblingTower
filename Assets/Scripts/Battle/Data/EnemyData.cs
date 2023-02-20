@@ -10,6 +10,7 @@ namespace EG.Tower.Battle.Data
         public int MaxHP;
         public int Attack;
         public int Defence;
+        public int CritChancePercent = 1;
         public int TurnEnergy = 1;
         public Sprite Icon;
         public EnemyActionModel[] Actions;

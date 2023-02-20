@@ -59,7 +59,7 @@ MonoBehaviour:
     DefaultValue: 50
     MaxValue: 100
     AttributeType: 2
-    Divisor: 5
+    Divisor: 10
     BattleAttribute: {fileID: 11400000, guid: 5276598108becdf4ba8b0275f8890e4b, type: 2}
   _mainVirtueBoost: 10
   _mainViceBoost: 10

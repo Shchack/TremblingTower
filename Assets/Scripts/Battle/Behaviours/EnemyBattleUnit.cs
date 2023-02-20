@@ -32,6 +32,7 @@ namespace EG.Tower.Game.Battle.Behaviours
             MaxHP = _data.MaxHP;
             AttackPoints = _data.Attack;
             DefendPoints = _data.Defence;
+            CritChancePercent = _data.CritChancePercent;
             Icon = _data.Icon;
             MaxTurnEnergy = _data.TurnEnergy;
             TurnEnergy = _data.TurnEnergy;

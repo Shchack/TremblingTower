@@ -26,6 +26,7 @@ namespace EG.Tower.Game.Battle.Behaviours
             _attributes = Attributes.ToDictionary(a => a.VirtueType, a => a);
             MaxTurnEnergy = GetBattleAttributeValue(VirtueType.Diligence);
             TurnEnergy = MaxTurnEnergy;
+            CritChancePercent = GetBattleAttributeValue(VirtueType.Knowledge);
             AttackPoints = GetBattleAttributeValue(VirtueType.Courage);
             CombatOrder = GetCombatOrder(AttackPoints);
             Actions = CreateActions();
