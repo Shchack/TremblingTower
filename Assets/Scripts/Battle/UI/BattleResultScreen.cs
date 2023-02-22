@@ -28,7 +28,7 @@ namespace EG.Tower.Game.Battle.UI
 
         private void ContinueGame()
         {
-            SceneHelper.LoadGameplayScene();
+            SceneHelper.LoadMapScene();
         }
 
         private void GoToMainMenu()

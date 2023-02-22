@@ -25,7 +25,7 @@ MonoBehaviour:
     <ChanceRange>k__BackingField:
       Min: 40
       Max: 60
-  - <Text>k__BackingField: Likelly
+  - <Text>k__BackingField: Likely
     <ChanceRange>k__BackingField:
       Min: 60
       Max: 90

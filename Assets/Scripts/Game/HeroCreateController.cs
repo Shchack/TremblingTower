@@ -58,7 +58,7 @@ namespace EG.Tower.Game
             Debug.Log("Hero created!");
             var heroModel = new HeroModel(_heroCreateModel);
             GameHub.One.Session.SetHeroModel(heroModel);
-            SceneHelper.LoadGameplayScene();
+            SceneHelper.LoadDialogueScene();
         }
     }
 }

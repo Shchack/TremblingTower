@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/HeroCreateScene.unity
     guid: db246edd2b374844ca4ee61b9a25cef6
   - enabled: 1
-    path: Assets/Scenes/GameplayScene.unity
-    guid: 581ba37b4d4c0534f9115e328bedb7d4
+    path: Assets/Scenes/DialogueScene.unity
+    guid: 39b4158b3494f0344b1361c45ac3f4a1
+  - enabled: 1
+    path: Assets/Scenes/MapScene.unity
+    guid: 73dfdcabd0383eb45b79767bc5a0c69b
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: 8bbd71123577ff74f9592715c80af2c2

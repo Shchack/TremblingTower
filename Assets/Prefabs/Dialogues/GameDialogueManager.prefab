@@ -75,7 +75,7 @@ MonoBehaviour:
       cancelConversation:
         key: 27
         buttonName: 
-    dialogueUI: {fileID: 101180, guid: 2ba89a1046e5b0445a49890868d075de, type: 3}
+    dialogueUI: {fileID: 843696415614472686, guid: 3f98e76ec87b57643b7a82806c84c05f, type: 3}
     defaultCanvas: {fileID: 2623373192521171499}
     localizationSettings:
       language: 
@@ -88,7 +88,7 @@ MonoBehaviour:
       allowPCSubtitleReminders: 0
       skipPCSubtitleAfterResponseMenu: 1
       subtitleCharsPerSecond: 30
-      minSubtitleSeconds: 2
+      minSubtitleSeconds: 3
       continueButton: 3
       requireContinueOnLastLine: 0
       richTextEmphases: 1
@@ -149,8 +149,8 @@ MonoBehaviour:
   preloadResources: 1
   warmUpConversationController: 0
   dontHideImmediateDuringWarmup: 0
-  dontDestroyOnLoad: 1
-  allowOnlyOneInstance: 1
+  dontDestroyOnLoad: 0
+  allowOnlyOneInstance: 0
   onStartTriggerWaitForSaveDataApplied: 0
   dialogueTimeMode: 0
   debugLevel: 2
@@ -202,7 +202,7 @@ MonoBehaviour:
   backButtons:
   - Cancel
   submitButton: Submit
-  singleton: 1
+  singleton: 0
   onUseKeyboard:
     m_PersistentCalls:
       m_Calls: []
