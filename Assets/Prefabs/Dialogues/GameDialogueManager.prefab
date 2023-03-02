@@ -115,10 +115,10 @@ MonoBehaviour:
       - Fire1
       - Fire2
       cancel:
-        key: 27
+        key: 32
         buttonName: 
       cancelConversation:
-        key: 27
+        key: 32
         buttonName: 
     barkSettings:
       allowBarksDuringConversations: 1
@@ -190,7 +190,7 @@ MonoBehaviour:
   joystickAxesToCheck: []
   joystickAxisThreshold: 0.5
   keyButtonsToCheck: []
-  keyCodesToCheck: 1b000000
+  keyCodesToCheck: 20000000
   keyInputSwitchesModeTo: 1
   alwaysAutoFocus: 0
   detectMouseControl: 1
