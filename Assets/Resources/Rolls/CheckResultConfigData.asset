@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016ae352cb81fd048a93cc8a0623767c, type: 3}
+  m_Name: CheckResultConfigData
+  m_EditorClassIdentifier: 
+  SuccessColor: {r: 0.36862746, g: 0.8627451, b: 0.42745098, a: 1}
+  FailColor: {r: 0.8627451, g: 0.36862746, b: 0.36862746, a: 1}
+  SuccessText: Check Success
+  FailText: Check Failure
+  RollImages:
+  - {fileID: 1894191917, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: 1466395148, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: 1740126772, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: -1086390742, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: -676986187, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: -1940711100, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  TweenType: 1
+  TweenInSeconds: 0.5
+  TweenOutSeconds: 0.5
+  TweenStaySeconds: 4

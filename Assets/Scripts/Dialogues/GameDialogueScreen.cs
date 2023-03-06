@@ -1,13 +1,15 @@
+using EG.Tower.Game;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace EG.Tower.Game
+namespace EG.Tower.Dialogues
 {
     public class GameDialogueScreen : MonoBehaviour
     {
         [SerializeField] private Button _skipButton;
         [SerializeField] private CanvasGroup _maskGroup;
         [SerializeField] private Image _dialogueImage;
+        [SerializeField] private CheckResultUI _checkResultUI;
 
         private GameDialogueController _controller;
 
@@ -22,6 +24,11 @@ namespace EG.Tower.Game
         private void Start()
         {
             GameHub.One.DialogueSystem.OnShowImageEvent += SetDialogueImage;
+        }
+
+        public void ShowCheckResult(int[] rolls, bool check)
+        {
+            _checkResultUI.Show(rolls, check);
         }
 
         private void HandleSkipButtonClick()
