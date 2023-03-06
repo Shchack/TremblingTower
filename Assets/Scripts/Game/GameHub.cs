@@ -1,4 +1,5 @@
-﻿using EG.Tower.Game.Battle;
+﻿using EG.Tower.Audio;
+using EG.Tower.Game.Battle;
 using EG.Tower.Utils;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace EG.Tower.Game
     {
         [SerializeField] private HeroSetupData _defaultTraits;
         [SerializeField] private GameDialogueSystem _dialogueSystem;
+        [SerializeField] private AudioSystem _audio;
         [SerializeField] private GameScreenEffectController _screenEffects;
 
         private PlayerSession _session;
@@ -23,6 +25,8 @@ namespace EG.Tower.Game
                 return _session;
             }
         }
+
+        public IAudioSystem Audio => _audio;
 
         public GameDialogueSystem DialogueSystem => _dialogueSystem;
 

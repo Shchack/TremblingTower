@@ -1,4 +1,5 @@
-﻿using EG.Tower.Game;
+﻿using EG.Tower.Dialogues.Data;
+using EG.Tower.Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,18 +10,8 @@ namespace EG.Tower.Dialogues
     {
         [SerializeField] private CanvasGroup _panel;
         [SerializeField] private TMP_Text _resultText;
-        [SerializeField] private Color _successColor;
-        [SerializeField] private Color _failColor;
-        [SerializeField] private string _successText = "Check Success";
-        [SerializeField] private string _failText = "Check Failure";
         [SerializeField] private Image[] _dices;
-        [SerializeField] private Sprite[] _rollImages;
-
-        [Header("Tween")]
-        [SerializeField] private LeanTweenType _type = LeanTweenType.linear;
-        [SerializeField] private float _inSeconds = 1f;
-        [SerializeField] private float _outSeconds = 1f;
-        [SerializeField] private float _staySeconds = 2f;
+        [SerializeField] private CheckResultConfigData _config;
 
         [Header("Debug")]
         [SerializeField] private bool _checkSuccess = true;
@@ -36,8 +27,8 @@ namespace EG.Tower.Dialogues
             SetRolls(rolls);
             SetResult(check);
 
-            _panel.LeanAlpha(1f, _inSeconds).setEase(_type).setOnComplete(() =>
-                _panel.LeanAlpha(0f, _outSeconds).setEase(_type).setDelay(_staySeconds)
+            _panel.LeanAlpha(1f, _config.TweenInSeconds).setEase(_config.TweenType).setOnComplete(() =>
+                _panel.LeanAlpha(0f, _config.TweenOutSeconds).setEase(_config.TweenType).setDelay(_config.TweenStaySeconds)
             );
         }
 
@@ -53,7 +44,7 @@ namespace EG.Tower.Dialogues
             {
                 if (rolls[i] - 1 >= 0 && rolls[i] - 1 <= 6)
                 {
-                    _dices[i].sprite = _rollImages[rolls[i] - 1];
+                    _dices[i].sprite = _config.RollImages[rolls[i] - 1];
                 }
                 else
                 {
@@ -64,14 +55,14 @@ namespace EG.Tower.Dialogues
 
         private void SetResult(bool check)
         {
-            var color = check ? _successColor : _failColor;
-            var text = check ? _successText : _failText;
+            var color = check ? _config.SuccessColor : _config.FailColor;
+            var text = check ? _config.SuccessText : _config.FailText;
 
             _resultText.text = text;
             _resultText.color = color;
 
-            var duration = _inSeconds + _outSeconds + _staySeconds;
-            GameHub.One.ScreenEffects.ShowFlashEffect(color, duration);
+            GameHub.One.ScreenEffects.ShowFlashEffect(color, _config.Duration);
+            GameHub.One.Audio.CheckResultTrack.PlayOneShot();
         }
 
         private void OnGUI()
