@@ -8,6 +8,7 @@ namespace EG.Tower.Game
     {
         [SerializeField] private HeroSetupData _defaultTraits;
         [SerializeField] private GameDialogueSystem _dialogueSystem;
+        [SerializeField] private GameScreenEffectController _screenEffects;
 
         private PlayerSession _session;
         public PlayerSession Session
@@ -24,6 +25,8 @@ namespace EG.Tower.Game
         }
 
         public GameDialogueSystem DialogueSystem => _dialogueSystem;
+
+        public GameScreenEffectController ScreenEffects => _screenEffects;
 
         public BattleController BattleController { get; private set; }
 

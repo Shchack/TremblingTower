@@ -2,6 +2,7 @@
 {
     public enum DiceType
     {
-        D10 = 10
+        D6 = 6,
+        D10 = 10,
     }
 }
