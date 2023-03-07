@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EG.Tower.Game
 {
-    [CreateAssetMenu(fileName = "BattleAttributeData", menuName = "Data/Hero/AttributeData", order = 1)]
+    [CreateAssetMenu(fileName = "BattleAttributeData", menuName = "Data/Hero/Traits/AttributeData", order = 1)]
     public class BattleAttributeData : ScriptableObject
     {
         public string Name;
