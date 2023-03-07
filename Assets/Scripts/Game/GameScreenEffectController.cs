@@ -17,6 +17,9 @@ namespace EG.Tower.Game
 
         public void ShowFlashEffect(Color color, float duration)
         {
+            LeanTween.cancel(_flashImage.gameObject);
+            _flashImage.color = new Color(_flashImage.color.r, _flashImage.color.g, _flashImage.color.b, 0f);
+
             _flashImage.color = new Color(color.r, color.g, color.b, 0f);
             var outSeconds = duration - _inSeconds;
 

@@ -1,5 +1,5 @@
 ﻿using EG.Tower.Audio;
-using EG.Tower.Game.Battle;
+using EG.Tower.Heroes;
 using EG.Tower.Utils;
 using UnityEngine;
 
@@ -31,17 +31,5 @@ namespace EG.Tower.Game
         public GameDialogueSystem DialogueSystem => _dialogueSystem;
 
         public GameScreenEffectController ScreenEffects => _screenEffects;
-
-        public BattleController BattleController { get; private set; }
-
-        public void Register(BattleController battleController)
-        {
-            BattleController = battleController;
-        }
-
-        public void Unregister(BattleController battleController)
-        {
-            BattleController = null;
-        }
     }
 }

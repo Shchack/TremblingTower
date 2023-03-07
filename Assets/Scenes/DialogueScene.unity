@@ -844,7 +844,7 @@ MonoBehaviour:
   _hero: {fileID: 663142672}
   _narrator: {fileID: 1333268213}
   _dialogueScreen: {fileID: 628223930}
-  _probabilitiesData: {fileID: 11400000, guid: 178489481ac09534f8a095502970a66d, type: 2}
+  _difficultiesData: {fileID: 11400000, guid: 178489481ac09534f8a095502970a66d, type: 2}
   _checkRollDice: 6
   _checkRollsCount: 2
 --- !u!114 &1786622564

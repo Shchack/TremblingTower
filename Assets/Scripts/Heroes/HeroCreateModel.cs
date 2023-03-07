@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EG.Tower.Heroes;
+using EG.Tower.Heroes.Skills;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EG.Tower.Game
@@ -7,26 +10,34 @@ namespace EG.Tower.Game
     public class HeroCreateModel
     {
         public string Name { get; private set; }
-        public Trait[] Traits { get; private set; }
-        public Trait MainVirtueTrait { get; private set; }
-        public Trait MainViceTrait { get; private set; }
+        public Skill[] Skills { get; private set; }
+        public Skill StrengthSkill { get; private set; }
+        public Skill WeaknessSkill { get; private set; }
+
+        public int StrengthSkillBoost { get; private set; }
+        public int WeaknessSkillBoost { get; private set; }
 
         public int MaxHP { get; private set; }
         public int Supplies { get; private set; }
         public int Money { get; private set; }
-        public HeroInspirationModel Inspiration { get; private set; }
+        public int Inspiration { get; private set; }
 
-        public HeroCreateModel(string defaultName, HeroSetupData setupData)
+        public Dictionary<string, Skill> SkillsByName { get; private set; }
+
+        public HeroCreateModel(HeroSetupData setupData)
         {
-            Name = defaultName;
-            MainVirtueTrait = null;
-            MainViceTrait = null;
-            Traits = setupData.GetTraits();
-
+            Name = setupData.HeroName;
+            Skills = setupData.GetSkills();
+            StrengthSkillBoost = setupData.StrengthSkillBoost;
+            WeaknessSkillBoost = setupData.WeaknessSkillBoost;
             MaxHP = setupData.MaxHP;
             Supplies = setupData.Supplies;
             Money = setupData.Money;
             Inspiration = setupData.Inspiration;
+
+            StrengthSkill = null;
+            WeaknessSkill = null;
+            SkillsByName = Skills.ToDictionary(s => s.Name, s => s);
         }
 
         public void SetName(string newName)
@@ -34,56 +45,59 @@ namespace EG.Tower.Game
             Name = newName;
         }
 
-        public void BoostVirtue(string virtue, int virtueBoost)
+        public void SetStrengthSkill(string name)
         {
-            if (MainVirtueTrait != null && MainVirtueTrait.HasVirtue(virtue))
+            if (StrengthSkill != null && StrengthSkill.HasName(name))
             {
                 return;
             }
 
-            var newTrait = Traits.FirstOrDefault(t => t.HasVirtue(virtue));
-
-            if (MainVirtueTrait != null)
+            if (SkillsByName.TryGetValue(name, out Skill newSkill))
             {
-                MainVirtueTrait.DecreaseValue(virtueBoost);
-            }
+                if (StrengthSkill != null)
+                {
+                    StrengthSkill.ResetValue();
+                }
 
-            newTrait.IncreaseValue(virtueBoost);
-            MainVirtueTrait = newTrait;
+                newSkill.AddValue(StrengthSkillBoost);
+                StrengthSkill = newSkill;
+            }
         }
 
-        public void BoostVice(string vice, int viceBoost)
+        public void SetWeaknessSkill(string name)
         {
-            if (MainViceTrait != null && MainViceTrait.HasVirtue(vice))
+            if (WeaknessSkill != null && WeaknessSkill.HasName(name))
             {
                 return;
             }
 
-            var newTrait = Traits.FirstOrDefault(t => t.HasVice(vice));
-            if (MainViceTrait != null)
+            if (SkillsByName.TryGetValue(name, out Skill newSkill))
             {
-                MainViceTrait.IncreaseValue(viceBoost);
-            }
+                if (WeaknessSkill != null)
+                {
+                    WeaknessSkill.ResetValue();
+                }
 
-            newTrait.DecreaseValue(viceBoost);
-            MainViceTrait = newTrait;
-        }
-
-        public void ResetMainVirtue()
-        {
-            if (MainVirtueTrait != null)
-            {
-                MainVirtueTrait.ResetValue();
-                MainVirtueTrait = null;
+                newSkill.AddValue(WeaknessSkillBoost);
+                WeaknessSkill = newSkill;
             }
         }
 
-        public void ResetMainVice()
+        public void ResetStrengthSkill()
         {
-            if (MainViceTrait != null)
+            if (StrengthSkill != null)
             {
-                MainViceTrait.ResetValue();
-                MainViceTrait = null;
+                StrengthSkill.ResetValue();
+                StrengthSkill = null;
+            }
+        }
+
+        public void ResetWeaknessSkill()
+        {
+            if (WeaknessSkill != null)
+            {
+                WeaknessSkill.ResetValue();
+                WeaknessSkill = null;
             }
         }
     }

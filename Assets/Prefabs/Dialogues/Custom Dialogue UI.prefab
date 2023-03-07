@@ -5361,9 +5361,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5390901741973815528}
   - component: {fileID: 6178755462561257732}
+  - component: {fileID: 772537449125041444}
   - component: {fileID: 8240842764386271540}
   - component: {fileID: 2526064604526451328}
-  - component: {fileID: 772537449125041444}
   m_Layer: 5
   m_Name: CheckResultPanel
   m_TagString: Untagged
@@ -5401,6 +5401,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8914113610326660203}
   m_CullTransparentMesh: 1
+--- !u!114 &772537449125041444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914113610326660203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf0c35829e4877c41b5f6a25f8889b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _panel: {fileID: 2526064604526451328}
+  _resultText: {fileID: 4560571343759178554}
+  _dices:
+  - {fileID: 6162043355375371454}
+  - {fileID: 266019258627688621}
+  _config: {fileID: 11400000, guid: 31654c1ded99fbb41b3dc19539fe83ab, type: 2}
+  _checkSuccess: 1
+  _rolls: 0200000003000000
 --- !u!114 &8240842764386271540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5443,23 +5463,3 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &772537449125041444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8914113610326660203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf0c35829e4877c41b5f6a25f8889b34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _panel: {fileID: 2526064604526451328}
-  _resultText: {fileID: 4560571343759178554}
-  _dices:
-  - {fileID: 6162043355375371454}
-  - {fileID: 266019258627688621}
-  _config: {fileID: 11400000, guid: 31654c1ded99fbb41b3dc19539fe83ab, type: 2}
-  _checkSuccess: 1
-  _rolls: 0200000003000000

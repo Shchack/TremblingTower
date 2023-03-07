@@ -27,6 +27,9 @@ namespace EG.Tower.Dialogues
             SetRolls(rolls);
             SetResult(check);
 
+            LeanTween.cancel(_panel.gameObject);
+            _panel.alpha = 0f;
+
             _panel.LeanAlpha(1f, _config.TweenInSeconds).setEase(_config.TweenType).setOnComplete(() =>
                 _panel.LeanAlpha(0f, _config.TweenOutSeconds).setEase(_config.TweenType).setDelay(_config.TweenStaySeconds)
             );

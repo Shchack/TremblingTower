@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using EG.Tower.Heroes.Skills;
+using UnityEngine;
 
 namespace EG.Tower.Game
 {
@@ -6,17 +7,17 @@ namespace EG.Tower.Game
     {
         private HeroModel _heroModel => GameHub.One.Session.HeroModel;
 
-        public double GetVirtueValue(string virtueName)
+        public int GetSkillValue(string name)
         {
-            return _heroModel.FindVirtueTraitValue(virtueName);
+            return _heroModel.FindSkillValue(name);
         }
 
-        public void AddVirtueValue(string virtueName, double value)
+        public void AddSkillValue(string name, int value)
         {
-            if (_heroModel.TryFindVirtueTrait(virtueName, out Trait trait))
+            if (_heroModel.TryFindSkill(name, out Skill skill))
             {
-                trait.AddValue(value);
-                Debug.Log($"Trait {trait.Virtue} Value is {trait.Value}");
+                skill.AddValue(value);
+                Debug.Log($"Skill {skill.Name} value is {skill.Value}");
             }
         }
     }

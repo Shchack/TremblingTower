@@ -1,4 +1,6 @@
-﻿namespace EG.Tower.Game
+﻿using EG.Tower.Heroes;
+
+namespace EG.Tower.Game
 {
     public class PlayerSession
     {
@@ -9,7 +11,7 @@
             {
                 if (_heroModel == null)
                 {
-                    var heroModel = new HeroModel("Hero", _defaultTraits);
+                    var heroModel = new HeroModel("Hero", _defaultHeroSetup);
                     SetHeroModel(heroModel);
                 }
 
@@ -17,11 +19,11 @@
             }
         }
 
-        private HeroSetupData _defaultTraits;
+        private HeroSetupData _defaultHeroSetup;
 
-        public PlayerSession(HeroSetupData defaultTraits)
+        public PlayerSession(HeroSetupData defaultSetup)
         {
-            _defaultTraits = defaultTraits;
+            _defaultHeroSetup = defaultSetup;
         }
 
         public void SetHeroModel(HeroModel heroModel)

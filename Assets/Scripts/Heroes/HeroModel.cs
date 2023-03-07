@@ -1,5 +1,5 @@
-﻿using EG.Tower.Game.Battle.Models;
-using EG.Tower.Game.Heroes;
+﻿using EG.Tower.Heroes;
+using EG.Tower.Heroes.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +10,19 @@ namespace EG.Tower.Game
     [Serializable]
     public class HeroModel
     {
-        private const float TRAIT_DEFAULT_VALUE = 50f;
+        private const int SKILL_DEFAULT_VALUE = 0;
 
         [field: SerializeField]
         public string Name { get; private set; }
 
         [field: SerializeField]
-        public Trait[] Traits { get; private set; }
+        public Skill[] Skills { get; private set; }
 
         [field: SerializeField]
-        public Trait MainVirtueTrait { get; private set; }
+        public Skill StrengthSkill { get; private set; }
 
         [field: SerializeField]
-        public Trait MainViceTrait { get; private set; }
+        public Skill WeaknessSkill { get; private set; }
 
         [field: SerializeField]
         public int HP { get; private set; }
@@ -37,84 +37,56 @@ namespace EG.Tower.Game
         public int Money { get; private set; }
 
         [field: SerializeField]
-        public HeroInspirationModel Inspiration { get; private set; }
+        public int Inspiration { get; private set; }
 
-        private Dictionary<VirtueType, Trait> _virtueTraits;
+        private Dictionary<string, Skill> _skillsByName;
 
         public HeroModel(HeroCreateModel createModel)
         {
             Name = createModel.Name;
-            Traits = createModel.Traits;
-            MainVirtueTrait = createModel.MainVirtueTrait;
-            MainViceTrait = createModel.MainViceTrait;
-            _virtueTraits = Traits.ToDictionary(t => t.VirtueType, t => t);
+            Skills = createModel.Skills;
+            StrengthSkill = createModel.StrengthSkill;
+            WeaknessSkill = createModel.WeaknessSkill;
             HP = createModel.MaxHP;
             MaxHP = createModel.MaxHP;
             Supplies = createModel.Supplies;
             Money = createModel.Money;
             Inspiration = createModel.Inspiration;
+
+            _skillsByName = createModel.SkillsByName;
         }
 
         public HeroModel(string name, HeroSetupData setupData)
         {
             Name = name;
-            Traits = setupData.GetTraits();
-            MainVirtueTrait = null;
-            MainViceTrait = null;
-            _virtueTraits = Traits.ToDictionary(t => t.VirtueType, t => t);
+            Skills = setupData.GetSkills();
+            StrengthSkill = null;
+            WeaknessSkill = null;
             HP = setupData.MaxHP;
             MaxHP = setupData.MaxHP;
             Inspiration = setupData.Inspiration;
             Supplies = setupData.Supplies;
             Money = setupData.Money;
+
+            _skillsByName = Skills.ToDictionary(s => s.Name, s => s);
         }
 
-        public BattleAttributeItemModel[] GetBattleAttributes()
+        public int FindSkillValue(string name)
         {
-            return Traits.Select(CreateBattleAttribute).ToArray();
-        }
-
-        public double FindVirtueTraitValue(string name)
-        {
-            double traitValue = TRAIT_DEFAULT_VALUE;
-            if (TryFindVirtueTrait(name, out Trait trait))
+            int skillValue = SKILL_DEFAULT_VALUE;
+            if (TryFindSkill(name, out Skill skill))
             {
-                traitValue = trait.Value;
+                skillValue = skill.Value;
             }
 
-            return traitValue;
+            return skillValue;
         }
 
-        public bool TryFindVirtueTrait(string name, out Trait trait)
+        public bool TryFindSkill(string name, out Skill skill)
         {
-            trait = null;
-            bool success = Enum.TryParse(name, out VirtueType type) && TryFindVirtueTrait(type, out trait);
+            bool success = _skillsByName.TryGetValue(name, out skill);
 
             return success;
-        }
-
-        public bool TryFindVirtueTrait(VirtueType type, out Trait trait)
-        {
-            bool success = _virtueTraits.TryGetValue(type, out trait);
-            if (!success)
-            {
-                Debug.LogWarning($"Trait {type} not found!");
-            }
-
-            return success;
-        }
-
-        private BattleAttributeItemModel CreateBattleAttribute(Trait trait)
-        {
-            int value = trait.GetBattleValue();
-
-            return new BattleAttributeItemModel(
-                trait.VirtueType,
-                trait.Virtue,
-                trait.Value,
-                value,
-                trait.AttributeType,
-                trait.BattleAttribute);
         }
     }
 }

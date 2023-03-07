@@ -1,4 +1,6 @@
+using EG.Tower.Heroes.Skills;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,66 +9,62 @@ namespace EG.Tower.Game
 {
     public class HeroCreateUI : MonoBehaviour
     {
-        [SerializeField] private TMP_InputField _nameInput;
-        [SerializeField] private DropDownExtended _mainVirtueDropdown;
-        [SerializeField] private DropDownExtended _mainViceDropdown;
-        [SerializeField] private RectTransform _traitsPanelUI;
-        [SerializeField] private TraitUI _traitUiPrefab;
-        [SerializeField] private Button _createHeroButton;
+        [SerializeField] private TMP_Text _nameLabel;
+        [SerializeField] private DropDownExtended _strengthSkillDropdown;
+        [SerializeField] private DropDownExtended _weaknessSkillDropdown;
+        [SerializeField] private RectTransform _skillsPanel;
+        [SerializeField] private SkillUI _skillUiPrefab;
+        [SerializeField] private Button _startGameButton;
 
         [SerializeField] private Color _errorColor = Color.red;
         [SerializeField] private float _errorTime = 1f;
 
         private HeroCreateController _controller;
-        private List<TraitUI> _traitUiItems;
+        private List<SkillUI> _skillUiItems;
 
         private void Awake()
         {
             _controller = FindObjectOfType<HeroCreateController>();
-            _traitUiItems = new List<TraitUI>();
+            _skillUiItems = new List<SkillUI>();
         }
 
         private void Start()
         {
-            _createHeroButton.onClick.AddListener(HandleCreateHeroButtonClick);
-            _nameInput.onValueChanged.AddListener(HandleHeroNameChanged);
-            InitDropdowns(_controller.TraitsData);
+            _startGameButton.onClick.AddListener(HandleCreateHeroButtonClick);
+            _nameLabel.text = _controller.HeroName;
+            InitDropdowns(_controller.Skills);
             InitTraitsUI(_controller);
         }
 
-        private void HandleHeroNameChanged(string newName)
+        private void InitDropdowns(Skill[] skills)
         {
-            _controller.SetHeroName(newName);
-        }
-
-        private void InitDropdowns(HeroSetupData traitsData)
-        {
-            _mainVirtueDropdown.onValueChanged.AddListener(HandleMainVirtueChanged);
-            _mainViceDropdown.onValueChanged.AddListener(HandleMainViceChanged);
-            _mainVirtueDropdown.AddOptions(traitsData.Virtues);
-            _mainViceDropdown.AddOptions(traitsData.Vices);
+            var options = skills.Select(s => s.Name).ToList();
+            _strengthSkillDropdown.onValueChanged.AddListener(HandleMainVirtueChanged);
+            _weaknessSkillDropdown.onValueChanged.AddListener(HandleMainViceChanged);
+            _strengthSkillDropdown.AddOptions(options);
+            _weaknessSkillDropdown.AddOptions(options);
         }
 
         private void InitTraitsUI(HeroCreateController controller)
         {
             ClearTraits();
-            foreach (var trait in controller.HeroTraits)
+            foreach (var skill in controller.Skills)
             {
-                var traitUI = Instantiate(_traitUiPrefab, _traitsPanelUI);
-                traitUI.Init(trait);
-                _traitUiItems.Add(traitUI);
+                var skillUI = Instantiate(_skillUiPrefab, _skillsPanel);
+                skillUI.Init(skill);
+                _skillUiItems.Add(skillUI);
             }
         }
 
         private void HandleMainVirtueChanged(int index)
         {
-            _mainViceDropdown.EnableAll();
+            _weaknessSkillDropdown.EnableAll();
 
             if (index > 0)
             {
-                var virtue = _mainVirtueDropdown.GetText(index);
-                _controller.SetMainVirtue(virtue);
-                _mainViceDropdown.SetOptionEnabled(index, false);
+                var virtue = _strengthSkillDropdown.GetText(index);
+                _controller.SetStrengthSkill(virtue);
+                _weaknessSkillDropdown.SetOptionEnabled(index, false);
             }
             else
             {
@@ -76,13 +74,13 @@ namespace EG.Tower.Game
 
         private void HandleMainViceChanged(int index)
         {
-            _mainVirtueDropdown.EnableAll();
+            _strengthSkillDropdown.EnableAll();
 
             if (index > 0)
             {
-                var vice = _mainViceDropdown.GetText(index);
-                _controller.SetMainVice(vice);
-                _mainVirtueDropdown.SetOptionEnabled(index, false);
+                var vice = _weaknessSkillDropdown.GetText(index);
+                _controller.SetWeaknessSkill(vice);
+                _strengthSkillDropdown.SetOptionEnabled(index, false);
             }
             else
             {
@@ -92,56 +90,45 @@ namespace EG.Tower.Game
 
         private void ClearTraits()
         {
-            var traitsUI = _traitsPanelUI.GetComponentsInChildren<TraitUI>();
+            var traitsUI = _skillsPanel.GetComponentsInChildren<SkillUI>();
 
             for (int i = 0; i < traitsUI.Length; i++)
             {
                 Destroy(traitsUI[i].gameObject);
             }
 
-            _traitUiItems.Clear();
+            _skillUiItems.Clear();
         }
 
         private void HandleCreateHeroButtonClick()
         {
-            bool isValid = IsValidName() & IsMainVirtueSelected() & IsMainViceSelected();
+            bool isValid = IsStrengthSkillSelected() & IsWeaknessSkillSelected();
             if (isValid)
             {
                 _controller.CreateHero();
             }
         }
 
-        private bool IsValidName()
+        private bool IsStrengthSkillSelected()
         {
-            bool valid = !string.IsNullOrWhiteSpace(_nameInput.text) && _nameInput.text.Length <= _nameInput.characterLimit;
+            bool valid = _strengthSkillDropdown.value != 0;
             if (!valid)
             {
-                StartCoroutine(ShowValidationError(_nameInput));
+                StartCoroutine(ShowValidationError(_strengthSkillDropdown));
             }
 
             return valid;
         }
 
-        private bool IsMainVirtueSelected()
+        private bool IsWeaknessSkillSelected()
         {
-            bool valid = _mainVirtueDropdown.value != 0;
+            bool valid = _weaknessSkillDropdown.value != 0;
             if (!valid)
             {
-                StartCoroutine(ShowValidationError(_mainVirtueDropdown));
+                StartCoroutine(ShowValidationError(_weaknessSkillDropdown));
             }
 
-            return valid;
-        }
-
-        private bool IsMainViceSelected()
-        {
-            bool valid = _mainViceDropdown.value != 0;
-            if (!valid)
-            {
-                StartCoroutine(ShowValidationError(_mainViceDropdown));
-            }
-
-            return _mainViceDropdown.value != 0;
+            return _weaknessSkillDropdown.value != 0;
         }
 
         private System.Collections.IEnumerator ShowValidationError(Selectable uiSelectable)
