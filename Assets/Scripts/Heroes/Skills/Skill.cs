@@ -16,7 +16,7 @@ namespace EG.Tower.Heroes.Skills
         {
             Name = data.Name;
             AltName = data.AltName;
-            _value = data.Value;
+            _value = data.DefaultValue;
         }
 
         public int Value

@@ -8,6 +8,7 @@ namespace EG.Tower.Heroes
     public class HeroSetupData : ScriptableObject
     {
         [SerializeField] private string _heroName;
+        [SerializeField] private Sprite _heroPortrait;
         [SerializeField] private SkillData[] _skills;
         [SerializeField] private int _strengthSkillBoost = 1;
         [SerializeField] private int _weaknessSkillBoost = -1;
@@ -18,6 +19,7 @@ namespace EG.Tower.Heroes
         [SerializeField] private int _inspiration = 2;
 
         public string HeroName => _heroName;
+        public Sprite HeroPortrait => _heroPortrait;
         public int StrengthSkillBoost => _strengthSkillBoost;
         public int WeaknessSkillBoost => _weaknessSkillBoost;
         public int MaxHP => _maxHP;

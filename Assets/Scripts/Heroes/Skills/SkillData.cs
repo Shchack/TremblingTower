@@ -1,10 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EG.Tower.Heroes.Skills
 {
-    [Serializable]
-    public class SkillData
+    [CreateAssetMenu(fileName = "SkillData", menuName = "Data/Hero/Skill", order = 1)]
+    public class SkillData : ScriptableObject
     {
         [field: SerializeField]
         public string Name { get; private set; }
@@ -13,6 +12,9 @@ namespace EG.Tower.Heroes.Skills
         public string AltName { get; private set; }
 
         [field: SerializeField]
-        public int Value { get; private set; }
+        public int DefaultValue { get; private set; }
+
+        [field: SerializeField]
+        public Sprite Icon { get; private set; }
     }
 }

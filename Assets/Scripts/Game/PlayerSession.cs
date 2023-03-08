@@ -11,7 +11,7 @@ namespace EG.Tower.Game
             {
                 if (_heroModel == null)
                 {
-                    var heroModel = new HeroModel("Hero", _defaultHeroSetup);
+                    var heroModel = new HeroModel(_defaultHeroSetup);
                     SetHeroModel(heroModel);
                 }
 

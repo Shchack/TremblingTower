@@ -1,0 +1,31 @@
+﻿using UnityEngine;
+
+namespace EG.Tower.Missions
+{
+    [CreateAssetMenu(fileName = "MissionData", menuName = "Data/Missions/Mission", order = 0)]
+    public class MissionData : ScriptableObject
+    {
+        [field: SerializeField] public string Name { get; private set; }
+        [field: SerializeField] public MissionRegionType Region { get; private set; }
+        [field: SerializeField] public FactionType Faction { get; private set; }
+        [field: SerializeField] public MissionSkillData[] MissionSkills { get; private set; }
+        [field: SerializeField] public MissionStep[] Steps { get; private set; }
+    }
+
+    public enum MissionRegionType
+    {
+        None = 0,
+        City = 1,
+        Village = 2,
+        Forest = 3,
+        Marsh = 4
+    }
+
+    public enum FactionType
+    {
+        None = 0,
+        BlackEmpire = 1,
+        Spirits = 2,
+        Smugglers = 3
+    }
+}

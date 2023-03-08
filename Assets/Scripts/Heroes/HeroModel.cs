@@ -16,6 +16,9 @@ namespace EG.Tower.Game
         public string Name { get; private set; }
 
         [field: SerializeField]
+        public Sprite Portrait { get; private set; }
+
+        [field: SerializeField]
         public Skill[] Skills { get; private set; }
 
         [field: SerializeField]
@@ -44,6 +47,7 @@ namespace EG.Tower.Game
         public HeroModel(HeroCreateModel createModel)
         {
             Name = createModel.Name;
+            Portrait = createModel.Portrait;
             Skills = createModel.Skills;
             StrengthSkill = createModel.StrengthSkill;
             WeaknessSkill = createModel.WeaknessSkill;
@@ -56,9 +60,10 @@ namespace EG.Tower.Game
             _skillsByName = createModel.SkillsByName;
         }
 
-        public HeroModel(string name, HeroSetupData setupData)
+        public HeroModel(HeroSetupData setupData)
         {
-            Name = name;
+            Name = setupData.HeroName;
+            Portrait = setupData.HeroPortrait;
             Skills = setupData.GetSkills();
             StrengthSkill = null;
             WeaknessSkill = null;
