@@ -89,11 +89,11 @@ Material:
     - _BASE_COLOR_WEIGHT: 1
     - _BUMP_MAP_STRENGTH: 10
     - _EMISSION_WEIGHT: 1
-    - _METALNESS: 0.474
+    - _METALNESS: 0.422
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _REFLECTIONS_IOR: 0
-    - _REFLECTIONS_ROUGHNESS: 0.28
+    - _REFLECTIONS_IOR: 3.8
+    - _REFLECTIONS_ROUGHNESS: 0.658
     - _REFLECTIONS_WEIGHT: 1
     - _RoughStrength: 0.2
     - _TRANSPARENCY: 0
