@@ -11,7 +11,16 @@ namespace EG.Tower.Missions
         public void Init(string name, int value)
         {
             _nameLabel.text = name;
-            string valueStr = value >= 0 ? $"+{value}" : $"-{value}";
+            string valueStr = "0";
+            if (value > 0)
+            {
+                valueStr = $"+{value}";
+            }
+            if (value < 0)
+            {
+                valueStr = $"-{Mathf.Abs(value)}";
+            }
+
             _valueLabel.text = valueStr;
         }
     }

@@ -17,15 +17,15 @@ MonoBehaviour:
   <Faction>k__BackingField: 1
   <MissionSkills>k__BackingField:
   - <Skill>k__BackingField: {fileID: 11400000, guid: 9e7487a4e90060948b6330c2c92c177a, type: 2}
-    <Value>k__BackingField: 1
+    <Value>k__BackingField: 2
   - <Skill>k__BackingField: {fileID: 11400000, guid: 6cddd6c93f3b5524fa41113b375c10f6, type: 2}
-    <Value>k__BackingField: 1
+    <Value>k__BackingField: -1
   - <Skill>k__BackingField: {fileID: 11400000, guid: 8dceb9a6c3d30224997ff68c0dde3897, type: 2}
-    <Value>k__BackingField: 0
+    <Value>k__BackingField: -2
   - <Skill>k__BackingField: {fileID: 11400000, guid: a38e67a1386ee3847864faddc6efeca1, type: 2}
-    <Value>k__BackingField: 0
+    <Value>k__BackingField: 1
   - <Skill>k__BackingField: {fileID: 11400000, guid: 9aa4a6a275a3da9409b68e2595ed0271, type: 2}
-    <Value>k__BackingField: 0
+    <Value>k__BackingField: -3
   <Steps>k__BackingField:
   - <Name>k__BackingField: 1. Neutralize Guards
     <PossibleSkillChecks>k__BackingField:

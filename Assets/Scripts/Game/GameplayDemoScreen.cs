@@ -15,7 +15,7 @@ namespace EG.Tower.Game
 
         private void BeginDemoBattle()
         {
-            SceneHelper.LoadBattleScene();
+            SceneHelper.LoadMissionScene();
         }
     }
 }

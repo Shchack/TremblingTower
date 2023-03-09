@@ -23,6 +23,8 @@ namespace EG.Tower.Game
 
         [Header("Progress")]
         [SerializeField] private MissionProgressUI _missionProgressUI;
+        [SerializeField] private RectTransform _leavePanel;
+        [SerializeField] private Button _leaveButton;
 
         private MissionController _controller;
 
@@ -31,9 +33,12 @@ namespace EG.Tower.Game
             _controller = FindObjectOfType<MissionController>();
             _controller.OnCharacterSelectedEvent += HandleCharacterSelectedEvent;
             _controller.OnCurrentStepChangedEvent += HandleCurrentStepChangedEvent;
+            _controller.OnMissionEndEvent += HandleMissionEndEvent;
             _executeStepButton.onClick.AddListener(HandleExecuteButtonClick);
             _nextStepButton.onClick.AddListener(HandleNextStepButtonClick);
+            _leaveButton.onClick.AddListener(HandleLeaveButtonClick);
 
+            _leavePanel.gameObject.SetActive(false);
             _successChanceLabel.enabled = false;
             _executeStepButton.interactable = false;
             _nextStepButton.gameObject.SetActive(false);
@@ -76,6 +81,15 @@ namespace EG.Tower.Game
             _actionSelectorUi.SetInteraction(false);
             _executeStepButton.gameObject.SetActive(false);
             _nextStepButton.gameObject.SetActive(true);
+
+            if (_controller.IsMissionEnd)
+            {
+                var nextStepButtonLabel = _nextStepButton.GetComponentInChildren<TMP_Text>();
+                if (nextStepButtonLabel != null)
+                {
+                    nextStepButtonLabel.text = "End Mission";
+                }
+            }
         }
 
         private void HandleSuccessChanceChangedEvent(bool shouldShow, float chance)
@@ -107,6 +121,16 @@ namespace EG.Tower.Game
             _characterUi.HideRoll();
             _missionBriefUi.HideRoll();
             _controller.SetNextStep();
+        }
+
+        private void HandleMissionEndEvent()
+        {
+            _leavePanel.gameObject.SetActive(true);
+        }
+
+        private void HandleLeaveButtonClick()
+        {
+            _controller.EndMission();
         }
     }
 }

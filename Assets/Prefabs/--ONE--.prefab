@@ -431,9 +431,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultTraits: {fileID: 11400000, guid: e15e6d10dcd2991498f61cfe1bb03148, type: 2}
+  _defaultMissionData: {fileID: 11400000, guid: 692393bac75648041af34de338d2d9c9, type: 2}
   _dialogueSystem: {fileID: 7520073090439537139}
   _audio: {fileID: 4065310620865919944}
   _screenEffects: {fileID: 7211013554919871154}
+  _checkRollDice: 6
+  _checkRollsCount: 2
   _diceSixSprites:
   - {fileID: 1894191917, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
   - {fileID: 1466395148, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}

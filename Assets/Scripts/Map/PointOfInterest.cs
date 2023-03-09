@@ -1,3 +1,4 @@
+using EG.Tower.Missions;
 using EG.Tower.Utils;
 using PixelCrushers.DialogueSystem;
 using TMPro;
@@ -9,6 +10,8 @@ namespace EG.Tower.Game
     {
         [ConversationPopup(false, true)]
         [SerializeField] private string _conversation;
+
+        [SerializeField] private MissionData _missionData;
 
         [SerializeField] private SpriteRenderer _renderer;
         [SerializeField] private Transform _hoverUI;
@@ -29,12 +32,18 @@ namespace EG.Tower.Game
         {
             if (string.IsNullOrWhiteSpace(_conversation))
             {
-                SceneHelper.LoadBattleScene();
+                LoadMission();
             }
             else
             {
                 LoadConversation();
             }
+        }
+
+        private void LoadMission()
+        {
+            GameHub.One.NextMissionData = _missionData;
+            SceneHelper.LoadMissionScene();
         }
 
         private void LoadConversation()

@@ -1,4 +1,5 @@
 using EG.Tower.Game;
+using EG.Tower.Utils;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -9,8 +10,9 @@ namespace EG.Tower.Missions
     {
         public event Action<HeroModel> OnCharacterSelectedEvent;
         public event Action<MissionStep> OnCurrentStepChangedEvent;
+        public event Action OnMissionEndEvent;
 
-        [SerializeField] private MissionData _data;
+        private MissionData _data => GameHub.One.NextMissionData;
 
         public string MissionName => _data.Name;
         public MissionRegionType Region => _data.Region;
@@ -18,9 +20,11 @@ namespace EG.Tower.Missions
         public MissionSkillData[] MissionSkills => _data.MissionSkills;
 
         public MissionStep[] Steps { get; private set; }
+        public bool IsMissionEnd => _currentStepIndex >= (Steps.Length - 1);
 
         private int _currentStepIndex;
         private MissionStep _currentStep => Steps[_currentStepIndex];
+
 
         private void Awake()
         {
@@ -52,10 +56,7 @@ namespace EG.Tower.Missions
 
         public void ExecuteStep()
         {
-            if (_currentStep.TryExecute())
-            {
-            }
-            else
+            if (!_currentStep.TryExecute())
             {
                 Debug.LogError("Failed to execute step. No selections.", gameObject);
             }
@@ -71,13 +72,14 @@ namespace EG.Tower.Missions
             }
             else
             {
-                EndMission();
+                Debug.LogWarning("Ending mission!");
+                OnMissionEndEvent?.Invoke();
             }
         }
 
-        private void EndMission()
+        public void EndMission()
         {
-            Debug.LogWarning("Mission end!");
+            SceneHelper.LoadMapScene();
         }
     }
 }
