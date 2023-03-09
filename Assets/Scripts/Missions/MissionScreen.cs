@@ -1,5 +1,4 @@
 using EG.Tower.Missions;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,22 +7,19 @@ namespace EG.Tower.Game
 {
     public class MissionScreen : MonoBehaviour
     {
-        [Header("Mission Brief")]
-        [SerializeField] private TMP_Text _missionTitleLabel;
-        [SerializeField] private TMP_Text _regionLabel;
-        [SerializeField] private TMP_Text _factionLabel;
-        [SerializeField] private RectTransform _missionSkillsHolder;
-        [SerializeField] private MissionSkillUI _missionSkillUiPrefab;
-
-        [Header("Mission Steps")]
-        [SerializeField] private RectTransform _missionStepsHolder;
-        [SerializeField] private MissionStepUI _missionStepUiPrefab;
-
-        [Header("Current Action")]
-        [SerializeField] private Image _portrait;
-        [SerializeField] private MissionActionSelectorUI _actionSelectorUi;
+        [Header("Side Panels")]
         [SerializeField] private SelectedCharacterUI _characterUi;
+        [SerializeField] private MissionBriefUI _missionBriefUi;
+
+        [Header("Current Step")]
+        [SerializeField] private TMP_Text _missionTitleLabel;
         [SerializeField] private TMP_Text _currentStepLabel;
+        [SerializeField] private Image _heroSelectorPortrait;
+        [SerializeField] private MissionActionSelectorUI _actionSelectorUi;
+        [SerializeField] private Button _executeStepButton;
+
+        [Header("Progress")]
+        [SerializeField] private MissionProgressUI _missionProgressUI;
 
         private MissionController _controller;
 
@@ -32,12 +28,27 @@ namespace EG.Tower.Game
             _controller = FindObjectOfType<MissionController>();
             _controller.OnCharacterSelectedEvent += HandleCharacterSelectedEvent;
             _controller.OnCurrentStepChangedEvent += HandleCurrentStepChangedEvent;
+            _controller.OnHeroRollEvent += HandleHeroRollEvent;
+            _controller.OnEnemyRollEvent += HandleEnemyRollEvent;
+            _executeStepButton.onClick.AddListener(HandleExecuteButtonClick);
+        }
+
+        private void Start()
+        {
+            Init(_controller);
+        }
+
+        private void Init(MissionController controller)
+        {
+            _missionTitleLabel.text = controller.MissionName;
+            _missionBriefUi.Init(controller.Region, controller.Faction, controller.MissionSkills);
+            _missionProgressUI.Init(controller.Steps);
         }
 
         private void HandleCharacterSelectedEvent(HeroModel hero)
         {
-            _portrait.sprite = hero.Portrait;
-            _portrait.color = new Color(_portrait.color.r, _portrait.color.g, _portrait.color.b, 1f);
+            _heroSelectorPortrait.sprite = hero.Portrait;
+            _heroSelectorPortrait.color = new Color(_heroSelectorPortrait.color.r, _heroSelectorPortrait.color.g, _heroSelectorPortrait.color.b, 1f);
             _characterUi.Init(hero);
         }
 
@@ -53,50 +64,20 @@ namespace EG.Tower.Game
             _controller.SelectAction(skillCheck);
         }
 
-        private void Start()
+        private void HandleHeroRollEvent(int[] rolls)
         {
-            Init(_controller);
+            _characterUi.ShowRoll(rolls);
         }
 
-        private void Init(MissionController controller)
+        private void HandleEnemyRollEvent(int[] rolls)
         {
-            _missionTitleLabel.text = controller.MissionName;
-            _regionLabel.text = $"Region: {controller.Region}";
-            _factionLabel.text = $"Faction: {controller.Faction}";
-            InitMissionSkills(controller.MissionSkills);
-            InitSteps(controller.Steps);
+            _missionBriefUi.ShowRoll(rolls);
         }
 
-        private void InitMissionSkills(MissionSkillData[] skills)
+        private void HandleExecuteButtonClick()
         {
-            var existingSkills = _missionSkillsHolder.GetComponentsInChildren<MissionSkillUI>();
-
-            for (int i = 0; i < existingSkills.Length; i++)
-            {
-                Destroy(existingSkills[i].gameObject);
-            }
-
-            foreach (var skill in skills)
-            {
-                var skillUi = Instantiate(_missionSkillUiPrefab, _missionSkillsHolder);
-                skillUi.Init(skill.Skill.AltName, skill.Value);
-            }
-        }
-
-        private void InitSteps(MissionStep[] steps)
-        {
-            var existingSteps = _missionStepsHolder.GetComponentsInChildren<MissionStepUI>();
-
-            for (int i = 0; i < existingSteps.Length; i++)
-            {
-                Destroy(existingSteps[i].gameObject);
-            }
-
-            foreach (var step in steps)
-            {
-                var stepUi = Instantiate(_missionStepUiPrefab, _missionStepsHolder);
-                stepUi.Init(step);
-            }
+            // TODO: Validate selectors
+            _controller.ExecuteStep();
         }
     }
 }

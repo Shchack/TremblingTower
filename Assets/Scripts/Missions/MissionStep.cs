@@ -1,15 +1,23 @@
 ﻿using System;
-using UnityEngine;
 
 namespace EG.Tower.Missions
 {
-    [Serializable]
     public class MissionStep
     {
-        [field: SerializeField]
-        public string Name { get; private set; }
+        public event Action<bool> OnStepCompletedEvent;
 
-        [field: SerializeField]
+        public string Name { get; private set; }
         public SkillCheckData[] PossibleSkillChecks { get; private set; }
+
+        public MissionStep(MissionStepData data)
+        {
+            Name = data.Name;
+            PossibleSkillChecks = data.PossibleSkillChecks;
+        }
+
+        public void CompleteStep(bool isSuccess)
+        {
+            OnStepCompletedEvent?.Invoke(isSuccess);
+        }
     }
 }

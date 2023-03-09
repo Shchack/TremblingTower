@@ -1,17 +1,17 @@
 ﻿using EG.Tower.Game;
-using EG.Tower.Heroes.Skills;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace EG.Tower.Missions
 {
-    public class SelectedCharacterUI : MonoBehaviour
+    public class MissionBriefUI : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _heroNameLabel;
-        [SerializeField] private TMP_Text _itemNameLabel;
-        [SerializeField] private RectTransform _skillsHolder;
-        [SerializeField] private MissionSkillUI _skillUiPrefab;
+        [SerializeField] private TMP_Text _regionLabel;
+        [SerializeField] private TMP_Text _factionLabel;
+        [SerializeField] private RectTransform _missionSkillsHolder;
+        [SerializeField] private MissionSkillUI _missionSkillUiPrefab;
         [SerializeField] private RectTransform _rollHolder;
         [SerializeField] private Image[] _dicesUi;
 
@@ -20,16 +20,16 @@ namespace EG.Tower.Missions
             _rollHolder.gameObject.SetActive(false);
         }
 
-        public void Init(HeroModel hero)
+        public void Init(MissionRegionType region, FactionType faction, MissionSkillData[] skills)
         {
-            _heroNameLabel.text = hero.Name;
-            _itemNameLabel.text = "Student Revolver";
-            InitSkills(hero.Skills);
+            _regionLabel.text = $"Region: {region}";
+            _factionLabel.text = $"Faction: {faction}";
+            InitMissionSkills(skills);
         }
 
-        private void InitSkills(Skill[] skills)
+        private void InitMissionSkills(MissionSkillData[] skills)
         {
-            var existingSkills = _skillsHolder.GetComponentsInChildren<MissionSkillUI>();
+            var existingSkills = _missionSkillsHolder.GetComponentsInChildren<MissionSkillUI>();
 
             for (int i = 0; i < existingSkills.Length; i++)
             {
@@ -38,8 +38,8 @@ namespace EG.Tower.Missions
 
             foreach (var skill in skills)
             {
-                var skillUi = Instantiate(_skillUiPrefab, _skillsHolder);
-                skillUi.Init(skill.AltName, skill.Value);
+                var skillUi = Instantiate(_missionSkillUiPrefab, _missionSkillsHolder);
+                skillUi.Init(skill.Skill.AltName, skill.Value);
             }
         }
 

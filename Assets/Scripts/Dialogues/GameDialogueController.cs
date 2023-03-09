@@ -43,17 +43,9 @@ namespace EG.Tower.Dialogues
 
         public void CheckSkill(string skillName, string difficultyTypeName)
         {
-            int[] rolls = new int[_checkRollsCount];
-            int rollValue = 0;
-            for (int i = 0; i < _checkRollsCount; i++)
-            {
-                var roll = RollHelper.Roll(_checkRollDice);
-                rollValue += roll;
-                rolls[i] = roll;
-            }
-
             RollDifficulty difficulty = _difficultiesData.FindDifficulty(difficultyTypeName);
             int skillValue = _hero.GetSkillValue(skillName);
+            int rollValue = RollHelper.RollDices(_checkRollDice, _checkRollsCount, out int[] rolls);
             var checkValue = skillValue + rollValue;
 
             bool check = checkValue >= difficulty.Value;

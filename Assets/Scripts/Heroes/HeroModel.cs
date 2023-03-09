@@ -76,7 +76,7 @@ namespace EG.Tower.Game
             _skillsByName = Skills.ToDictionary(s => s.Name, s => s);
         }
 
-        public int FindSkillValue(string name)
+        public int FindSkillValueByName(string name)
         {
             int skillValue = SKILL_DEFAULT_VALUE;
             if (TryFindSkill(name, out Skill skill))

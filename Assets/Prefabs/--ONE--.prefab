@@ -434,6 +434,13 @@ MonoBehaviour:
   _dialogueSystem: {fileID: 7520073090439537139}
   _audio: {fileID: 4065310620865919944}
   _screenEffects: {fileID: 7211013554919871154}
+  _diceSixSprites:
+  - {fileID: 1894191917, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: 1466395148, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: 1740126772, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: -1086390742, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: -676986187, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
+  - {fileID: -1940711100, guid: 1dd540269fd547c48aa5eddfdfb8558f, type: 3}
 --- !u!1 &5403611900636919804
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ namespace EG.Tower.Game
 
         public int GetSkillValue(string name)
         {
-            return _heroModel.FindSkillValue(name);
+            return _heroModel.FindSkillValueByName(name);
         }
 
         public void AddSkillValue(string name, int value)
