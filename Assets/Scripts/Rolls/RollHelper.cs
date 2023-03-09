@@ -1,4 +1,5 @@
 ﻿using EG.Tower.Utils;
+using UnityEngine;
 
 namespace EG.Tower.Rolls
 {
@@ -9,18 +10,36 @@ namespace EG.Tower.Rolls
             return KujRandom.Int(1, (int)dice + 1);
         }
 
-        public static int RollDices(DiceType dice, int count, out int[] rolls)
+        public static DicesRoll RollDices(DiceType dice, int count, Sprite[] diceIcons)
         {
-            rolls = new int[count];
-            int rollValue = 0;
+            var diceItems = new DiceItem[count];
+            int total = 0;
             for (int i = 0; i < count; i++)
             {
                 var roll = Roll(dice);
-                rollValue += roll;
-                rolls[i] = roll;
+                var icon = FindDiceSprite(roll, diceIcons);
+                diceItems[i] = new DiceItem(dice, total, icon);
+
+                total += roll;
             }
 
-            return rollValue;
+            return new DicesRoll(total, diceItems);
+        }
+
+        private static Sprite FindDiceSprite(int diceValue, Sprite[] diceIcons)
+        {
+            var result = diceIcons[0];
+
+            if (diceValue - 1 >= 0 && diceValue - 1 <= 6)
+            {
+                result = diceIcons[diceValue - 1];
+            }
+            else
+            {
+                Debug.LogError($"Wrong dice roll: {diceValue}!");
+            }
+
+            return result;
         }
     }
 }

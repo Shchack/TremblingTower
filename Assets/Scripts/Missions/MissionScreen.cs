@@ -14,9 +14,12 @@ namespace EG.Tower.Game
         [Header("Current Step")]
         [SerializeField] private TMP_Text _missionTitleLabel;
         [SerializeField] private TMP_Text _currentStepLabel;
+        [SerializeField] private TMP_Text _successChanceLabel;
         [SerializeField] private Image _heroSelectorPortrait;
         [SerializeField] private MissionActionSelectorUI _actionSelectorUi;
         [SerializeField] private Button _executeStepButton;
+        [SerializeField] private Button _nextStepButton;
+
 
         [Header("Progress")]
         [SerializeField] private MissionProgressUI _missionProgressUI;
@@ -28,9 +31,12 @@ namespace EG.Tower.Game
             _controller = FindObjectOfType<MissionController>();
             _controller.OnCharacterSelectedEvent += HandleCharacterSelectedEvent;
             _controller.OnCurrentStepChangedEvent += HandleCurrentStepChangedEvent;
-            _controller.OnHeroRollEvent += HandleHeroRollEvent;
-            _controller.OnEnemyRollEvent += HandleEnemyRollEvent;
             _executeStepButton.onClick.AddListener(HandleExecuteButtonClick);
+            _nextStepButton.onClick.AddListener(HandleNextStepButtonClick);
+
+            _successChanceLabel.enabled = false;
+            _executeStepButton.interactable = false;
+            _nextStepButton.gameObject.SetActive(false);
         }
 
         private void Start()
@@ -57,6 +63,27 @@ namespace EG.Tower.Game
             _currentStepLabel.text = $"Step {step.Name}";
             _actionSelectorUi.Init(step.PossibleSkillChecks);
             _actionSelectorUi.OnActionSelectedEvent += HandleActionSelectedEvent;
+
+            step.OnCompletedEvent += HandleCompletedEvent;
+            step.OnSuccessChanceChangedEvent += HandleSuccessChanceChangedEvent;
+        }
+
+        private void HandleCompletedEvent(StepCompletionInfo info)
+        {
+            _characterUi.ShowRoll(info.HeroRoll);
+            _missionBriefUi.ShowRoll(info.EnemyRoll);
+
+            _actionSelectorUi.SetInteraction(false);
+            _executeStepButton.gameObject.SetActive(false);
+            _nextStepButton.gameObject.SetActive(true);
+        }
+
+        private void HandleSuccessChanceChangedEvent(bool shouldShow, float chance)
+        {
+            var intValue = Mathf.RoundToInt(chance * 100f);
+            _successChanceLabel.text = $"Success chance: {intValue}%";
+            _successChanceLabel.enabled = shouldShow;
+            _executeStepButton.interactable = shouldShow;
         }
 
         private void HandleActionSelectedEvent(SkillCheckData skillCheck)
@@ -64,20 +91,22 @@ namespace EG.Tower.Game
             _controller.SelectAction(skillCheck);
         }
 
-        private void HandleHeroRollEvent(int[] rolls)
-        {
-            _characterUi.ShowRoll(rolls);
-        }
-
-        private void HandleEnemyRollEvent(int[] rolls)
-        {
-            _missionBriefUi.ShowRoll(rolls);
-        }
-
         private void HandleExecuteButtonClick()
         {
             // TODO: Validate selectors
             _controller.ExecuteStep();
+        }
+
+        private void HandleNextStepButtonClick()
+        {
+            _successChanceLabel.enabled = false;
+            _executeStepButton.gameObject.SetActive(true);
+            _executeStepButton.interactable = false;
+            _nextStepButton.gameObject.SetActive(false);
+            _actionSelectorUi.SetInteraction(true);
+            _characterUi.HideRoll();
+            _missionBriefUi.HideRoll();
+            _controller.SetNextStep();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using EG.Tower.Audio;
 using EG.Tower.Heroes;
+using EG.Tower.Rolls;
 using EG.Tower.Utils;
 using System;
 using UnityEngine;
@@ -12,7 +13,13 @@ namespace EG.Tower.Game
         [SerializeField] private GameDialogueSystem _dialogueSystem;
         [SerializeField] private AudioSystem _audio;
         [SerializeField] private GameScreenEffectController _screenEffects;
+
+        [Header("Roll")]
+        [SerializeField] private DiceType _checkRollDice = DiceType.D6;
+        [SerializeField] private int _checkRollsCount = 2;
         [SerializeField] private Sprite[] _diceSixSprites;
+
+        public int MaxRollValue => (int)_checkRollDice * _checkRollsCount;
 
         private PlayerSession _session;
         public PlayerSession Session
@@ -34,20 +41,9 @@ namespace EG.Tower.Game
 
         public GameScreenEffectController ScreenEffects => _screenEffects;
 
-        public Sprite FindDiceSixSprite(int diceValue)
+        public DicesRoll RollTwoDiceSix()
         {
-            var result = _diceSixSprites[0];
-
-            if (diceValue - 1 >= 0 && diceValue - 1 <= 6)
-            {
-                result = _diceSixSprites[diceValue - 1];
-            }
-            else
-            {
-                Debug.LogError($"Wrong dice roll: {diceValue}!");
-            }
-
-            return result;
+            return RollHelper.RollDices(_checkRollDice, _checkRollsCount, _diceSixSprites);
         }
     }
 }

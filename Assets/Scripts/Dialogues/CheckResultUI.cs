@@ -1,5 +1,6 @@
 ﻿using EG.Tower.Dialogues.Data;
 using EG.Tower.Game;
+using EG.Tower.Rolls;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,16 +16,15 @@ namespace EG.Tower.Dialogues
 
         [Header("Debug")]
         [SerializeField] private bool _checkSuccess = true;
-        [SerializeField] private int[] _rolls = { 1, 1 };
 
         private void Start()
         {
             _panel.alpha = 0f;
         }
 
-        public void Show(int[] rolls, bool check)
+        public void Show(DicesRoll roll, bool check)
         {
-            SetRolls(rolls);
+            ShowRoll(roll);
             SetResult(check);
 
             LeanTween.cancel(_panel.gameObject);
@@ -35,9 +35,9 @@ namespace EG.Tower.Dialogues
             );
         }
 
-        private void SetRolls(int[] rolls)
+        private void ShowRoll(DicesRoll roll)
         {
-            if (_dices.Length != rolls.Length)
+            if (_dices.Length != roll.Dices.Length)
             {
                 Debug.LogError($"No dice visual for rolls!");
                 return;
@@ -45,14 +45,7 @@ namespace EG.Tower.Dialogues
 
             for (int i = 0; i < _dices.Length; i++)
             {
-                if (rolls[i] - 1 >= 0 && rolls[i] - 1 <= 6)
-                {
-                    _dices[i].sprite = _config.RollImages[rolls[i] - 1];
-                }
-                else
-                {
-                    Debug.LogError($"Wrong dice roll: {rolls[i]}!");
-                }
+                _dices[i].sprite = roll.Dices[i].Icon;
             }
         }
 
@@ -72,7 +65,8 @@ namespace EG.Tower.Dialogues
         {
             if (GUILayout.Button("Check Result"))
             {
-                Show(_rolls, _checkSuccess);
+                var roll = GameHub.One.RollTwoDiceSix();
+                Show(roll, _checkSuccess);
             }
         }
     }

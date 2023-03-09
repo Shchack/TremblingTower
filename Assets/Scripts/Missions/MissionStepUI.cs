@@ -21,21 +21,21 @@ namespace EG.Tower.Missions
         public void Init(MissionStep step)
         {
             _missionStep = step;
-            _missionStep.OnStepCompletedEvent += HandleStepCompletedEvent;
+            _missionStep.OnCompletedEvent += HandleStepCompletedEvent;
             _stepNameLabel.text = step.Name;
         }
 
-        private void HandleStepCompletedEvent(bool isSuccess)
+        private void HandleStepCompletedEvent(StepCompletionInfo info)
         {
             _resultImage.enabled = true;
-            _resultImage.color = isSuccess ? _succesColor : _failColor;
+            _resultImage.color = info.Success ? _succesColor : _failColor;
         }
 
         private void OnDestroy()
         {
             if (_missionStep != null)
             {
-                _missionStep.OnStepCompletedEvent -= HandleStepCompletedEvent;
+                _missionStep.OnCompletedEvent -= HandleStepCompletedEvent;
             }
         }
     }

@@ -13,19 +13,6 @@ namespace EG.Tower.Missions
         [field: SerializeField] public FactionType Faction { get; private set; }
         [field: SerializeField] public MissionSkillData[] MissionSkills { get; private set; }
         [field: SerializeField] public MissionStepData[] Steps { get; private set; }
-
-        public int FindSkillValueByName(string skillName)
-        {
-            int result = 0;
-            var skill = MissionSkills.FirstOrDefault(s => s.Skill.Name.Equals(skillName, StringComparison.OrdinalIgnoreCase));
-
-            if (skill != null)
-            {
-                result = skill.Value;
-            }
-
-            return result;
-        }
     }
 
     public enum MissionRegionType

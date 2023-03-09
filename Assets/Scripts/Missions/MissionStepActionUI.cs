@@ -34,7 +34,7 @@ namespace EG.Tower.Missions
         public void Init(int i, SkillCheckData skillCheckData)
         {
             _skillCheck = skillCheckData;
-            _optionLabel.text = $"{i+1}. {skillCheckData.Name}";
+            _optionLabel.text = $"{i+1}. [{skillCheckData.Skill.AltName}] {skillCheckData.Name}";
         }
     }
 }

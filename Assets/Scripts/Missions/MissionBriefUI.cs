@@ -1,4 +1,4 @@
-﻿using EG.Tower.Game;
+﻿using EG.Tower.Rolls;
 using System;
 using TMPro;
 using UnityEngine;
@@ -43,9 +43,9 @@ namespace EG.Tower.Missions
             }
         }
 
-        public void ShowRoll(int[] dices)
+        public void ShowRoll(DicesRoll roll)
         {
-            if (_dicesUi.Length != dices.Length)
+            if (_dicesUi.Length != roll.Dices.Length)
             {
                 Debug.LogError($"No dice visual for rolls!");
                 return;
@@ -53,17 +53,15 @@ namespace EG.Tower.Missions
 
             for (int i = 0; i < _dicesUi.Length; i++)
             {
-                if (dices[i] - 1 >= 0 && dices[i] - 1 <= 6)
-                {
-                    _dicesUi[i].sprite = GameHub.One.FindDiceSixSprite(dices[i]);
-                }
-                else
-                {
-                    Debug.LogError($"Wrong dice roll: {dices[i]}!");
-                }
+                _dicesUi[i].sprite = roll.Dices[i].Icon;
             }
 
             _rollHolder.gameObject.SetActive(true);
+        }
+
+        public void HideRoll()
+        {
+            _rollHolder.gameObject.SetActive(false);
         }
     }
 }

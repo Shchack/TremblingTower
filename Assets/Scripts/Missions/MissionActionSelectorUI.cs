@@ -65,5 +65,10 @@ namespace EG.Tower.Missions
                 Debug.LogError("Skill check not set in UI option!");
             }
         }
+
+        public void SetInteraction(bool isInteractable)
+        {
+            _selectButton.interactable = isInteractable;
+        }
     }
 }

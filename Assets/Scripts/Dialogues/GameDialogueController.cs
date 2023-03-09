@@ -12,8 +12,6 @@ namespace EG.Tower.Dialogues
         [SerializeField] private Transform _narrator;
         [SerializeField] private GameDialogueScreen _dialogueScreen;
         [SerializeField] private RollDifficultiesData _difficultiesData;
-        [SerializeField] private DiceType _checkRollDice = DiceType.D6;
-        [SerializeField] private int _checkRollsCount = 2;
 
         private void Awake()
         {
@@ -45,15 +43,15 @@ namespace EG.Tower.Dialogues
         {
             RollDifficulty difficulty = _difficultiesData.FindDifficulty(difficultyTypeName);
             int skillValue = _hero.GetSkillValue(skillName);
-            int rollValue = RollHelper.RollDices(_checkRollDice, _checkRollsCount, out int[] rolls);
-            var checkValue = skillValue + rollValue;
+            DicesRoll roll = GameHub.One.RollTwoDiceSix();
+            roll.SetBonusValue(skillValue);
 
-            bool check = checkValue >= difficulty.Value;
+            bool check = roll.TotalValue >= difficulty.Value;
 
             DialogueLua.SetVariable("CheckResult", check);
-            _dialogueScreen.ShowCheckResult(rolls, check);
+            _dialogueScreen.ShowCheckResult(roll, check);
 
-            Debug.Log($"{skillName} check result: {check}. {checkValue} agains {difficultyTypeName}");
+            Debug.Log($"{skillName} check result: {check}. {roll.TotalValue} agains {difficulty.Value}");
         }
 
         public void GiveTraitReward(string virtueName, double value)
