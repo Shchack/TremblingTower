@@ -20,7 +20,7 @@ namespace EG.Tower.Missions
             _rollHolder.gameObject.SetActive(false);
         }
 
-        public void Init(MissionRegionType region, FactionType faction, SkillValueData[] skills)
+        public void Init(RegionType region, FactionType faction, SkillValueData[] skills)
         {
             _regionLabel.text = $"Region: {region}";
             _factionLabel.text = $"Faction: {faction}";

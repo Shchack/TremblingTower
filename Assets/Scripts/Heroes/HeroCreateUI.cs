@@ -1,4 +1,5 @@
 using EG.Tower.Heroes.Skills;
+using EG.Tower.Heroes.Traits;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -10,10 +11,13 @@ namespace EG.Tower.Game
     public class HeroCreateUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text _nameLabel;
+        [SerializeField] private TMP_Text _descriptionLabel;
         [SerializeField] private DropDownExtended _strengthSkillDropdown;
         [SerializeField] private DropDownExtended _weaknessSkillDropdown;
         [SerializeField] private RectTransform _skillsPanel;
         [SerializeField] private SkillUI _skillUiPrefab;
+        [SerializeField] private RectTransform _traitsPanel;
+        [SerializeField] private TraitUI _traitUiPrefab;
         [SerializeField] private Button _startGameButton;
 
         [SerializeField] private Color _errorColor = Color.red;
@@ -32,8 +36,10 @@ namespace EG.Tower.Game
         {
             _startGameButton.onClick.AddListener(HandleCreateHeroButtonClick);
             _nameLabel.text = _controller.HeroName;
+            _descriptionLabel.text = _controller.HeroDescription;
+            InitTraitsUI(_controller.Traits);
             InitDropdowns(_controller.Skills);
-            InitTraitsUI(_controller);
+            InitSkillsUI(_controller.Skills);
         }
 
         private void InitDropdowns(Skill[] skills)
@@ -45,14 +51,24 @@ namespace EG.Tower.Game
             _weaknessSkillDropdown.AddOptions(options);
         }
 
-        private void InitTraitsUI(HeroCreateController controller)
+        private void InitSkillsUI(Skill[] skills)
         {
-            ClearTraits();
-            foreach (var skill in controller.Skills)
+            ClearSkillsPanel();
+            foreach (var skill in skills)
             {
                 var skillUI = Instantiate(_skillUiPrefab, _skillsPanel);
                 skillUI.Init(skill);
                 _skillUiItems.Add(skillUI);
+            }
+        }
+
+        private void InitTraitsUI(TraitData[] traits)
+        {
+            ClearTraitsPanel();
+            foreach (var item in traits)
+            {
+                var uiItem = Instantiate(_traitUiPrefab, _traitsPanel);
+                uiItem.Init(item);
             }
         }
 
@@ -88,16 +104,26 @@ namespace EG.Tower.Game
             }
         }
 
-        private void ClearTraits()
+        private void ClearSkillsPanel()
         {
-            var traitsUI = _skillsPanel.GetComponentsInChildren<SkillUI>();
+            var uiItems = _skillsPanel.GetComponentsInChildren<SkillUI>();
 
-            for (int i = 0; i < traitsUI.Length; i++)
+            for (int i = 0; i < uiItems.Length; i++)
             {
-                Destroy(traitsUI[i].gameObject);
+                Destroy(uiItems[i].gameObject);
             }
 
             _skillUiItems.Clear();
+        }
+
+        private void ClearTraitsPanel()
+        {
+            var uiItems = _traitsPanel.GetComponentsInChildren<TraitUI>();
+
+            for (int i = 0; i < uiItems.Length; i++)
+            {
+                Destroy(uiItems[i].gameObject);
+            }
         }
 
         private void HandleCreateHeroButtonClick()

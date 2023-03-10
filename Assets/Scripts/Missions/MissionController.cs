@@ -16,7 +16,7 @@ namespace EG.Tower.Missions
         public HeroModel[] Heroes => GameHub.One.Session.Team;
 
         public string MissionName => _data.Name;
-        public MissionRegionType Region => _data.Region;
+        public RegionType Region => _data.Region;
         public FactionType Faction => _data.Faction;
         public SkillValueData[] MissionSkills => _data.MissionSkills;
 
@@ -30,7 +30,7 @@ namespace EG.Tower.Missions
 
         private void Awake()
         {
-            Steps = _data.Steps.Select(s => new MissionStep(s, _data.MissionSkills)).ToArray();
+            Steps = _data.Steps.Select(s => new MissionStep(s, _data)).ToArray();
         }
 
         private void Start()

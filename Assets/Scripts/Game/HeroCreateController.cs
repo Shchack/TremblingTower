@@ -1,5 +1,6 @@
 ﻿using EG.Tower.Heroes;
 using EG.Tower.Heroes.Skills;
+using EG.Tower.Heroes.Traits;
 using EG.Tower.Utils;
 using UnityEngine;
 
@@ -9,9 +10,10 @@ namespace EG.Tower.Game
     {
         [SerializeField] private HeroSetupData _setupData;
 
-        public Skill[] Skills => _heroCreateModel.Skills;
-
         public string HeroName => _heroCreateModel.Name;
+        public string HeroDescription => _heroCreateModel.Description;
+        public TraitData[] Traits => _heroCreateModel.Traits;
+        public Skill[] Skills => _heroCreateModel.Skills;
 
         private HeroCreateModel _heroCreateModel;
 

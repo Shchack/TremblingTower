@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf512fce15725249a0e3d1e293dea2f, type: 3}
+  m_Name: NumbTraitData
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Numb
+  <Description>k__BackingField: -1 missions involving negotiations
+  <BonusValue>k__BackingField: -1
+  <Regions>k__BackingField: 
+  <Factions>k__BackingField: 
+  <Skill>k__BackingField: {fileID: 11400000, guid: 8dceb9a6c3d30224997ff68c0dde3897, type: 2}

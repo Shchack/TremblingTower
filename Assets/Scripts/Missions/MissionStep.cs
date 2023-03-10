@@ -4,6 +4,7 @@ using EG.Tower.Rolls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace EG.Tower.Missions
 {
@@ -16,16 +17,20 @@ namespace EG.Tower.Missions
         public SkillCheckData[] PossibleSkillChecks { get; private set; }
 
         private Dictionary<string, int> _missionSkillsByName;
+        private RegionType _missionRegion;
+        private FactionType _missionFaction;
         private HeroModel _selectedCharacter;
         private SkillCheckData _selectedAction;
 
         private bool CanExecute => _selectedCharacter != null && _selectedAction != null;
 
-        public MissionStep(MissionStepData data, SkillValueData[] missionSkills)
+        public MissionStep(MissionStepData data, MissionData missionData)
         {
             Name = data.Name;
+            _missionRegion = missionData.Region;
+            _missionFaction = missionData.Faction;
             PossibleSkillChecks = data.PossibleSkillChecks;
-            _missionSkillsByName = missionSkills.ToDictionary(s => s.Skill.Name, s => s.Value);
+            _missionSkillsByName = missionData.MissionSkills.ToDictionary(s => s.Skill.Name, s => s.Value);
         }
 
         public bool TryExecute()
@@ -66,9 +71,12 @@ namespace EG.Tower.Missions
             if (CanExecute)
             {
                 var enemySkillValue = FindMissonSkillValueByName(_selectedAction.Skill.Name);
-                int heroSkillValue = _selectedCharacter.FindSkillValueByName(_selectedAction.Skill.Name);
 
-                chance = 0.5f + ((heroSkillValue - enemySkillValue) / (float)GameHub.One.MaxRollValue);
+                int skillBonus = _selectedCharacter.FindSkillValueByName(_selectedAction.Skill.Name);
+                int traitsBonus = _selectedCharacter.CalculateTraitBonusValue(_selectedAction.Skill.Name, _missionRegion, _missionFaction);
+                int heroBonusValue = skillBonus + traitsBonus;
+
+                chance = 0.5f + ((heroBonusValue - enemySkillValue) / (float)GameHub.One.MaxRollValue);
 
                 if (chance < 0f)
                 {
@@ -97,8 +105,12 @@ namespace EG.Tower.Missions
         private DicesRoll CalculatHeroRoll()
         {
             DicesRoll roll = GameHub.One.RollTwoDiceSix();
-            int skillValue = _selectedCharacter.FindSkillValueByName(_selectedAction.Skill.Name);
-            roll.SetBonusValue(skillValue);
+            int skillBonus = _selectedCharacter.FindSkillValueByName(_selectedAction.Skill.Name);
+            int traitsBonus = _selectedCharacter.CalculateTraitBonusValue(_selectedAction.Skill.Name, _missionRegion, _missionFaction);
+            int bonusValue = skillBonus + traitsBonus;
+            roll.SetBonusValue(bonusValue);
+
+            Debug.Log($"Roll: [{roll.RollValue}]. Skill: [{skillBonus}]. Traits: [{traitsBonus}]. Total: [{roll.TotalValue}]");
 
             return roll;
         }

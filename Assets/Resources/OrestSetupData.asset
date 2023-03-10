@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: OrestSetupData
   m_EditorClassIdentifier: 
   _heroName: Orest
+  _heroDescription: A former student of the Black Empire military academy. Lost his
+    father in the war. Ready to do anything for his mother and sister.
   _heroPortrait: {fileID: 21300000, guid: 1cc5becf1024281459e0cda58008f883, type: 3}
   _skills:
   - <Skill>k__BackingField: {fileID: 11400000, guid: 9e7487a4e90060948b6330c2c92c177a, type: 2}
@@ -27,6 +29,9 @@ MonoBehaviour:
     <Value>k__BackingField: 0
   _strengthSkillBoost: 1
   _weaknessSkillBoost: -1
+  _traits:
+  - {fileID: 11400000, guid: 6fcf0cff128eb1746908f686372cb9aa, type: 2}
+  - {fileID: 11400000, guid: 115b0e038fb29a64fbeac794aeff6571, type: 2}
   _maxHP: 20
   _supplies: 5
   _money: 5

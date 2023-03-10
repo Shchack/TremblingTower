@@ -1,5 +1,7 @@
 ﻿using EG.Tower.Heroes;
 using EG.Tower.Heroes.Skills;
+using EG.Tower.Heroes.Traits;
+using EG.Tower.Missions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,9 @@ namespace EG.Tower.Game
         [field: SerializeField]
         public Sprite Portrait { get; private set; }
 
+        [field: SerializeField]
+        public TraitData[] Traits { get; private set; }
+        
         [field: SerializeField]
         public Skill[] Skills { get; private set; }
 
@@ -48,6 +53,7 @@ namespace EG.Tower.Game
         {
             Name = createModel.Name;
             Portrait = createModel.Portrait;
+            Traits = createModel.Traits;
             Skills = createModel.Skills;
             StrengthSkill = createModel.StrengthSkill;
             WeaknessSkill = createModel.WeaknessSkill;
@@ -64,6 +70,7 @@ namespace EG.Tower.Game
         {
             Name = setupData.HeroName;
             Portrait = setupData.HeroPortrait;
+            Traits = setupData.Traits;
             Skills = setupData.GetSkills();
             StrengthSkill = null;
             WeaknessSkill = null;
@@ -92,6 +99,21 @@ namespace EG.Tower.Game
             bool success = _skillsByName.TryGetValue(name, out skill);
 
             return success;
+        }
+
+        public int CalculateTraitBonusValue(string skillName, RegionType region, FactionType faction)
+        {
+            int bonusValue = 0;
+
+            foreach (var trait in Traits)
+            {
+                if (trait.TryGetBonusValue(skillName, region, faction, out int bonus))
+                {
+                    bonusValue += bonus;
+                }
+            }
+
+            return bonusValue;
         }
     }
 }

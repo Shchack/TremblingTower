@@ -1,5 +1,6 @@
 ﻿using EG.Tower.Game;
 using EG.Tower.Heroes.Skills;
+using EG.Tower.Heroes.Traits;
 using EG.Tower.Rolls;
 using System;
 using TMPro;
@@ -12,6 +13,8 @@ namespace EG.Tower.Missions
     {
         [SerializeField] private TMP_Text _heroNameLabel;
         [SerializeField] private RectTransform _heroInfoPanel;
+        [SerializeField] private RectTransform _traitsHolder;
+        [SerializeField] private TraitUI _traitUiPrefab;
         [SerializeField] private RectTransform _skillsHolder;
         [SerializeField] private MissionSkillUI _skillUiPrefab;
         [SerializeField] private RectTransform _rollHolder;
@@ -27,16 +30,33 @@ namespace EG.Tower.Missions
         {
             _heroInfoPanel.gameObject.SetActive(true);
             _heroNameLabel.text = hero.Name;
+            InitTraits(hero.Traits);
             InitSkills(hero.Skills);
+        }
+
+        private void InitTraits(TraitData[] traits)
+        {
+            var existingItems = _traitsHolder.GetComponentsInChildren<TraitUI>();
+
+            for (int i = 0; i < existingItems.Length; i++)
+            {
+                Destroy(existingItems[i].gameObject);
+            }
+
+            foreach (var trait in traits)
+            {
+                var traitUi = Instantiate(_traitUiPrefab, _traitsHolder);
+                traitUi.Init(trait);
+            }
         }
 
         private void InitSkills(Skill[] skills)
         {
-            var existingSkills = _skillsHolder.GetComponentsInChildren<MissionSkillUI>();
+            var existingItems = _skillsHolder.GetComponentsInChildren<MissionSkillUI>();
 
-            for (int i = 0; i < existingSkills.Length; i++)
+            for (int i = 0; i < existingItems.Length; i++)
             {
-                Destroy(existingSkills[i].gameObject);
+                Destroy(existingItems[i].gameObject);
             }
 
             foreach (var skill in skills)

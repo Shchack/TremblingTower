@@ -1,5 +1,6 @@
 ﻿using EG.Tower.Heroes;
 using EG.Tower.Heroes.Skills;
+using EG.Tower.Heroes.Traits;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace EG.Tower.Game
     public class HeroCreateModel
     {
         public string Name { get; private set; }
+        public string Description { get; private set; }
         public Sprite Portrait { get; private set; }
+        public TraitData[] Traits { get; private set; }
         public Skill[] Skills { get; private set; }
         public Skill StrengthSkill { get; private set; }
         public Skill WeaknessSkill { get; private set; }
@@ -29,7 +32,9 @@ namespace EG.Tower.Game
         public HeroCreateModel(HeroSetupData setupData)
         {
             Name = setupData.HeroName;
+            Description = setupData.HeroDescription;
             Portrait = setupData.HeroPortrait;
+            Traits = setupData.Traits;
             Skills = setupData.GetSkills();
             StrengthSkillBoost = setupData.StrengthSkillBoost;
             WeaknessSkillBoost = setupData.WeaknessSkillBoost;
