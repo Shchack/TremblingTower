@@ -74,6 +74,7 @@ namespace EG.Tower.Game
             _characterUi.ShowRoll(info.HeroRoll);
             _missionBriefUi.ShowRoll(info.EnemyRoll);
 
+            _heroSelectorUi.SetInteraction(false);
             _actionSelectorUi.SetInteraction(false);
             _executeStepButton.gameObject.SetActive(false);
             _nextStepButton.gameObject.SetActive(true);
@@ -119,6 +120,7 @@ namespace EG.Tower.Game
             _executeStepButton.gameObject.SetActive(true);
             _executeStepButton.interactable = false;
             _nextStepButton.gameObject.SetActive(false);
+            _heroSelectorUi.SetInteraction(true);
             _actionSelectorUi.SetInteraction(true);
             _characterUi.HideRoll();
             _missionBriefUi.HideRoll();
