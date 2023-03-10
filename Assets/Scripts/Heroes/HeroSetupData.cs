@@ -9,7 +9,7 @@ namespace EG.Tower.Heroes
     {
         [SerializeField] private string _heroName;
         [SerializeField] private Sprite _heroPortrait;
-        [SerializeField] private SkillData[] _skills;
+        [SerializeField] private SkillValueData[] _skills;
         [SerializeField] private int _strengthSkillBoost = 1;
         [SerializeField] private int _weaknessSkillBoost = -1;
 

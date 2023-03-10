@@ -1,5 +1,5 @@
-﻿using EG.Tower.Rolls;
-using System;
+﻿using EG.Tower.Heroes.Skills;
+using EG.Tower.Rolls;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,14 +20,14 @@ namespace EG.Tower.Missions
             _rollHolder.gameObject.SetActive(false);
         }
 
-        public void Init(MissionRegionType region, FactionType faction, MissionSkillData[] skills)
+        public void Init(MissionRegionType region, FactionType faction, SkillValueData[] skills)
         {
             _regionLabel.text = $"Region: {region}";
             _factionLabel.text = $"Faction: {faction}";
             InitMissionSkills(skills);
         }
 
-        private void InitMissionSkills(MissionSkillData[] skills)
+        private void InitMissionSkills(SkillValueData[] skills)
         {
             var existingSkills = _missionSkillsHolder.GetComponentsInChildren<MissionSkillUI>();
 

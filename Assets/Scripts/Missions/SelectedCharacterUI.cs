@@ -11,7 +11,7 @@ namespace EG.Tower.Missions
     public class SelectedCharacterUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text _heroNameLabel;
-        [SerializeField] private TMP_Text _itemNameLabel;
+        [SerializeField] private RectTransform _heroInfoPanel;
         [SerializeField] private RectTransform _skillsHolder;
         [SerializeField] private MissionSkillUI _skillUiPrefab;
         [SerializeField] private RectTransform _rollHolder;
@@ -20,12 +20,13 @@ namespace EG.Tower.Missions
         private void Awake()
         {
             _rollHolder.gameObject.SetActive(false);
+            _heroInfoPanel.gameObject.SetActive(false);
         }
 
         public void Init(HeroModel hero)
         {
+            _heroInfoPanel.gameObject.SetActive(true);
             _heroNameLabel.text = hero.Name;
-            _itemNameLabel.text = "Student Revolver";
             InitSkills(hero.Skills);
         }
 
@@ -64,6 +65,11 @@ namespace EG.Tower.Missions
         public void HideRoll()
         {
             _rollHolder.gameObject.SetActive(false);
+        }
+
+        public void HideInfo()
+        {
+            _heroInfoPanel.gameObject.SetActive(false);
         }
     }
 }

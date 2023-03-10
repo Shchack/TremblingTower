@@ -21,7 +21,7 @@ namespace EG.Tower.Missions
 
         private bool CanExecute => _selectedCharacter != null && _selectedAction != null;
 
-        public MissionStep(MissionStepData data, MissionSkillData[] missionSkills)
+        public MissionStep(MissionStepData data, SkillValueData[] missionSkills)
         {
             Name = data.Name;
             PossibleSkillChecks = data.PossibleSkillChecks;

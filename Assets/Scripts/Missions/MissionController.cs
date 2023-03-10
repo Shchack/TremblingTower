@@ -1,4 +1,5 @@
 using EG.Tower.Game;
+using EG.Tower.Heroes.Skills;
 using EG.Tower.Utils;
 using System;
 using System.Linq;
@@ -8,19 +9,20 @@ namespace EG.Tower.Missions
 {
     public class MissionController : MonoBehaviour
     {
-        public event Action<HeroModel> OnCharacterSelectedEvent;
         public event Action<MissionStep> OnCurrentStepChangedEvent;
         public event Action OnMissionEndEvent;
 
         private MissionData _data => GameHub.One.NextMissionData;
+        public HeroModel[] Heroes => GameHub.One.Session.Team;
 
         public string MissionName => _data.Name;
         public MissionRegionType Region => _data.Region;
         public FactionType Faction => _data.Faction;
-        public MissionSkillData[] MissionSkills => _data.MissionSkills;
+        public SkillValueData[] MissionSkills => _data.MissionSkills;
 
         public MissionStep[] Steps { get; private set; }
         public bool IsMissionEnd => _currentStepIndex >= (Steps.Length - 1);
+
 
         private int _currentStepIndex;
         private MissionStep _currentStep => Steps[_currentStepIndex];
@@ -42,11 +44,9 @@ namespace EG.Tower.Missions
             SetNextStep();
         }
 
-        private void SelectCharacter()
+        public void SelectHero(HeroModel hero)
         {
-            var selectedCharacter = GameHub.One.Session.HeroModel;
-            _currentStep.SelectCharacter(selectedCharacter);
-            OnCharacterSelectedEvent?.Invoke(selectedCharacter);
+            _currentStep.SelectCharacter(hero);
         }
 
         public void SelectAction(SkillCheckData skillCheck)
@@ -67,7 +67,6 @@ namespace EG.Tower.Missions
             if (_currentStepIndex + 1 < Steps.Length)
             {
                 _currentStepIndex++;
-                SelectCharacter();
                 OnCurrentStepChangedEvent?.Invoke(_currentStep);
             }
             else

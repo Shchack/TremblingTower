@@ -183,7 +183,6 @@ MonoBehaviour:
   _flashImage: {fileID: 6111919361015313603}
   _type: 1
   _inSeconds: 0.3
-  _outSeconds: 2
 --- !u!223 &2458286672605381136
 Canvas:
   m_ObjectHideFlags: 0
@@ -430,7 +429,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67c4a2457f78e64f8af3bf58835c275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultTraits: {fileID: 11400000, guid: e15e6d10dcd2991498f61cfe1bb03148, type: 2}
+  _defaultHeroSetup: {fileID: 11400000, guid: e15e6d10dcd2991498f61cfe1bb03148, type: 2}
+  _defaultTeamSetup:
+  - {fileID: 11400000, guid: bababd48115b34446842b5b455c90a56, type: 2}
+  - {fileID: 11400000, guid: 00ba7690a7d365648a3460b16b855c75, type: 2}
   _defaultMissionData: {fileID: 11400000, guid: 692393bac75648041af34de338d2d9c9, type: 2}
   _dialogueSystem: {fileID: 7520073090439537139}
   _audio: {fileID: 4065310620865919944}

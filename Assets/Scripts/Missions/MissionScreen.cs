@@ -15,7 +15,7 @@ namespace EG.Tower.Game
         [SerializeField] private TMP_Text _missionTitleLabel;
         [SerializeField] private TMP_Text _currentStepLabel;
         [SerializeField] private TMP_Text _successChanceLabel;
-        [SerializeField] private Image _heroSelectorPortrait;
+        [SerializeField] private MissionHeroSelectorUI _heroSelectorUi;
         [SerializeField] private MissionActionSelectorUI _actionSelectorUi;
         [SerializeField] private Button _executeStepButton;
         [SerializeField] private Button _nextStepButton;
@@ -31,7 +31,6 @@ namespace EG.Tower.Game
         private void Awake()
         {
             _controller = FindObjectOfType<MissionController>();
-            _controller.OnCharacterSelectedEvent += HandleCharacterSelectedEvent;
             _controller.OnCurrentStepChangedEvent += HandleCurrentStepChangedEvent;
             _controller.OnMissionEndEvent += HandleMissionEndEvent;
             _executeStepButton.onClick.AddListener(HandleExecuteButtonClick);
@@ -56,18 +55,15 @@ namespace EG.Tower.Game
             _missionProgressUI.Init(controller.Steps);
         }
 
-        private void HandleCharacterSelectedEvent(HeroModel hero)
-        {
-            _heroSelectorPortrait.sprite = hero.Portrait;
-            _heroSelectorPortrait.color = new Color(_heroSelectorPortrait.color.r, _heroSelectorPortrait.color.g, _heroSelectorPortrait.color.b, 1f);
-            _characterUi.Init(hero);
-        }
-
         private void HandleCurrentStepChangedEvent(MissionStep step)
         {
-            _currentStepLabel.text = $"Step {step.Name}";
+            _currentStepLabel.text = step.Name;
             _actionSelectorUi.Init(step.PossibleSkillChecks);
             _actionSelectorUi.OnActionSelectedEvent += HandleActionSelectedEvent;
+
+            _characterUi.HideInfo();
+            _heroSelectorUi.Init(_controller.Heroes);
+            _heroSelectorUi.OnHeroSelectedEvent += HandleHeroSelectedEvent;
 
             step.OnCompletedEvent += HandleCompletedEvent;
             step.OnSuccessChanceChangedEvent += HandleSuccessChanceChangedEvent;
@@ -98,6 +94,12 @@ namespace EG.Tower.Game
             _successChanceLabel.text = $"Success chance: {intValue}%";
             _successChanceLabel.enabled = shouldShow;
             _executeStepButton.interactable = shouldShow;
+        }
+
+        private void HandleHeroSelectedEvent(HeroModel hero)
+        {
+            _controller.SelectHero(hero);
+            _characterUi.Init(hero);
         }
 
         private void HandleActionSelectedEvent(SkillCheckData skillCheck)

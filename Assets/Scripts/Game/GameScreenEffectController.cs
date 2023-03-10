@@ -8,7 +8,6 @@ namespace EG.Tower.Game
         [SerializeField] private Image _flashImage;
         [SerializeField] private LeanTweenType _type = LeanTweenType.linear;
         [SerializeField] private float _inSeconds = 0.1f;
-        [SerializeField] private float _outSeconds = 0.5f;
 
         private void Start()
         {

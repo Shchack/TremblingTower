@@ -12,11 +12,11 @@ namespace EG.Tower.Heroes.Skills
 
         private int _value;
 
-        public Skill(SkillData data)
+        public Skill(SkillValueData data)
         {
-            Name = data.Name;
-            AltName = data.AltName;
-            _value = data.DefaultValue;
+            Name = data.Skill.Name;
+            AltName = data.Skill.AltName;
+            _value = data.Value;
         }
 
         public int Value

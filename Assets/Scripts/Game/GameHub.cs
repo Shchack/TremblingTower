@@ -3,14 +3,14 @@ using EG.Tower.Heroes;
 using EG.Tower.Missions;
 using EG.Tower.Rolls;
 using EG.Tower.Utils;
-using System;
 using UnityEngine;
 
 namespace EG.Tower.Game
 {
     public class GameHub : Singleton<GameHub>
     {
-        [SerializeField] private HeroSetupData _defaultTraits;
+        [SerializeField] private HeroSetupData _defaultHeroSetup;
+        [SerializeField] private HeroSetupData[] _defaultTeamSetup;
         [SerializeField] private MissionData _defaultMissionData;
         [SerializeField] private GameDialogueSystem _dialogueSystem;
         [SerializeField] private AudioSystem _audio;
@@ -30,7 +30,7 @@ namespace EG.Tower.Game
             {
                 if (_session == null)
                 {
-                    _session = new PlayerSession(_defaultTraits);
+                    _session = new PlayerSession(_defaultHeroSetup, _defaultTeamSetup);
                 }
 
                 return _session;
