@@ -1,4 +1,4 @@
-﻿namespace EG.Tower.Game.Rolls
+﻿namespace EG.Tower.Rolls
 {
     public enum DiceType
     {

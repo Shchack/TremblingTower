@@ -1,5 +1,5 @@
 ﻿using EG.Tower.Game;
-using EG.Tower.Game.Rolls;
+using EG.Tower.Rolls;
 using EG.Tower.Utils;
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
@@ -11,11 +11,7 @@ namespace EG.Tower.Dialogues
         [SerializeField] private Hero _hero;
         [SerializeField] private Transform _narrator;
         [SerializeField] private GameDialogueScreen _dialogueScreen;
-        [SerializeField] private RollProbabilitiesData _probabilitiesData;
-        [SerializeField] private DiceType _checkRollDice = DiceType.D6;
-        [SerializeField] private int _checkRollsCount = 2;
-
-        private const float TRAIT_MAX_VALUE = 100f;
+        [SerializeField] private RollDifficultiesData _difficultiesData;
 
         private void Awake()
         {
@@ -43,53 +39,45 @@ namespace EG.Tower.Dialogues
             SceneHelper.LoadMapScene();
         }
 
-        public string GetRollChance(string virtueName, double rollTypeValue)
+        public void CheckSkill(string skillName, string difficultyTypeName)
         {
-            double traitValue = _hero.GetVirtueValue(virtueName);
+            RollDifficulty difficulty = _difficultiesData.FindDifficulty(difficultyTypeName);
+            int skillValue = _hero.GetSkillValue(skillName);
+            DicesRoll roll = GameHub.One.RollTwoDiceSix();
+            roll.SetBonusValue(skillValue);
 
-            var checkValue = traitValue + rollTypeValue;
+            bool check = roll.TotalValue >= difficulty.Value;
 
-            var result = _probabilitiesData.FindText(checkValue);
-
-            return result;
-        }
-
-        public void CheckVirtue(string virtueName, double rollTypeValue)
-        {
-            var randomChance = Random.Range(0f, TRAIT_MAX_VALUE);
-            double traitValue = _hero.GetVirtueValue(virtueName);
-
-            int[] rolls = new int[_checkRollsCount];
-            for (int i = 0; i < _checkRollsCount; i++)
-            {
-                rolls[i] = RollHelper.Roll(_checkRollDice);
-            }
-
-            var checkValue = traitValue + rollTypeValue;
-            bool check = randomChance <= checkValue;
             DialogueLua.SetVariable("CheckResult", check);
-            _dialogueScreen.ShowCheckResult(rolls, check);
+            _dialogueScreen.ShowCheckResult(roll, check);
 
-            Debug.Log($"{virtueName} check result: {check}. {checkValue} agains {randomChance}");
+            Debug.Log($"{skillName} check result: {check}. {roll.TotalValue} agains {difficulty.Value}");
         }
 
         public void GiveTraitReward(string virtueName, double value)
         {
             Debug.Log($"Giving trait {virtueName} reward {value}");
-            _hero.AddVirtueValue(virtueName, value);
+
+            try
+            {
+                int intValue = System.Convert.ToInt32(value);
+                _hero.AddSkillValue(virtueName, intValue);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Change skill value failed: {ex.Message}");
+            }
         }
 
         private void OnEnable()
         {
-            Lua.RegisterFunction(nameof(GetRollChance), this, SymbolExtensions.GetMethodInfo(() => GetRollChance(string.Empty, (double)0)));
-            Lua.RegisterFunction(nameof(CheckVirtue), this, SymbolExtensions.GetMethodInfo(() => CheckVirtue(string.Empty, (double)0)));
+            Lua.RegisterFunction(nameof(CheckSkill), this, SymbolExtensions.GetMethodInfo(() => CheckSkill(string.Empty, string.Empty)));
             Lua.RegisterFunction(nameof(GiveTraitReward), this, SymbolExtensions.GetMethodInfo(() => GiveTraitReward(string.Empty, (double)0)));
         }
 
         private void OnDisable()
         {
-            Lua.UnregisterFunction(nameof(GetRollChance));
-            Lua.UnregisterFunction(nameof(CheckVirtue));
+            Lua.UnregisterFunction(nameof(CheckSkill));
             Lua.UnregisterFunction(nameof(GiveTraitReward));
         }
     }

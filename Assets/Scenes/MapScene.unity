@@ -180,7 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 546c841a8570b64439e977d5ac8dd610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _probabilitiesData: {fileID: 11400000, guid: 178489481ac09534f8a095502970a66d, type: 2}
 --- !u!4 &24334914
 Transform:
   m_ObjectHideFlags: 0
@@ -249,7 +248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7885132141882442728, guid: bea8219ffaf07794b87c4fd685fbced8, type: 3}
       propertyPath: _name
-      value: '"Dog Saviour"'
+      value: '"DogSaviour"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885132141882442728, guid: bea8219ffaf07794b87c4fd685fbced8, type: 3}
+      propertyPath: _description
+      value: Talk
       objectReference: {fileID: 0}
     - target: {fileID: 7885132141882442728, guid: bea8219ffaf07794b87c4fd685fbced8, type: 3}
       propertyPath: _conversation
@@ -1131,9 +1134,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7885132141882442728, guid: bea8219ffaf07794b87c4fd685fbced8, type: 3}
+      propertyPath: _name
+      value: '"Free House from Marauders"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885132141882442728, guid: bea8219ffaf07794b87c4fd685fbced8, type: 3}
+      propertyPath: _description
+      value: Start Mission
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885132141882442728, guid: bea8219ffaf07794b87c4fd685fbced8, type: 3}
+      propertyPath: _missionData
+      value: 
+      objectReference: {fileID: 11400000, guid: 692393bac75648041af34de338d2d9c9, type: 2}
     - target: {fileID: 8714423955487982346, guid: bea8219ffaf07794b87c4fd685fbced8, type: 3}
       propertyPath: m_Name
-      value: BattlePoint
+      value: FreeHouseFromMaraudersPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bea8219ffaf07794b87c4fd685fbced8, type: 3}

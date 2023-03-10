@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700ecdb4ed6eb9f4c8ef516100a8098c, type: 3}
+  m_Name: HanSetupData
+  m_EditorClassIdentifier: 
+  _heroName: Han
+  _heroDescription: 
+  _heroPortrait: {fileID: 21300000, guid: 045ac41013423fc4091ed19a01de7232, type: 3}
+  _skills:
+  - <Skill>k__BackingField: {fileID: 11400000, guid: 9e7487a4e90060948b6330c2c92c177a, type: 2}
+    <Value>k__BackingField: 0
+  - <Skill>k__BackingField: {fileID: 11400000, guid: 6cddd6c93f3b5524fa41113b375c10f6, type: 2}
+    <Value>k__BackingField: 1
+  - <Skill>k__BackingField: {fileID: 11400000, guid: 8dceb9a6c3d30224997ff68c0dde3897, type: 2}
+    <Value>k__BackingField: -1
+  - <Skill>k__BackingField: {fileID: 11400000, guid: a38e67a1386ee3847864faddc6efeca1, type: 2}
+    <Value>k__BackingField: 0
+  - <Skill>k__BackingField: {fileID: 11400000, guid: 9aa4a6a275a3da9409b68e2595ed0271, type: 2}
+    <Value>k__BackingField: 0
+  _strengthSkillBoost: 1
+  _weaknessSkillBoost: -1
+  _traits:
+  - {fileID: 11400000, guid: 458e66640bf37b84d817c7eb43254308, type: 2}
+  - {fileID: 11400000, guid: 1182b5510d177f84abd2ed2eeae7bf2f, type: 2}
+  _maxHP: 20
+  _supplies: 5
+  _money: 5
+  _inspiration: 2

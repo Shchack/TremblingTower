@@ -1,4 +1,5 @@
 using EG.Tower.Game;
+using EG.Tower.Rolls;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,9 +27,9 @@ namespace EG.Tower.Dialogues
             GameHub.One.DialogueSystem.OnShowImageEvent += SetDialogueImage;
         }
 
-        public void ShowCheckResult(int[] rolls, bool check)
+        public void ShowCheckResult(DicesRoll roll, bool check)
         {
-            _checkResultUI.Show(rolls, check);
+            _checkResultUI.Show(roll, check);
         }
 
         private void HandleSkipButtonClick()

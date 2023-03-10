@@ -1,5 +1,7 @@
 ﻿using EG.Tower.Audio;
-using EG.Tower.Game.Battle;
+using EG.Tower.Heroes;
+using EG.Tower.Missions;
+using EG.Tower.Rolls;
 using EG.Tower.Utils;
 using UnityEngine;
 
@@ -7,10 +9,19 @@ namespace EG.Tower.Game
 {
     public class GameHub : Singleton<GameHub>
     {
-        [SerializeField] private HeroSetupData _defaultTraits;
+        [SerializeField] private HeroSetupData _defaultHeroSetup;
+        [SerializeField] private HeroSetupData[] _defaultTeamSetup;
+        [SerializeField] private MissionData _defaultMissionData;
         [SerializeField] private GameDialogueSystem _dialogueSystem;
         [SerializeField] private AudioSystem _audio;
         [SerializeField] private GameScreenEffectController _screenEffects;
+
+        [Header("Roll")]
+        [SerializeField] private DiceType _checkRollDice = DiceType.D6;
+        [SerializeField] private int _checkRollsCount = 2;
+        [SerializeField] private Sprite[] _diceSixSprites;
+
+        public int MaxRollValue => (int)_checkRollDice * _checkRollsCount;
 
         private PlayerSession _session;
         public PlayerSession Session
@@ -19,7 +30,7 @@ namespace EG.Tower.Game
             {
                 if (_session == null)
                 {
-                    _session = new PlayerSession(_defaultTraits);
+                    _session = new PlayerSession(_defaultHeroSetup, _defaultTeamSetup);
                 }
 
                 return _session;
@@ -30,18 +41,29 @@ namespace EG.Tower.Game
 
         public GameDialogueSystem DialogueSystem => _dialogueSystem;
 
-        public GameScreenEffectController ScreenEffects => _screenEffects;
-
-        public BattleController BattleController { get; private set; }
-
-        public void Register(BattleController battleController)
+        private MissionData _missionData;
+        public MissionData NextMissionData
         {
-            BattleController = battleController;
+            get
+            {
+                if (_missionData == null)
+                {
+                    _missionData = _defaultMissionData;
+                }
+
+                return _missionData;
+            }
+            set
+            {
+                _missionData = value;
+            }
         }
 
-        public void Unregister(BattleController battleController)
+        public GameScreenEffectController ScreenEffects => _screenEffects;
+
+        public DicesRoll RollTwoDiceSix()
         {
-            BattleController = null;
+            return RollHelper.RollDices(_checkRollDice, _checkRollsCount, _diceSixSprites);
         }
     }
 }

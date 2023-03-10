@@ -7,7 +7,7 @@ namespace EG.Tower.Utils
         private const int CREATE_HERO_SCENE_INDEX = 0;
         private const int DIALOGUE_SCENE_INDEX = 1;
         private const int MAP_SCENE_INDEX = 2;
-        private const int BATTLE_SCENE_INDEX = 3;
+        private const int MISSION_SCENE_INDEX = 3;
 
         public static void LoadCreateHeroScene()
         {
@@ -24,9 +24,9 @@ namespace EG.Tower.Utils
             SceneManager.LoadScene(DIALOGUE_SCENE_INDEX, LoadSceneMode.Single);
         }
 
-        public static void LoadBattleScene()
+        public static void LoadMissionScene()
         {
-            SceneManager.LoadScene(BATTLE_SCENE_INDEX, LoadSceneMode.Single);
+            SceneManager.LoadScene(MISSION_SCENE_INDEX, LoadSceneMode.Single);
         }
     }
 }

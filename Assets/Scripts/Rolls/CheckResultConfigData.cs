@@ -10,7 +10,6 @@ namespace EG.Tower.Dialogues.Data
         public Color FailColor;
         public string SuccessText = "Check Success";
         public string FailText = "Check Failure";
-        public Sprite[] RollImages;
 
         [Header("Tween")]
         public LeanTweenType TweenType = LeanTweenType.linear;

@@ -192,30 +192,16 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: 
-  - id: 4
-    fields:
-    - title: Name
-      value: Trait/Honesty
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Initial Value
-      value: Honesty
-      type: 0
-      typeString: VirtueCustomFieldType
-    - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
   - id: 3
     fields:
     - title: Name
-      value: Trait/Courage
+      value: Skill/Courage
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
       value: Courage
       type: 0
-      typeString: VirtueCustomFieldType
+      typeString: SkillCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -223,13 +209,13 @@ MonoBehaviour:
   - id: 5
     fields:
     - title: Name
-      value: Trait/Justice
+      value: Skill/Caution
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
-      value: Justice
+      value: Caution
       type: 0
-      typeString: VirtueCustomFieldType
+      typeString: SkillCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -237,13 +223,13 @@ MonoBehaviour:
   - id: 6
     fields:
     - title: Name
-      value: Trait/Kindness
+      value: Skill/Empathy
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
-      value: Kindness
+      value: Empathy
       type: 0
-      typeString: VirtueCustomFieldType
+      typeString: SkillCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -251,13 +237,13 @@ MonoBehaviour:
   - id: 7
     fields:
     - title: Name
-      value: Trait/Diligence
+      value: Skill/Intellect
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
-      value: Diligence
+      value: Intellect
       type: 0
-      typeString: VirtueCustomFieldType
+      typeString: SkillCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -265,13 +251,13 @@ MonoBehaviour:
   - id: 11
     fields:
     - title: Name
-      value: Trait/Knowledge
+      value: Skill/Wisdom
       type: 0
       typeString: 
     - title: Initial Value
-      value: Knowledge
+      value: Wisdom
       type: 0
-      typeString: VirtueCustomFieldType
+      typeString: SkillCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -279,13 +265,13 @@ MonoBehaviour:
   - id: 8
     fields:
     - title: Name
-      value: Roll/StandardRoll
+      value: Roll/Trivial
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
-      value: 0
-      type: 1
-      typeString: CustomFieldType_Number
+      value: Trivial
+      type: 0
+      typeString: RollDifficultyCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -293,13 +279,13 @@ MonoBehaviour:
   - id: 9
     fields:
     - title: Name
-      value: Roll/EasyRoll
+      value: Roll/Easy
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
-      value: 20
-      type: 1
-      typeString: CustomFieldType_Number
+      value: Easy
+      type: 0
+      typeString: RollDifficultyCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -307,13 +293,41 @@ MonoBehaviour:
   - id: 10
     fields:
     - title: Name
-      value: Roll/HardRoll
+      value: Roll/Medium
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
-      value: -20
-      type: 1
-      typeString: CustomFieldType_Number
+      value: Medium
+      type: 0
+      typeString: RollDifficultyCustomFieldType
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+  - id: 12
+    fields:
+    - title: Name
+      value: Roll/Hard
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Initial Value
+      value: Hard
+      type: 0
+      typeString: RollDifficultyCustomFieldType
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+  - id: 13
+    fields:
+    - title: Name
+      value: Roll/Impossible
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Initial Value
+      value: Impossible
+      type: 0
+      typeString: RollDifficultyCustomFieldType
     - title: Description
       value: 
       type: 0
@@ -480,8 +494,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 402.28162
-        y: 297.5112
+        x: 400.34366
+        y: 294.60422
         width: 160
         height: 30
     - id: 2
@@ -507,9 +521,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: '[em5][[var=Trait_Kindness], Chance: [lua(GetRollChance(Variable["Trait_Kindness"],
-          Variable["Roll_StandardRoll"]))]][/em5] Save the dog from being beaten
-          by the Pioneeren teens.'
+        value: '[em5][[var=Skill_Empathy], [var=Roll_Easy]][/em5] Save the dog from
+          being beaten by the Pioneeren teens.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -537,13 +550,13 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: CheckVirtue(Variable["Trait_Kindness"], Variable["Roll_StandardRoll"]);
+      userScript: CheckSkill(Variable["Skill_Empathy"], Variable["Roll_Easy"]);
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 542.48145
+        x: 541.51245
         y: 230.47192
         width: 160
         height: 30
@@ -772,10 +785,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: Variable["CheckResult"] == false
-      userScript: 'GiveTraitReward(Variable["Trait_Courage"], 1);
-
-        ShowAlert("[em3][var=Trait_Courage]
-        +1[/em3]")'
+      userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -808,9 +818,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'Treat her and give some food.
-
-          [em4][Supplies -2][/em4]'
+        value: '[em5][[var=Skill_Empathy], [var=Roll_Medium]][/em5] Treat her and
+          give some food.'
         type: 0
         typeString: 
       - title: Sequence
@@ -831,23 +840,21 @@ MonoBehaviour:
         destinationDialogueID: 12
         isConnector: 0
         priority: 2
-      conditionsString: Item["Supplies"].Count >= 2
-      userScript: 'Item["Supplies"].Count = Item["Supplies"].Count -2;
-
-        GiveTraitReward(Variable["Trait_Courage"],
-        2);
-
-        GiveTraitReward(Variable["Trait_Kindness"], 2);
-
-        ShowAlert("[em4]Supplies
-        -2[/em4]\n[em3][var=Trait_Courage] +2[/em3]\n[em3][var=Trait_Kindness] +2[/em3]")'
+      - originConversationID: 1
+        originDialogueID: 9
+        destinationConversationID: 1
+        destinationDialogueID: 22
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: CheckSkill(Variable["Skill_Empathy"], Variable["Roll_Medium"]);
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1048.0587
-        y: 144.8579
+        x: 1047.4288
+        y: 139.86786
         width: 160
         height: 30
     - id: 10
@@ -895,10 +902,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 'GiveTraitReward("Courage", 2);
-
-        ShowAlert("[em3]Courage
-        +2[/em3]")'
+      userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -933,11 +937,9 @@ MonoBehaviour:
       - title: Dialogue Text
         value: 'You share what you can give: quiet moments of warmth and love.
 
-
           You
           pet her behind the ear. As you look at your hand, you see the dog''s blood.
           You wonder if she''d make it without the bandages.
-
 
           You play
           with the dog for a bit. As she lies on its back, you can see the ribs through
@@ -971,7 +973,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 1049.6715
-        y: 278.1222
+        y: 277.1242
         width: 160
         height: 30
     - id: 12
@@ -997,18 +999,16 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'You pet the dog, and when she gets used to you, you clean her wound
-          and apply a bandage. This should do the trick.
+        value: '[em3][Success][/em3] You pet the dog, and when she gets used to you,
+          you clean her wound and apply a bandage. This should do the trick.
 
+          You
+          throw some food, and the dog easily catches it mid-air. Judging from her
+          reflexes, she''s well trained.
 
-          You throw some
-          food, and the dog easily catches it mid-air. Judging from her reflexes,
-          she''s well trained.
-
-
-          As you walk away, you realize you have
-          done everything you could. She would make it through the next couple days,
-          which, for such a tumultuous time, feels like an eternity.'
+          As you walk away, you realize
+          you have done everything you could. She would make it through the next
+          couple days, which, for such a tumultuous time, feels like an eternity.'
         type: 0
         typeString: 
       - title: Sequence
@@ -1029,15 +1029,15 @@ MonoBehaviour:
         destinationDialogueID: 18
         isConnector: 0
         priority: 2
-      conditionsString: 
+      conditionsString: Variable["CheckResult"] == true
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1269.8552
-        y: 146.01208
+        x: 1266.8611
+        y: 102.0999
         width: 160
         height: 30
     - id: 17
@@ -1134,8 +1134,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1269.8552
-        y: 196.01208
+        x: 1452.4901
+        y: 145.11388
         width: 160
         height: 30
     - id: 19
@@ -1291,9 +1291,65 @@ MonoBehaviour:
         y: 299.06158
         width: 160
         height: 30
+    - id: 22
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '[em4][Fail][/em4] You share what you can give: quiet moments of warmth
+          and love.'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 22
+        destinationConversationID: 1
+        destinationDialogueID: 18
+        isConnector: 0
+        priority: 2
+      conditionsString: Variable["CheckResult"] == false
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1267.6195
+        y: 179.88782
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 66.40695, y: 1.9379883}
-    canvasZoom: 1.032
+    canvasScrollPosition: {x: 209.07294, y: 0}
+    canvasZoom: 0.73200023
   - id: 2
     fields:
     - title: Title
@@ -1600,8 +1656,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: '[em5][[var=Trait_Kindness], Chance: [lua(GetRollChance(Variable["Trait_Kindness"],
-          Variable["Roll_EasyRoll"]))]][/em5] Hug her tighter. Longer.'
+        value: '[em5][[var=Skill_Empathy], [var=Roll_Trivial]][/em5] Hug her tighter.
+          Longer.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -1629,13 +1685,13 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: CheckVirtue(Variable["Trait_Kindness"], Variable["Roll_EasyRoll"]);
+      userScript: CheckSkill(Variable["Skill_Empathy"], Variable["Roll_Trivial"]);
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 710.0814
+        x: 708.71155
         y: 330.06186
         width: 160
         height: 30
@@ -1738,7 +1794,13 @@ MonoBehaviour:
       - originConversationID: 2
         originDialogueID: 6
         destinationConversationID: 2
-        destinationDialogueID: 7
+        destinationDialogueID: 54
+        isConnector: 0
+        priority: 2
+      - originConversationID: 2
+        originDialogueID: 6
+        destinationConversationID: 2
+        destinationDialogueID: 57
         isConnector: 0
         priority: 2
       conditionsString: Variable["CheckResult"] == true
@@ -1748,8 +1810,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 622.1219
-        y: 395.5258
+        x: 629.58136
+        y: 406.01666
         width: 160
         height: 30
     - id: 7
@@ -1775,9 +1837,10 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: As you hug her, you can't help but remember that final hug so many
-          years ago. You start feeling her tears on your cheeck. She cries silently,
-          so you wouldn't notice. Tears are traitors, and they giver her away.
+        value: '[em3][Success][/em3] As you hug her, you can''t help but remember
+          that final hug so many years ago. You start feeling her tears on your cheeck.
+          She cries silently, so you wouldn''t notice. Tears are traitors, and they
+          giver her away.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -1798,15 +1861,15 @@ MonoBehaviour:
         destinationDialogueID: 9
         isConnector: 0
         priority: 2
-      conditionsString: 
+      conditionsString: Variable["CheckResult"] == true
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 622.4311
-        y: 450.6804
+        x: 479.44098
+        y: 567.79156
         width: 160
         height: 30
     - id: 9
@@ -1864,8 +1927,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 831.80695
-        y: 522.6302
+        x: 844.30695
+        y: 716.3803
         width: 160
         height: 30
     - id: 10
@@ -1919,8 +1982,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 791.1939
-        y: 395.52576
+        x: 797.1149
+        y: 406.01666
         width: 160
         height: 30
     - id: 11
@@ -1975,8 +2038,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 832.7503
-        y: 572.6302
+        x: 845.2503
+        y: 766.3803
         width: 160
         height: 30
     - id: 12
@@ -2038,8 +2101,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 832.7503
-        y: 622.6302
+        x: 845.2503
+        y: 816.3803
         width: 160
         height: 30
     - id: 13
@@ -2093,8 +2156,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 669.6436
-        y: 676.5137
+        x: 682.1436
+        y: 870.2638
         width: 160
         height: 30
     - id: 14
@@ -2148,8 +2211,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 962.84753
-        y: 673.66113
+        x: 975.34753
+        y: 867.41125
         width: 160
         height: 30
     - id: 15
@@ -2205,8 +2268,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 669.6436
-        y: 726.5137
+        x: 682.1436
+        y: 920.2638
         width: 160
         height: 30
     - id: 16
@@ -2260,8 +2323,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 963.81824
-        y: 725.5428
+        x: 976.31824
+        y: 919.2929
         width: 160
         height: 30
     - id: 17
@@ -2316,8 +2379,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 806.5368
-        y: 791.0768
+        x: 819.0368
+        y: 984.8269
         width: 160
         height: 30
     - id: 18
@@ -2379,8 +2442,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 806.5368
-        y: 841.0768
+        x: 819.0368
+        y: 1034.8269
         width: 160
         height: 30
     - id: 19
@@ -2434,8 +2497,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 700.7115
-        y: 892.04767
+        x: 713.2115
+        y: 1085.7979
         width: 160
         height: 30
     - id: 20
@@ -2489,8 +2552,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 917.2164
-        y: 891.0768
+        x: 929.7164
+        y: 1084.8269
         width: 160
         height: 30
     - id: 21
@@ -2544,8 +2607,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 809.4494
-        y: 957.58154
+        x: 821.9494
+        y: 1151.3317
         width: 160
         height: 30
     - id: 22
@@ -2600,8 +2663,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 808.50604
-        y: 1007.58154
+        x: 821.00604
+        y: 1201.3317
         width: 160
         height: 30
     - id: 23
@@ -2663,8 +2726,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 809.4494
-        y: 1057.5815
+        x: 821.9494
+        y: 1251.3317
         width: 160
         height: 30
     - id: 24
@@ -2690,8 +2753,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: '[em5][[var=Trait_Kindness], Chance: [lua(GetRollChance(Variable["Trait_Kindness"],
-          Variable["Roll_EasyRoll"]))]][/em5] Drop your backpack and pet Vovk.'
+        value: '[em5][[var=Skill_Empathy], [var=Roll_Trivial]][/em5] Drop your backpack
+          and pet Vovk.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -2719,14 +2782,14 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: CheckVirtue(Variable["Trait_Kindness"], Variable["Roll_EasyRoll"]);
+      userScript: CheckSkill(Variable["Skill_Empathy"], Variable["Roll_Trivial"]);
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 696.82806
-        y: 1109.5232
+        x: 709.32806
+        y: 1304.3722
         width: 160
         height: 30
     - id: 25
@@ -2780,8 +2843,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1023.7566
-        y: 1114.3029
+        x: 1036.2566
+        y: 1308.053
         width: 160
         height: 30
     - id: 26
@@ -2837,8 +2900,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 625.0698
-        y: 1168.3143
+        x: 637.5698
+        y: 1362.0645
         width: 160
         height: 30
     - id: 27
@@ -2895,8 +2958,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 814.41046
-        y: 1167.5265
+        x: 826.91046
+        y: 1361.2766
         width: 160
         height: 30
     - id: 28
@@ -2954,8 +3017,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 818.7487
-        y: 1274.9908
+        x: 831.2487
+        y: 1468.741
         width: 160
         height: 30
     - id: 29
@@ -3016,8 +3079,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 816.862
-        y: 1324.9908
+        x: 829.362
+        y: 1518.741
         width: 160
         height: 30
     - id: 30
@@ -3043,9 +3106,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: '[em5][[var=Trait_Courage], Chance: [lua(GetRollChance(Variable["Trait_Courage"],
-          Variable["Roll_EasyRoll"]))]][/em5] Search your room for the things that
-          would invoke memories.'
+        value: '[em5][[var=Skill_Courage], [var=Roll_Medium]][/em5] Search your room
+          for the things that would invoke memories.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -3073,14 +3135,14 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: CheckVirtue(Variable["Trait_Courage"], Variable["Roll_EasyRoll"]);
+      userScript: CheckSkill(Variable["Skill_Courage"], Variable["Roll_Medium"]);
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 689.4649
-        y: 1410.6073
+        x: 703.3348
+        y: 1601.0607
         width: 160
         height: 30
     - id: 32
@@ -3134,8 +3196,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1027.821
-        y: 1411.9772
+        x: 1040.321
+        y: 1605.7273
         width: 160
         height: 30
     - id: 33
@@ -3197,8 +3259,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 601.79364
-        y: 1472.936
+        x: 614.29364
+        y: 1666.6862
         width: 160
         height: 30
     - id: 34
@@ -3253,8 +3315,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 801.7935
-        y: 1471.5662
+        x: 814.2935
+        y: 1665.3163
         width: 160
         height: 30
     - id: 35
@@ -3312,8 +3374,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 825.08124
-        y: 1566.0865
+        x: 837.58124
+        y: 1759.8367
         width: 160
         height: 30
     - id: 36
@@ -3375,8 +3437,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 825.08124
-        y: 1624.3057
+        x: 837.58124
+        y: 1818.0558
         width: 160
         height: 30
     - id: 37
@@ -3402,9 +3464,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: '[em5][[var=Trait_Justice], Chance: [lua(GetRollChance(Variable["Trait_Justice"],
-          Variable["Roll_EasyRoll"]))]][/em5] Mom, you haven''t eaten anything. Sit
-          for a bit, let''s have a meal together.'
+        value: '[em5][[var=Skill_Wisdom], [var=Roll_Easy]][/em5] Mom, you haven''t
+          eaten anything. Sit for a bit, let''s have a meal together.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -3432,14 +3493,14 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: CheckVirtue(Variable["Trait_Justice"], Variable["Roll_EasyRoll"]);
+      userScript: CheckSkill(Variable["Skill_Wisdom"], Variable["Roll_Easy"]);
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 709.90265
-        y: 1701.0914
+        x: 722.40265
+        y: 1894.8416
         width: 160
         height: 30
     - id: 38
@@ -3493,8 +3554,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 984.0099
-        y: 1700.1984
+        x: 996.50995
+        y: 1893.9485
         width: 160
         height: 30
     - id: 39
@@ -3550,8 +3611,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 634.0098
-        y: 1764.4844
+        x: 646.5098
+        y: 1958.2345
         width: 160
         height: 30
     - id: 40
@@ -3606,8 +3667,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 825.97406
-        y: 1763.5913
+        x: 838.47406
+        y: 1957.3414
         width: 160
         height: 30
     - id: 41
@@ -3663,8 +3724,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1036.6885
-        y: 1763.5913
+        x: 1049.1885
+        y: 1957.3414
         width: 160
         height: 30
     - id: 42
@@ -3729,8 +3790,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 830.4384
-        y: 1860.0199
+        x: 842.9384
+        y: 2053.77
         width: 160
         height: 30
     - id: 43
@@ -3756,9 +3817,9 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: '[em5][[var=Trait_Honesty], Chance: [lua(GetRollChance(Variable["Trait_Honesty"],
-          Variable["Roll_StandardRoll"]))]][/em5] Mom, if I''m honest with you, it
-          was tough for me at the Academy. Why did you decide to send me there?'
+        value: '[em5][[var=Skill_Courage], [var=Roll_Easy]][/em5] Mom, if I''m honest
+          with you, it was tough for me at the Academy. Why did you decide to send
+          me there?'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -3786,14 +3847,14 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: CheckVirtue(Variable["Trait_Standard"], Variable["Roll_StandardRoll"]);
+      userScript: CheckSkill(Variable["Skill_Courage"], Variable["Roll_Easy"]);
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 684.0098
-        y: 1945.7343
+        x: 693.7701
+        y: 2139.4844
         width: 160
         height: 30
     - id: 44
@@ -3848,8 +3909,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1002.7601
-        y: 1943.9485
+        x: 1015.26
+        y: 2137.6987
         width: 160
         height: 30
     - id: 45
@@ -3911,8 +3972,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 603.60205
-        y: 2036.562
+        x: 616.10205
+        y: 2230.312
         width: 160
         height: 30
     - id: 46
@@ -3969,8 +4030,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 792.9383
-        y: 2037.6987
+        x: 805.4383
+        y: 2231.4487
         width: 160
         height: 30
     - id: 47
@@ -4026,8 +4087,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1009.9483
-        y: 2003.7699
+        x: 1022.44824
+        y: 2197.52
         width: 160
         height: 30
     - id: 48
@@ -4085,8 +4146,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 835.7955
-        y: 2126.0908
+        x: 848.2955
+        y: 2319.8408
         width: 160
         height: 30
     - id: 49
@@ -4145,8 +4206,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 833.9087
-        y: 2176.0908
+        x: 846.4087
+        y: 2369.8408
         width: 160
         height: 30
     - id: 50
@@ -4203,8 +4264,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 835.7955
-        y: 2226.0908
+        x: 848.2955
+        y: 2419.8408
         width: 160
         height: 30
     - id: 51
@@ -4252,8 +4313,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 835.7955
-        y: 2276.0908
+        x: 848.2955
+        y: 2469.8408
         width: 160
         height: 30
     - id: 52
@@ -4367,9 +4428,180 @@ MonoBehaviour:
         y: 77.22242
         width: 160
         height: 30
+    - id: 54
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 3
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '[em5][[var=Skill_Empathy], [var=Roll_Easy]][/em5] Just a litte longer...'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 2
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 2
+        originDialogueID: 54
+        destinationConversationID: 2
+        destinationDialogueID: 7
+        isConnector: 0
+        priority: 2
+      - originConversationID: 2
+        originDialogueID: 54
+        destinationConversationID: 2
+        destinationDialogueID: 58
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: CheckSkill(Variable["Skill_Empathy"], Variable["Roll_Easy"]);
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 531.31244
+        y: 478.57062
+        width: 160
+        height: 30
+    - id: 57
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 3
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: Gently loosen the grip and make a step back.
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 2
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 2
+        originDialogueID: 57
+        destinationConversationID: 2
+        destinationDialogueID: 9
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 713.08655
+        y: 480.7589
+        width: 160
+        height: 30
+    - id: 58
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 3
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '[em4][Fail][/em4] Gently loosen the grip and make a step back.'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 2
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 2
+        originDialogueID: 58
+        destinationConversationID: 2
+        destinationDialogueID: 9
+        isConnector: 0
+        priority: 2
+      conditionsString: Variable["CheckResult"] == false
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 658.1166
+        y: 566.715
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 415.72668, y: 0}
-    canvasZoom: 0.9099996
+    canvasScrollPosition: {x: 274.46738, y: 0}
+    canvasZoom: 0.7299998
   syncInfo:
     syncActors: 0
     syncItems: 0
