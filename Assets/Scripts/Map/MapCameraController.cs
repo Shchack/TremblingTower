@@ -8,7 +8,7 @@ namespace EG.Tower.Game.Map
 
         private void Start()
         {
-            TargetPoint();
+            //TargetPoint();
         }
 
         private void TargetPoint()

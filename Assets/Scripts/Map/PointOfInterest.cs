@@ -3,17 +3,19 @@ using EG.Tower.Utils;
 using PixelCrushers.DialogueSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace EG.Tower.Game
 {
-    public class PointOfInterest : MonoBehaviour
+    public class PointOfInterest : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         [ConversationPopup(false, true)]
         [SerializeField] private string _conversation;
 
         [SerializeField] private MissionData _missionData;
 
-        [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private Image _pointer;
         [SerializeField] private Transform _hoverUI;
         [SerializeField] private TMP_Text _nameLabel;
         [SerializeField] private TMP_Text _descriptionLabel;
@@ -21,11 +23,16 @@ namespace EG.Tower.Game
         [SerializeField] private string _name;
         [SerializeField] private string _description;
 
+        [SerializeField] private float _floatDistance = 15f;
+        [SerializeField] private float _speedTime = 2f;
+
         private void Start()
         {
             _hoverUI.gameObject.SetActive(false);
             _nameLabel.text = _name;
             _descriptionLabel.text = _description;
+
+            _pointer.rectTransform.LeanMoveLocalY(_floatDistance, _speedTime).setEaseInOutSine().setLoopPingPong();
         }
 
         private void Interact()
@@ -56,13 +63,13 @@ namespace EG.Tower.Game
         {
             Debug.Log("Pointer over object!");
 
-            _renderer.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            _pointer.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             ShowInfo(true);
         }
 
         public void OnMouseExit()
         {
-            _renderer.transform.localScale = new Vector3(1f, 1f, 1f);
+            _pointer.rectTransform.localScale = new Vector3(1f, 1f, 1f);
             ShowInfo(false);
         }
 
@@ -74,6 +81,25 @@ namespace EG.Tower.Game
         private void ShowInfo(bool isShown)
         {
             _hoverUI.gameObject.SetActive(isShown);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Debug.Log("Pointer over object!");
+
+            _pointer.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            ShowInfo(true);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _pointer.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+            ShowInfo(false);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Interact();
         }
     }
 }
