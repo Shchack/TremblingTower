@@ -849,7 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightToLeft: 0
-  charactersPerSecond: 30
+  charactersPerSecond: 20
   audioClip: {fileID: 0}
   alternateAudioClips: []
   audioSource: {fileID: 0}
@@ -865,9 +865,9 @@ MonoBehaviour:
   removeDuplicateTypewriterEffects: 1
   playOnEnable: 1
   waitOneFrameBeforeStarting: 0
-  stopOnConversationEnd: 0
+  stopOnConversationEnd: 1
   autoScrollSettings:
-    autoScrollEnabled: 1
+    autoScrollEnabled: 0
     scrollRect: {fileID: 1407364712792942877}
     scrollbarEnabler: {fileID: 1407364712792942878}
   onBegin:
@@ -1546,8 +1546,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1407364711681966675}
   m_HandleRect: {fileID: 1407364711681966677}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.3857198
+  m_Value: -0.000000023119904
+  m_Size: 0.3714339
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4229,8 +4229,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 15}
-  m_SizeDelta: {x: -100, y: -270}
+  m_AnchoredPosition: {x: 0, y: 30.000027}
+  m_SizeDelta: {x: -100, y: -299.99994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1407364712792942874
 CanvasRenderer:
@@ -4625,7 +4625,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 120}
-  m_SizeDelta: {x: 220, y: 40}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1407364713028952666
 CanvasRenderer:

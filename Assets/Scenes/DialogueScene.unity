@@ -552,6 +552,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 990003466, guid: a79d32f8d83dcee4481d3564a250264d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1666718655, guid: a79d32f8d83dcee4481d3564a250264d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -845,8 +849,6 @@ MonoBehaviour:
   _narrator: {fileID: 1333268213}
   _dialogueScreen: {fileID: 628223930}
   _difficultiesData: {fileID: 11400000, guid: 178489481ac09534f8a095502970a66d, type: 2}
-  _checkRollDice: 6
-  _checkRollsCount: 2
 --- !u!114 &1786622564
 MonoBehaviour:
   m_ObjectHideFlags: 0

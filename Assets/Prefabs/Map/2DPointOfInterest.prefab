@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 7885132141882442728}
   - component: {fileID: 4483231601964466928}
   m_Layer: 0
-  m_Name: PointOfInterest
+  m_Name: 2DPointOfInterest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3,28 +3,26 @@ using EG.Tower.Utils;
 using PixelCrushers.DialogueSystem;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace EG.Tower.Game
 {
-    public class PointOfInterest : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+    public class PointOfInterest : MonoBehaviour
     {
         [ConversationPopup(false, true)]
         [SerializeField] private string _conversation;
 
         [SerializeField] private MissionData _missionData;
 
-        [SerializeField] private Image _pointer;
-        [SerializeField] private Transform _hoverUI;
+        [SerializeField] private MeshRenderer _renderer;
+        [SerializeField] private RectTransform _hoverUI;
         [SerializeField] private TMP_Text _nameLabel;
         [SerializeField] private TMP_Text _descriptionLabel;
 
         [SerializeField] private string _name;
         [SerializeField] private string _description;
 
-        [SerializeField] private float _floatDistance = 15f;
-        [SerializeField] private float _speedTime = 2f;
+        [SerializeField] private float _toPositionY = 8f;
+        [SerializeField] private float _duration = 2f;
 
         private void Start()
         {
@@ -32,7 +30,12 @@ namespace EG.Tower.Game
             _nameLabel.text = _name;
             _descriptionLabel.text = _description;
 
-            _pointer.rectTransform.LeanMoveLocalY(_floatDistance, _speedTime).setEaseInOutSine().setLoopPingPong();
+            // transform.LeanMoveLocalY(_toPositionY, _duration).setEaseInOutSine().setLoopPingPong();
+        }
+
+        private void Update()
+        {
+            transform.Rotate(new Vector3(0f, 1f, 0f), 90f * Time.deltaTime);
         }
 
         private void Interact()
@@ -63,13 +66,13 @@ namespace EG.Tower.Game
         {
             Debug.Log("Pointer over object!");
 
-            _pointer.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            _renderer.material.EnableKeyword("_EMISSION");
             ShowInfo(true);
         }
 
         public void OnMouseExit()
         {
-            _pointer.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+            _renderer.material.DisableKeyword("_EMISSION");
             ShowInfo(false);
         }
 
@@ -83,23 +86,23 @@ namespace EG.Tower.Game
             _hoverUI.gameObject.SetActive(isShown);
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            Debug.Log("Pointer over object!");
+        //public void OnPointerEnter(PointerEventData eventData)
+        //{
+        //    Debug.Log("Pointer over object!");
 
-            _pointer.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            ShowInfo(true);
-        }
+        //    _pointer.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        //    ShowInfo(true);
+        //}
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            _pointer.rectTransform.localScale = new Vector3(1f, 1f, 1f);
-            ShowInfo(false);
-        }
+        //public void OnPointerExit(PointerEventData eventData)
+        //{
+        //    _pointer.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+        //    ShowInfo(false);
+        //}
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            Interact();
-        }
+        //public void OnPointerClick(PointerEventData eventData)
+        //{
+        //    Interact();
+        //}
     }
 }
