@@ -34,7 +34,7 @@ namespace EG.Tower.Dialogues
 
         private void HandleSkipButtonClick()
         {
-            _controller.SkipDialogue();
+            _controller.EndDialogue();
         }
 
         private void SetDialogueImage(Sprite sprite)

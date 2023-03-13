@@ -26,11 +26,11 @@ namespace EG.Tower.Game
         [SerializeField] private RectTransform _leavePanel;
         [SerializeField] private Button _leaveButton;
 
-        private MissionController _controller;
+        private Missions.MissionController _controller;
 
         private void Awake()
         {
-            _controller = FindObjectOfType<MissionController>();
+            _controller = FindObjectOfType<Missions.MissionController>();
             _controller.OnCurrentStepChangedEvent += HandleCurrentStepChangedEvent;
             _controller.OnMissionEndEvent += HandleMissionEndEvent;
             _executeStepButton.onClick.AddListener(HandleExecuteButtonClick);
@@ -48,7 +48,7 @@ namespace EG.Tower.Game
             Init(_controller);
         }
 
-        private void Init(MissionController controller)
+        private void Init(Missions.MissionController controller)
         {
             _missionTitleLabel.text = controller.MissionName;
             _missionBriefUi.Init(controller.Region, controller.Faction, controller.MissionSkills);

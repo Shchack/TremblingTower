@@ -382,11 +382,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 670459541}
+  - component: {fileID: 670459542}
   - component: {fileID: 670459540}
   - component: {fileID: 670459539}
   - component: {fileID: 670459538}
   m_Layer: 5
-  m_Name: InfoCanvas
+  m_Name: MapScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -474,6 +475,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &670459542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670459537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2fd9c8665edeba47abd12a319ae9895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _missionInfoPanel: {fileID: 1669622686}
+  _missionNameLabel: {fileID: 8451590757286116580}
+  _missionDescriptionLabel: {fileID: 5506543000845669605}
 --- !u!1 &844456877
 GameObject:
   m_ObjectHideFlags: 3
@@ -609,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5173992703248490178, guid: 9b343a9c02b7cae46a0d951ceec0d929, type: 3}
       propertyPath: m_Name
-      value: HUB
+      value: GAMEHUB
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b343a9c02b7cae46a0d951ceec0d929, type: 3}
@@ -1003,8 +1019,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1503776666}
+  - component: {fileID: 1503776667}
   m_Layer: 0
-  m_Name: Missions
+  m_Name: Encounters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,6 +1044,19 @@ Transform:
   m_Father: {fileID: 1145607110}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1503776667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503776665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a1ee65d1e5414b4f89d34bef4751cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mapCamera: {fileID: 435576541}
 --- !u!1 &1669622685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +1069,7 @@ GameObject:
   - component: {fileID: 1669622688}
   - component: {fileID: 1669622687}
   m_Layer: 5
-  m_Name: HoverInfoPanel
+  m_Name: MissionInfoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1145,6 +1175,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1503776666}
     m_Modifications:
     - target: {fileID: 2198607172116485945, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
+      propertyPath: _name
+      value: Free House from Marauders
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198607172116485945, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
       propertyPath: _hoverUI
       value: 
       objectReference: {fileID: 1669622686}
@@ -1152,6 +1186,14 @@ PrefabInstance:
       propertyPath: _nameLabel
       value: 
       objectReference: {fileID: 8451590757286116580}
+    - target: {fileID: 2198607172116485945, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
+      propertyPath: _description
+      value: (click to begin)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198607172116485945, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
+      propertyPath: _missionData
+      value: 
+      objectReference: {fileID: 11400000, guid: 692393bac75648041af34de338d2d9c9, type: 2}
     - target: {fileID: 2198607172116485945, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
       propertyPath: _descriptionLabel
       value: 
@@ -1293,6 +1335,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: _name
+      value: '"Dog Saviour"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: _hoverUI
       value: 
       objectReference: {fileID: 1669622686}
@@ -1300,6 +1346,14 @@ PrefabInstance:
       propertyPath: _nameLabel
       value: 
       objectReference: {fileID: 8451590757286116580}
+    - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: _description
+      value: (click to begin)
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: _conversation
+      value: DogSaviourConversation
+      objectReference: {fileID: 0}
     - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: _descriptionLabel
       value: 

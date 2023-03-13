@@ -127,19 +127,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 65033240788496594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58478184b019d9e4186bb6d32ecb5253, type: 3}
+  m_Script: {fileID: 11500000, guid: 196cdcdaa50737741b23db397f54d25f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _conversation: DogSaviourConversation
+  _conversation: 
   _missionData: {fileID: 0}
+  _name: 
+  _description: 
   _renderer: {fileID: 8806508578736975595}
-  _hoverUI: {fileID: 0}
-  _nameLabel: {fileID: 0}
-  _descriptionLabel: {fileID: 0}
-  _name: Dog Saviour Story
-  _description: (click to start)
-  _toPositionY: 12
-  _duration: 2
+  _rotationAxis: {x: 0, y: 1, z: 0}
+  _rotationSpeed: 45
 --- !u!65 &65033240788496596
 BoxCollider:
   m_ObjectHideFlags: 0

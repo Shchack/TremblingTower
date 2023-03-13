@@ -30,10 +30,10 @@ namespace EG.Tower.Dialogues
 
         private void HandleConversationEnd(Transform t)
         {
-            SkipDialogue();
+            EndDialogue();
         }
 
-        public void SkipDialogue()
+        public void EndDialogue()
         {
             DialogueManager.StopConversation();
             SceneHelper.LoadMapScene();
