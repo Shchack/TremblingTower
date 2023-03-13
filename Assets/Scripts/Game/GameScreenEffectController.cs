@@ -6,6 +6,7 @@ namespace EG.Tower.Game
     public class GameScreenEffectController : MonoBehaviour
     {
         [SerializeField] private Image _flashImage;
+        [SerializeField] private Image _blackMaskImage;
         [SerializeField] private LeanTweenType _type = LeanTweenType.linear;
         [SerializeField] private float _inSeconds = 0.1f;
 
@@ -25,6 +26,18 @@ namespace EG.Tower.Game
             _flashImage.rectTransform.LeanAlpha(0.5f, _inSeconds).setEase(_type).setOnComplete(() =>
                _flashImage.rectTransform.LeanAlpha(0f, outSeconds).setEase(_type)
            );
+        }
+
+        public void FadeIn(float duration)
+        {
+            LeanTween.cancel(_blackMaskImage.gameObject);
+            LeanTween.alpha(_blackMaskImage.gameObject, 1f, duration);
+        }
+
+        public void FadeOut(float duration)
+        {
+            LeanTween.cancel(_blackMaskImage.gameObject);
+            LeanTween.alpha(_blackMaskImage.gameObject, 0f, duration);
         }
 
         private void OnGUI()

@@ -8,7 +8,6 @@ namespace EG.Tower.Dialogues
     public class GameDialogueScreen : MonoBehaviour
     {
         [SerializeField] private Button _skipButton;
-        [SerializeField] private CanvasGroup _maskGroup;
         [SerializeField] private Image _dialogueImage;
         [SerializeField] private CheckResultUI _checkResultUI;
 
@@ -19,7 +18,6 @@ namespace EG.Tower.Dialogues
             _controller = FindObjectOfType<GameDialogueController>();
             _skipButton.onClick.AddListener(HandleSkipButtonClick);
             _dialogueImage.enabled = false;
-            _maskGroup.alpha = 1f;
         }
 
         private void Start()
@@ -44,7 +42,6 @@ namespace EG.Tower.Dialogues
             if (!_dialogueImage.enabled)
             {
                 _dialogueImage.enabled = true;
-                _maskGroup.alpha = 0f;
             }
         }
 

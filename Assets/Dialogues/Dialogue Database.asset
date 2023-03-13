@@ -1263,7 +1263,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: ShowImage(DogSaviour_1);  Continue()@0.1;
+        value: ShowImage(DogSaviour_1); Continue()@0.1;
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 1
@@ -1353,7 +1353,7 @@ MonoBehaviour:
   - id: 2
     fields:
     - title: Title
-      value: Main Quest 00 (Welcome Home)
+      value: MainQuest00_WelcomeHome
       type: 0
       typeString: CustomFieldType_Text
     - title: Description
@@ -1552,7 +1552,7 @@ MonoBehaviour:
       - originConversationID: 2
         originDialogueID: 2
         destinationConversationID: 2
-        destinationDialogueID: 52
+        destinationDialogueID: 3
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -1595,7 +1595,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: Fade(in, 1); SetContinueMode(original);
+        value: 
         type: 0
         typeString: CustomFieldType_Text
       - title: Response Menu Sequence
@@ -2183,7 +2183,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: '"We all are very happy you''re finally here."'
+        value: I'm happy to be home
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -2296,7 +2296,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: We all are very happy you're finally here.
+        value: '"We all are very happy you''re finally here."'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -2374,64 +2374,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 584.25415
+        x: 599.14777
         y: 1341.3489
-        width: 160
-        height: 30
-    - id: 52
-      fields:
-      - title: Title
-        value: show image MainQuest00_2
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Actor
-        value: 2
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: SetContinueMode(false); Fade(stay, 1); ShowImage(MainQuest00_2)@1; 
-          Continue()@1;
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 2
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 2
-        originDialogueID: 52
-        destinationConversationID: 2
-        destinationDialogueID: 3
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 476.82513
-        y: 575.08765
         width: 160
         height: 30
     - id: 53
@@ -3009,12 +2953,12 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 64.470085, y: 856.7936}
-    canvasZoom: 0.63999987
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 0.78999984
   - id: 3
     fields:
     - title: Title
-      value: Main Quest 00.1 (Welcome Home)
+      value: MainQuest_001_WelcomeHome
       type: 0
       typeString: CustomFieldType_Text
     - title: Description
@@ -3068,11 +3012,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 2
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 2
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -3098,7 +3042,7 @@ MonoBehaviour:
       - originConversationID: 3
         originDialogueID: 0
         destinationConversationID: 3
-        destinationDialogueID: 52
+        destinationDialogueID: 85
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -3108,8 +3052,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 635.3514
-        y: 118.24049
+        x: 630.9558
+        y: 67.69104
         width: 160
         height: 30
     - id: 52
@@ -5046,9 +4990,64 @@ MonoBehaviour:
         y: 1642.9817
         width: 160
         height: 30
+    - id: 85
+      fields:
+      - title: Title
+        value: show image
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: ShowImage(MainQuest00_1); SetContinueMode(original); Continue()@0.1;
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 3
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 3
+        originDialogueID: 85
+        destinationConversationID: 3
+        destinationDialogueID: 52
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 628.758
+        y: 134.17456
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 171.84297, y: 0}
-    canvasZoom: 0.82000005
+    canvasScrollPosition: {x: 23.983908, y: 17.165756}
+    canvasZoom: 0.88
   syncInfo:
     syncActors: 0
     syncItems: 0

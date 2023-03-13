@@ -256,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435576539}
   m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: 3.2764952, y: 49.686447, z: -35}
+  m_LocalPosition: {x: 28, y: 40, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -282,7 +282,7 @@ MonoBehaviour:
   _rotateSpeed: 50
   _zoomSpeed: 30
   _zoomRange:
-    Min: 40
+    Min: 30
     Max: 80
 --- !u!114 &435576542
 MonoBehaviour:
@@ -490,6 +490,87 @@ MonoBehaviour:
   _missionInfoPanel: {fileID: 1669622686}
   _missionNameLabel: {fileID: 8451590757286116580}
   _missionDescriptionLabel: {fileID: 5506543000845669605}
+--- !u!1001 &799995116
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1503776666}
+    m_Modifications:
+    - target: {fileID: 65033240788496594, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_Name
+      value: WelcomeHome001_Marker
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: _name
+      value: '"Welcome Home"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: _hoverUI
+      value: 
+      objectReference: {fileID: 1669622686}
+    - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: _nameLabel
+      value: 
+      objectReference: {fileID: 8451590757286116580}
+    - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: _description
+      value: (click to begin)
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: _conversation
+      value: MainQuest_001_WelcomeHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: _descriptionLabel
+      value: 
+      objectReference: {fileID: 5506543000845669605}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
 --- !u!1 &844456877
 GameObject:
   m_ObjectHideFlags: 3
@@ -538,6 +619,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2198607172116485951, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
   m_PrefabInstance: {fileID: 2198607172866953004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1026342683 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+  m_PrefabInstance: {fileID: 799995116}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1145607109
 GameObject:
@@ -725,7 +811,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422516318}
   m_LocalRotation: {x: 0.5735764, y: -0, z: -0, w: 0.8191521}
-  m_LocalPosition: {x: 3.2764952, y: 49.686447, z: -35}
+  m_LocalPosition: {x: 28, y: 40, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1039,6 +1125,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1026342683}
   - {fileID: 905795603}
   - {fileID: 4978130541657718149}
   m_Father: {fileID: 1145607110}
@@ -1202,9 +1289,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: FreeHouseMarker
       objectReference: {fileID: 0}
+    - target: {fileID: 2198607172116485950, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2198607172116485951, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2198607172116485951, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1290,9 +1381,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: DogSaviourMarker
       objectReference: {fileID: 0}
+    - target: {fileID: 65033240788496594, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: m_LocalPosition.x
