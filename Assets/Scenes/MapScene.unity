@@ -507,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.31
+      value: 22.44
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -515,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.07
+      value: -13.35
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -563,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: _conversation
-      value: MainQuest_001_WelcomeHome
+      value: MainQuest10_0_WelcomeHome
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: _descriptionLabel
@@ -1291,7 +1291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198607172116485950, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2198607172116485951, guid: 0cc26002fb9bbae46aa93dfed4ee8ddd, type: 3}
       propertyPath: m_RootOrder
@@ -1383,7 +1383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496594, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496595, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: m_RootOrder
@@ -1447,7 +1447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: _conversation
-      value: DogSaviourConversation
+      value: DogSaviour
       objectReference: {fileID: 0}
     - target: {fileID: 65033240788496597, guid: d280bf0258ba7bd47bc9d07d9b192dc2, type: 3}
       propertyPath: _descriptionLabel

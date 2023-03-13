@@ -122,12 +122,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f4cb6ffb3bd9f47bcb2cce0f65e738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstConversation: MainQuest00_WelcomeHome
+  _firstConversation: 00_Main_MeetingYasia
   _sprites:
   - {fileID: 21300000, guid: fc968bcd1f237b34f91e4bc18170ffa8, type: 3}
-  - {fileID: 21300000, guid: c7987bcbb30f6c84a8943af85302f8b3, type: 3}
-  - {fileID: 21300000, guid: 18c118be93020b84ca3aec3a0a18d794, type: 3}
-  - {fileID: 21300000, guid: 0db99d6c027b9c643a6339af5e2f6388, type: 3}
+  - {fileID: 21300000, guid: a1de070645dab2741ba53203f62264d4, type: 3}
+  - {fileID: 21300000, guid: 3f0ad7fa05c73184384456f5d585d118, type: 3}
+  - {fileID: 21300000, guid: 931e52fd28aad0b4f9416c0fe0d67d33, type: 3}
+  - {fileID: 21300000, guid: d4c0feec68f3e2e4eb43f866828e0be0, type: 3}
 --- !u!1 &3122057952943043380
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,10 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultHeroSetup: {fileID: 11400000, guid: e15e6d10dcd2991498f61cfe1bb03148, type: 2}
-  _defaultTeamSetup:
-  - {fileID: 11400000, guid: bababd48115b34446842b5b455c90a56, type: 2}
-  - {fileID: 11400000, guid: 00ba7690a7d365648a3460b16b855c75, type: 2}
-  _defaultMissionData: {fileID: 11400000, guid: 692393bac75648041af34de338d2d9c9, type: 2}
+  _defaultMissionData: {fileID: 11400000, guid: bd5465c831a7fa3408f39d7d953f3c87, type: 2}
   _dialogueSystem: {fileID: 7520073090439537139}
   _audio: {fileID: 4065310620865919944}
   _screenEffects: {fileID: 7211013554919871154}

@@ -36,7 +36,7 @@ namespace EG.Tower.Dialogues
         public void EndDialogue()
         {
             DialogueManager.StopConversation();
-            SceneHelper.LoadMapScene();
+            SceneHelper.LoadMissionScene();
         }
 
         public void CheckSkill(string skillName, string difficultyTypeName)

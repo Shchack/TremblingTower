@@ -1,4 +1,5 @@
-﻿using EG.Tower.Heroes.Skills;
+﻿using EG.Tower.Heroes;
+using EG.Tower.Heroes.Skills;
 using UnityEngine;
 
 namespace EG.Tower.Missions
@@ -11,5 +12,7 @@ namespace EG.Tower.Missions
         [field: SerializeField] public FactionType Faction { get; private set; }
         [field: SerializeField] public SkillValueData[] MissionSkills { get; private set; }
         [field: SerializeField] public MissionStepData[] Steps { get; private set; }
+
+        [field: SerializeField] public HeroSetupData[] Team;
     }
 }

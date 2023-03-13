@@ -10,7 +10,6 @@ namespace EG.Tower.Game
     public class GameHub : Singleton<GameHub>
     {
         [SerializeField] private HeroSetupData _defaultHeroSetup;
-        [SerializeField] private HeroSetupData[] _defaultTeamSetup;
         [SerializeField] private MissionData _defaultMissionData;
         [SerializeField] private GameDialogueSystem _dialogueSystem;
         [SerializeField] private AudioSystem _audio;
@@ -30,7 +29,7 @@ namespace EG.Tower.Game
             {
                 if (_session == null)
                 {
-                    _session = new PlayerSession(_defaultHeroSetup, _defaultTeamSetup);
+                    _session = new PlayerSession(_defaultHeroSetup);
                 }
 
                 return _session;

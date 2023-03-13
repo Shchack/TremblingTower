@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e129fb89a6a2a4ba305e62e63f7b19, type: 3}
+  m_Name: TutorialMissionData
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Orest vs Yasia
+  <Region>k__BackingField: 3
+  <Faction>k__BackingField: 2
+  <MissionSkills>k__BackingField:
+  - <Skill>k__BackingField: {fileID: 11400000, guid: 9e7487a4e90060948b6330c2c92c177a, type: 2}
+    <Value>k__BackingField: 0
+  - <Skill>k__BackingField: {fileID: 11400000, guid: 6cddd6c93f3b5524fa41113b375c10f6, type: 2}
+    <Value>k__BackingField: 2
+  - <Skill>k__BackingField: {fileID: 11400000, guid: 8dceb9a6c3d30224997ff68c0dde3897, type: 2}
+    <Value>k__BackingField: 1
+  - <Skill>k__BackingField: {fileID: 11400000, guid: a38e67a1386ee3847864faddc6efeca1, type: 2}
+    <Value>k__BackingField: -1
+  - <Skill>k__BackingField: {fileID: 11400000, guid: 9aa4a6a275a3da9409b68e2595ed0271, type: 2}
+    <Value>k__BackingField: 2
+  <Steps>k__BackingField:
+  - <Name>k__BackingField: Explore the Area
+    <PossibleSkillChecks>k__BackingField:
+    - <Name>k__BackingField: Choose stance to attack.
+      <Skill>k__BackingField: {fileID: 11400000, guid: 9e7487a4e90060948b6330c2c92c177a, type: 2}
+    - <Name>k__BackingField: Hide behind a tree
+      <Skill>k__BackingField: {fileID: 11400000, guid: 6cddd6c93f3b5524fa41113b375c10f6, type: 2}
+    - <Name>k__BackingField: Find something to use as a weapon
+      <Skill>k__BackingField: {fileID: 11400000, guid: a38e67a1386ee3847864faddc6efeca1, type: 2}
+  - <Name>k__BackingField: Choose strategy
+    <PossibleSkillChecks>k__BackingField:
+    - <Name>k__BackingField: Strike first
+      <Skill>k__BackingField: {fileID: 11400000, guid: 9e7487a4e90060948b6330c2c92c177a, type: 2}
+    - <Name>k__BackingField: Prepare to counter-attack
+      <Skill>k__BackingField: {fileID: 11400000, guid: 6cddd6c93f3b5524fa41113b375c10f6, type: 2}
+    - <Name>k__BackingField: Prepare an ambush
+      <Skill>k__BackingField: {fileID: 11400000, guid: a38e67a1386ee3847864faddc6efeca1, type: 2}
+  - <Name>k__BackingField: Defeat the Spirit
+    <PossibleSkillChecks>k__BackingField:
+    - <Name>k__BackingField: Attack
+      <Skill>k__BackingField: {fileID: 11400000, guid: 9e7487a4e90060948b6330c2c92c177a, type: 2}
+    - <Name>k__BackingField: Counter attack from hideout
+      <Skill>k__BackingField: {fileID: 11400000, guid: 6cddd6c93f3b5524fa41113b375c10f6, type: 2}
+    - <Name>k__BackingField: Ambush an enemy
+      <Skill>k__BackingField: {fileID: 11400000, guid: a38e67a1386ee3847864faddc6efeca1, type: 2}

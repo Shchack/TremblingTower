@@ -704,7 +704,7 @@ MonoBehaviour:
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 120
+  m_paragraphSpacing: 100
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
@@ -1457,8 +1457,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1407364711681966675}
   m_HandleRect: {fileID: 1407364711681966677}
   m_Direction: 2
-  m_Value: -0.000000023119904
-  m_Size: 0.3714339
+  m_Value: -0.000000024691198
+  m_Size: 0.38691056
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

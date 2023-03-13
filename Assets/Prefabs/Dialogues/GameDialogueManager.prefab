@@ -88,8 +88,8 @@ MonoBehaviour:
       allowPCSubtitleReminders: 0
       skipPCSubtitleAfterResponseMenu: 0
       subtitleCharsPerSecond: 30
-      minSubtitleSeconds: 3
-      continueButton: 3
+      minSubtitleSeconds: 1
+      continueButton: 1
       requireContinueOnLastLine: 0
       richTextEmphases: 1
       informSequenceStartAndEnd: 0
@@ -330,7 +330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skipButton: {fileID: 1407364711626377706}
-  _maskGroup: {fileID: 1407364712907161407}
   _dialogueImage: {fileID: 1407364710976840736}
   _checkResultUI: {fileID: 1819291556380923515}
 --- !u!1001 &1407364711296205663
@@ -690,11 +689,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!225 &1407364712907161407 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 1618689120, guid: 3f98e76ec87b57643b7a82806c84c05f, type: 3}
-  m_PrefabInstance: {fileID: 1407364711296205663}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1819291556380923515 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 772537449125041444, guid: 3f98e76ec87b57643b7a82806c84c05f, type: 3}

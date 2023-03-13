@@ -2,6 +2,7 @@ using EG.Tower.Game;
 using EG.Tower.Heroes.Skills;
 using EG.Tower.Utils;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,7 +14,6 @@ namespace EG.Tower.Missions
         public event Action OnMissionEndEvent;
 
         private MissionData _data => GameHub.One.NextMissionData;
-        public HeroModel[] Heroes => GameHub.One.Session.Team;
 
         public string MissionName => _data.Name;
         public RegionType Region => _data.Region;
@@ -23,6 +23,7 @@ namespace EG.Tower.Missions
         public MissionStep[] Steps { get; private set; }
         public bool IsMissionEnd => _currentStepIndex >= (Steps.Length - 1);
 
+        public HeroModel[] Heroes { get; private set; }
 
         private int _currentStepIndex;
         private MissionStep _currentStep => Steps[_currentStepIndex];
@@ -31,6 +32,23 @@ namespace EG.Tower.Missions
         private void Awake()
         {
             Steps = _data.Steps.Select(s => new MissionStep(s, _data)).ToArray();
+            InitTeam();
+        }
+
+        private void InitTeam()
+        {
+            var heroes = new List<HeroModel> { GameHub.One.Session.HeroModel };
+
+            if (_data.Team != null && _data.Team.Length > 0)
+            {
+                foreach (var heroSetup in _data.Team)
+                {
+                    var heroModel = new HeroModel(heroSetup);
+                    heroes.Add(heroModel);
+                }
+            }
+
+            Heroes = heroes.ToArray();
         }
 
         private void Start()
